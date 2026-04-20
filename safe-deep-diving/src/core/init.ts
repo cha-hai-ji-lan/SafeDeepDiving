@@ -21,9 +21,10 @@ export const replace_config = async () => {
     await invoke("write_json_file", { filePath: configPathF.value, data: dcfg.value })
 }
 
-const init_app = async () => {
-    init_app_path()
-    init_config()
+export const init_app = async () => {
+    await init_app_path()
+    await init_config()
+    init_color_palette()
 }
 /**
  * 初始化程序路径
@@ -46,6 +47,8 @@ export const init_app_path = async () => {
 */
 export const init_config = async () => {
     cfg.value = await invoke("read_json_file", { filePath: configPathF.value })
+    console.log(configPathF.value)
+    console.log(cfg.value)
     // 获取软件配置
     appConfig.value = cfg.value["app"]
     // 获取主题配置
@@ -54,8 +57,11 @@ export const init_config = async () => {
     interfaceConfig.value = cfg.value["interface"]
 }
 
-
+/**
+ * 初始化调色板
+*/
 export const init_color_palette = async () => {
+    console.log(themeConfig.value)
     // 主题颜色
     document.documentElement.style.setProperty("--ready", `${themeConfig.value["-base"]["ready"]}`)
     document.documentElement.style.setProperty("--normal", `${themeConfig.value["-base"]["normal"]}`)
@@ -65,7 +71,8 @@ export const init_color_palette = async () => {
     document.documentElement.style.setProperty("--background", `${themeConfig.value[themeConfig.value["current"]]["background"]}`)
     // document.documentElement.style.setProperty("--border-line", `${themeConfig.value[themeConfig.value["current"]]["borderLine"]}`)
     // document.documentElement.style.setProperty("--button", `${themeConfig.value[themeConfig.value["currentTheme"]]["button"]}`)
-    // document.documentElement.style.setProperty("--font", `${themeConfig.value[themeConfig.value["currentTheme"]]["font"]}`)
+    document.documentElement.style.setProperty("--font", `${themeConfig.value[themeConfig.value["current"]]["font"]}`)
+    document.documentElement.style.setProperty("--border", `${themeConfig.value[themeConfig.value["current"]]["border"]}`)
     // 界面样式
     document.documentElement.style.setProperty("--b-transparent", `${interfaceConfig.value["baseTransparency"]}`)
     document.documentElement.style.setProperty("--w-transparent", `${interfaceConfig.value["weakTransparency"]}`)

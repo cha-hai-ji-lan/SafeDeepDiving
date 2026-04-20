@@ -13,8 +13,12 @@
     "windows": [
       {
         "title": "safe-deep-diving",
-        "width": 800,
-        "height": 600
+        "width": 1280,
+        "height": 720,
+        "minWidth": 512,
+        "minHeight": 288,
+        "decorations": false, 
+        "transparent": true
       }
     ],
     "security": {

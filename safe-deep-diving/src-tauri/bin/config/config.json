@@ -3,13 +3,18 @@
         "version": "0.0.1"
     },
     "theme": {
-        "current": "ligt",
+        "current": "light",
         "light": {
             "name": "海滨微风",
-            "backGround": "188, 210, 214"
+            "background": "188, 210, 214",
+            "font": "49, 47, 54",
+            "border": "64, 166, 191"
         },
         "dark": {
-            "name": "墨色深海"
+            "name": "墨色深海",
+            "background": "188, 210, 214",
+            "font": "49, 47, 54",
+            "border": "64, 166, 191"
         },
         "-base": {
             "ready": "0, 162, 103",
