@@ -1,0 +1,26 @@
+{
+    "app": {
+        "version": "0.0.1"
+    },
+    "theme": {
+        "current": "ligt",
+        "light": {
+            "name": "海滨微风",
+            "backGround": "188, 210, 214"
+        },
+        "dark": {
+            "name": "墨色深海"
+        },
+        "-base": {
+            "ready": "0, 162, 103",
+            "noraml": "0, 145, 198",
+            "warn": "204, 120, 50",
+            "err": "232, 17, 35"
+        }
+    },
+    "interface": {
+        "atomicTime": 200,
+        "baseTransparency": 1,
+        "weakTransparency": 0.4
+    }
+}

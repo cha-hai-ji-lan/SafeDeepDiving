@@ -1,0 +1,16 @@
+{
+    "app": {
+        "version": "0.0.1"
+    },
+    "theme": {
+        "current":"ligt",
+        "light":{
+            "name":"海滨微风",
+            "backGround":"188, 210, 214"
+
+        },
+        "dark":{
+            "name":"墨色深海"
+        }
+    }
+}
