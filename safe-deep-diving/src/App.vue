@@ -3,11 +3,10 @@
     <div data-tauri-drag-region class="title">
       <div data-tauri-drag-region class="title-frame">
       </div>
-      <div data-tauri-drag-region class="title-bar" :class="{'enter-title-bar': ele_state['enter-title-bar']}"
-      @mouseenter="title_bar_mouse_enter"
-      @mouseleave="title_bar_mouse_leave"
-      >
-        <div v-if="ele_state['enter-title-bar'] === false" data-tauri-drag-region @click="() => { title_bar_click('omit') }" class="base-ico">
+      <div data-tauri-drag-region class="title-bar" :class="{ 'enter-title-bar': ele_state['enter-title-bar'] }"
+        @mouseenter="title_bar_mouse_enter" @mouseleave="title_bar_mouse_leave">
+        <div v-if="ele_state['enter-title-bar'] === false" data-tauri-drag-region
+          @click="() => { title_bar_click('omit') }" class="base-ico">
           <BaseIcon Type="omit"></BaseIcon>
         </div>
         <div data-tauri-drag-region @click="() => { title_bar_click('pin') }" class="base-ico">
@@ -16,13 +15,13 @@
         <div data-tauri-drag-region class="base-ico">
           <BaseIcon Type="setting"></BaseIcon>
         </div>
-        <div data-tauri-drag-region @click="() => { title_bar_click('minimize') }" class="base-ico">
+        <div data-tauri-drag-region @click="() => { title_bar_click('minimize') }" class="base-ico minimize">
           <BaseIcon Type="minimize"></BaseIcon>
         </div>
-        <div data-tauri-drag-region @click="() => { title_bar_click('maximize') }" class="base-ico">
+        <div data-tauri-drag-region @click="() => { title_bar_click('maximize') }" class="base-ico maximize">
           <BaseIcon :Type="baseIconCtr['maximize']"></BaseIcon>
         </div>
-        <div data-tauri-drag-region @click="() => { title_bar_click('close') }" class="base-ico">
+        <div data-tauri-drag-region @click="() => { title_bar_click('close') }" class="base-ico close">
           <BaseIcon Type="close"></BaseIcon>
         </div>
 
@@ -33,15 +32,18 @@
   </main>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, reactive } from "vue";
-import { Window } from "@tauri-apps/api/window";
+import { ref, onMounted, onUnmounted, reactive } from "vue";
+import { Window, getCurrentWindow } from "@tauri-apps/api/window";
+import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import Main from "./interface/Main.vue";
 import BaseIcon from "./icons/BaseIcon.vue"
 import { init_app } from "./core/init.ts";
 const appWindow = Window.getCurrent()
 
 const baseIconCtr = ref({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标
-const ele_state = reactive({"enter-title-bar": false})
+const ele_state = reactive({ "enter-title-bar": false })
+
+let resize_unlisten: UnlistenFn | null = null
 
 const title_bar_mouse_enter = () => {
   ele_state['enter-title-bar'] = true
@@ -84,8 +86,26 @@ const title_bar_click = (mode: string) => {
 
 }
 
-onMounted(() => {
+onMounted(async () => {
   init_app()
+  // 监听窗口调整大小事件，并在回调中检查状态
+  resize_unlisten = await listen('tauri://resize', async () => {
+    const currentWindow = getCurrentWindow();
+    const isMaximized = await currentWindow.isMaximized();
+    console.log('窗口是否最大化:', isMaximized);
+
+    if (isMaximized) {
+      baseIconCtr.value["maximize"] = "maximize-1"
+    } else {
+      baseIconCtr.value["maximize"] = "maximize-0"
+    }
+  });
+})
+
+onUnmounted(() => {
+  if(resize_unlisten){
+    resize_unlisten()
+  }
 })
 </script>
 
@@ -146,7 +166,8 @@ onMounted(() => {
       border-radius: 1vmin;
       overflow-x: hidden;
       transition: width 200ms;
-      &.enter-title-bar{
+
+      &.enter-title-bar {
         width: 22.5vmin;
       }
 
@@ -158,6 +179,25 @@ onMounted(() => {
         width: 3.5vmin;
         height: 100%;
         max-width: 30px;
+        transition: background-color 300ms;
+
+        &.minimize {
+          &:hover {
+            background-color: rgba(var(--ready), var(--w-transparent));
+          }
+        }
+
+        &.maximize {
+          &:hover {
+            background-color: rgba(var(--warn), var(--w-transparent));
+          }
+        }
+
+        &.close {
+          &:hover {
+            background-color: rgba(var(--err), var(--w-transparent));
+          }
+        }
       }
 
     }
