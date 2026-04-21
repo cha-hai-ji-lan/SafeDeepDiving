@@ -1,0 +1,7 @@
+.l-fill {
+    fill: rgba(var(--but-0), 1)
+}
+
+.d-fill {
+    fill: rgba(var(--but-1), 1)
+}
