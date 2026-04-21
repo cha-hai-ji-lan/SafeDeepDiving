@@ -1,7 +1,13 @@
 .l-fill {
     fill: rgba(var(--but-0), 1)
 }
+.m-fill {
+    fill: rgba(var(--but-1), 1)
+}
 
 .d-fill {
-    fill: rgba(var(--but-1), 1)
+    fill: rgba(var(--but-2), 1)
+}
+.d-stroke {
+    stroke: rgba(var(--but-2), 1)
 }

@@ -3,9 +3,27 @@
     <div data-tauri-drag-region class="title">
       <div data-tauri-drag-region class="title-frame">
       </div>
-      <div data-tauri-drag-region class="title-bar">
-        <div class="base-ico">
+      <div data-tauri-drag-region class="title-bar" :class="{'enter-title-bar': ele_state['enter-title-bar']}"
+      @mouseenter="title_bar_mouse_enter"
+      @mouseleave="title_bar_mouse_leave"
+      >
+        <div v-if="ele_state['enter-title-bar'] === false" data-tauri-drag-region @click="() => { title_bar_click('omit') }" class="base-ico">
+          <BaseIcon Type="omit"></BaseIcon>
+        </div>
+        <div data-tauri-drag-region @click="() => { title_bar_click('pin') }" class="base-ico">
+          <BaseIcon :Type="baseIconCtr['pin']"></BaseIcon>
+        </div>
+        <div data-tauri-drag-region class="base-ico">
           <BaseIcon Type="setting"></BaseIcon>
+        </div>
+        <div data-tauri-drag-region @click="() => { title_bar_click('minimize') }" class="base-ico">
+          <BaseIcon Type="minimize"></BaseIcon>
+        </div>
+        <div data-tauri-drag-region @click="() => { title_bar_click('maximize') }" class="base-ico">
+          <BaseIcon :Type="baseIconCtr['maximize']"></BaseIcon>
+        </div>
+        <div data-tauri-drag-region @click="() => { title_bar_click('close') }" class="base-ico">
+          <BaseIcon Type="close"></BaseIcon>
         </div>
 
       </div>
@@ -15,10 +33,56 @@
   </main>
 </template>
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
+import { Window } from "@tauri-apps/api/window";
 import Main from "./interface/Main.vue";
 import BaseIcon from "./icons/BaseIcon.vue"
 import { init_app } from "./core/init.ts";
+const appWindow = Window.getCurrent()
+
+const baseIconCtr = ref({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标
+const ele_state = reactive({"enter-title-bar": false})
+
+const title_bar_mouse_enter = () => {
+  ele_state['enter-title-bar'] = true
+}
+const title_bar_mouse_leave = () => {
+  ele_state['enter-title-bar'] = false
+}
+const title_bar_click = (mode: string) => {
+
+  switch (mode) {
+    case 'minimize':
+      appWindow.minimize()
+      break;
+    case 'maximize':
+      if (baseIconCtr.value["maximize"] === "maximize-1") {
+        baseIconCtr.value["maximize"] = "maximize-0"
+        appWindow.toggleMaximize();
+      } else if (baseIconCtr.value["maximize"] === "maximize-0") {
+        baseIconCtr.value["maximize"] = "maximize-1"
+        appWindow.toggleMaximize();
+      }
+      break;
+    case 'pin':
+      if (baseIconCtr.value["pin"] === "pin-0") {
+        baseIconCtr.value["pin"] = "pin-1"
+        appWindow.setAlwaysOnTop(true);
+      } else if (baseIconCtr.value["pin"] === "pin-1") {
+        baseIconCtr.value["pin"] = "pin-0"
+        appWindow.setAlwaysOnTop(false);
+
+      }
+      break;
+    case 'close':
+      appWindow.close();
+      break;
+    default:
+
+      break;
+  }
+
+}
 
 onMounted(() => {
   init_app()
@@ -53,7 +117,7 @@ onMounted(() => {
       justify-self: start;
       flex-direction: row;
       flex: 1;
-      height: 5vmin;
+      height: 3.25vmin;
       margin-right: 1vmin;
       border-radius: 1vmin;
       border: 0.25vmin solid transparent;
@@ -69,19 +133,31 @@ onMounted(() => {
     }
 
     & .title-bar {
+      position: relative;
+      /* 用于后续收缩框定位 */
       display: flex;
       align-items: center;
       justify-content: start;
       border: 0.25vmin solid rgba(var(--menu), var(--b-transparent));
       background-color: rgba(var(--menu), var(--w-transparent));
-      width: 16vmin;
-      height: 5vmin;
+      width: 3.5vmin;
+      /* width: 22.5vmin; */
+      height: 3vmin;
       border-radius: 1vmin;
+      overflow-x: hidden;
+      transition: width 200ms;
+      &.enter-title-bar{
+        width: 22.5vmin;
+      }
 
       & .base-ico {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 0 0.5vmin;
         width: 3.5vmin;
-        height: 3.5vmin;
+        height: 100%;
+        max-width: 30px;
       }
 
     }
