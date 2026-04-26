@@ -1,10 +1,93 @@
 <template>
-    <div id="main">
-        <canvas id="main-canvas"></canvas>
+    <div id="main" ref="containerRef">
+        <!-- vtkFullScreenRenderWindow 会接管此容器 -->
     </div>
 </template>
+
 <script setup lang="ts">
+import { onMounted, onBeforeUnmount, ref } from 'vue';
+import "@kitware/vtk.js/Rendering/Profiles/Geometry";
+import vtkFullScreenRenderWindow from '@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow';
+import vtkActor from '@kitware/vtk.js/Rendering/Core/Actor';
+import vtkMapper from '@kitware/vtk.js/Rendering/Core/Mapper';
+import vtkConeSource from '@kitware/vtk.js/Filters/Sources/ConeSource';
+
+
+
+const containerRef = ref<HTMLDivElement | null>(null);
+let fullScreenRenderer: any = null;
+let resizeObserver: ResizeObserver | null = null;
+
+onMounted(() => {
+    const container = containerRef.value;
+    if (!container) return;
+
+    // 创建 ResizeObserver 监听容器尺寸
+    resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+            const { width, height } = entry.contentRect;
+            // 只有当尺寸大于 0 且尚未初始化时才初始化
+            if (width > 0 && height > 0 && !fullScreenRenderer) {
+                initVTK(container);
+                // 初始化后可以断开观察，或者保留以处理窗口缩放
+                // resizeObserver?.disconnect(); 
+            } else if (fullScreenRenderer) {
+                // 如果已经初始化，窗口大小改变时通知 VTK 调整
+                fullScreenRenderer.resize();
+            }
+        }
+    });
+
+    resizeObserver.observe(container);
+});
+
+onBeforeUnmount(() => {
+    if (resizeObserver) {
+        resizeObserver.disconnect();
+    }
+    if (fullScreenRenderer) {
+        fullScreenRenderer.delete();
+        fullScreenRenderer = null;
+    }
+});
+
+function initVTK(container: HTMLElement) {
+    try {
+        // 1. 创建全屏渲染窗口
+        fullScreenRenderer = vtkFullScreenRenderWindow.newInstance({
+            background: [0, 0, 0, 0],
+            container: container,
+        });
+        const renderer = fullScreenRenderer.getRenderer();
+        const renderWindow = fullScreenRenderer.getRenderWindow();
+
+        // 2. 创建圆锥体
+        const coneSource = vtkConeSource.newInstance({ height: 1.0, radius: 0.5, resolution: 4 });
+
+        // 3. Mapper 将数据映射到图形对象
+        const mapper = vtkMapper.newInstance();
+        mapper.setInputConnection(coneSource.getOutputPort());
+
+        // 4. Actor 用来将图形对象映射到屏幕上
+        const actor = vtkActor.newInstance();
+        actor.setMapper(mapper);
+
+        // 5. 添加到场景
+        renderer.addActor(actor);
+
+        // 6. 重置相机
+        renderer.resetCamera();
+
+        // 7. 首次渲染
+        renderWindow.render();
+
+        console.log('VTK initialized successfully');
+    } catch (error) {
+        console.error('Failed to initialize VTK:', error);
+    }
+}
 </script>
+
 <style scoped>
 #main {
     display: flex;
@@ -12,15 +95,10 @@
     align-self: center;
     width: 100%;
     height: 100%;
+    /* 确保父容器也有高度 */
     border-radius: 8px;
     background-color: rgba(var(--background), var(--b-transparent));
-}
-#main-canvas{
-    position: absolute; /* 绝对定位 */
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;  /* 占满宽度 */
-    height: 100%; /* 占满高度 */
+    position: relative;
+    overflow: hidden;
 }
 </style>

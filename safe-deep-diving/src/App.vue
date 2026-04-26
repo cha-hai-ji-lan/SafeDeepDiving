@@ -209,9 +209,13 @@ onUnmounted(() => {
 @import "./style/animation.css";
 @import "./style/setting.css";
 
-html {
-  padding: 0;
+html, body, #app {
+  width: 100%;
+  height: 100%;
   margin: 0;
+  padding: 0;
+}
+html {
   font: 1.75vmin "宋体", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   color: rgba(var(--font), 1);
@@ -220,8 +224,4 @@ html {
   overflow: hidden;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-}
 </style>
