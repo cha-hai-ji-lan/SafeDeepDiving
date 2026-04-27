@@ -4,10 +4,23 @@
 .m-fill {
     fill: rgba(var(--but-1), 1)
 }
-
 .d-fill {
     fill: rgba(var(--but-2), 1)
 }
+.l-stroke {
+    stroke: rgba(var(--but-0), 1)
+}
+.m-stroke {
+    stroke: rgba(var(--but-1), 1)
+}
 .d-stroke {
     stroke: rgba(var(--but-2), 1)
+}
+
+.grab-cursor {
+    cursor: grab;
+}
+
+.grabbing-cursor{
+    cursor: grabbing;
 }

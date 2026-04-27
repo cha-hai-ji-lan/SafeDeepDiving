@@ -27,6 +27,7 @@
       </div>
     </div>
     <MainThree></MainThree>
+    <ViewTools></ViewTools>
   </main>
 </template>
 <script setup lang="ts">
@@ -35,6 +36,7 @@ import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import MainThree from "./interface/MainThree.vue";
 import BaseIcon from "./icons/BaseIcon.vue"
+import ViewTools from "./components/ViewTools.vue";
 import { init_app } from "./core/init.ts";
 const appWindow = Window.getCurrent()
 
@@ -127,7 +129,7 @@ onUnmounted(() => {
     justify-self: center;
     flex-direction: row;
     width: calc(100vw - 4vmin);
-    height: 5vmin;
+    height: fit-content;
 
     & .title-frame {
       display: flex;

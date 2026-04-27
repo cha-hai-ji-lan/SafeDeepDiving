@@ -60,10 +60,18 @@
             <line x2="512" x1="512" y1="704" y2="960" stroke-width="64" stroke-linecap="round" />
         </g>
     </svg>
-    <svg v-if="Type === 'omit'" class="base-icon d-stroke l-fill" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-	<circle r="92" cx="512" cy="512" stroke-width="64"  />
-	<circle r="92" cx="512" cy="128" stroke-width="64"  />
-	<circle r="92" cx="512" cy="896" stroke-width="64"  />
+    <svg v-if="Type === 'omit'" class="base-icon d-stroke l-fill" xmlns="http://www.w3.org/2000/svg" width="1024"
+        height="1024" viewBox="0 0 1024 1024">
+        <circle r="92" cx="512" cy="512" stroke-width="64" />
+        <circle r="92" cx="512" cy="128" stroke-width="64" />
+        <circle r="92" cx="512" cy="896" stroke-width="64" />
+    </svg>
+    <svg v-if="Type === 'drag-block'" class="base-icon d-stroke" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+	<path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="64"  />
+	<path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="64"  transform="rotate(90 512 512)" />
+	<path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="64"  transform="rotate(180 512 512)" />
+	<path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="64"  transform="rotate(270 512 512)" />
+	<rect class="l-fill m-stroke" width="384" height="384" x="320" y="320" fill="#d3e3ee" stroke="#74aff6" ry="64" rx="64" stroke-width="96" stroke-linejoin="round" />
 </svg>
 </template>
 <script setup lang="ts">
