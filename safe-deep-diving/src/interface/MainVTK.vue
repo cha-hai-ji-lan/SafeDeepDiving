@@ -19,7 +19,7 @@ const containerRef = ref<HTMLDivElement | null>(null);
 let fullScreenRenderer: any = null;
 let resizeObserver: ResizeObserver | null = null;
 
-const outline = ref()
+const outline = ref() 
 
 onMounted(() => {
     if (!containerRef.value) return;
@@ -67,7 +67,7 @@ function initVTK() {
         const renderWindow = fullScreenRenderer.getRenderWindow();
 
         // 2. 创建圆锥体
-        const coneSource = vtkConeSource.newInstance({ height: 1.0, radius: 0.5, resolution: 4 });
+        const coneSource = vtkConeSource.newInstance({ height: 1.0, radius: 0.5, resolution: 128 });
         // 创建轮廓过滤器并连接圆锥体数据
         outline.value.setInputConnection(coneSource.getOutputPort());
 
@@ -98,9 +98,9 @@ function initVTK() {
         outlineActor.getProperty().setLineWidth(1);   // 线宽
 
         // 5. 添加到场景
-        renderer.addActor(actor);
+        // renderer.addActor(actor);
         renderer.addActor(actor1);
-        renderer.addActor(outlineActor);
+        // renderer.addActor(outlineActor);
 
         // 6. 重置相机
         renderer.resetCamera();

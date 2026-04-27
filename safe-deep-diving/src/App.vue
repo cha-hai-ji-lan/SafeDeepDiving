@@ -24,18 +24,16 @@
         <div data-tauri-drag-region @click="() => { title_bar_click('close') }" class="base-ico close">
           <BaseIcon Type="close"></BaseIcon>
         </div>
-
       </div>
     </div>
-
-    <Main></Main>
+    <MainThree></MainThree>
   </main>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, reactive } from "vue";
 import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
-import Main from "./interface/Main.vue";
+import MainThree from "./interface/MainThree.vue";
 import BaseIcon from "./icons/BaseIcon.vue"
 import { init_app } from "./core/init.ts";
 const appWindow = Window.getCurrent()
