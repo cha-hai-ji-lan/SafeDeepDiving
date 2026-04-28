@@ -86,6 +86,16 @@ export const init_three = (threeContainer: Ref<HTMLDivElement | null>) => {
         renderer.render(scene, camera);  // 渲染场景和相机
     }
     animate();
+
+    // 监听画布变化
+    window.addEventListener("resize", ()=>{
+        // 重置渲染器宽高比
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // 重置相机宽高比
+        camera.aspect = window.innerWidth / window.innerHeight;
+        // 更新相机投影矩阵
+        camera.updateProjectionMatrix();  
+    })
 }
 
 export const clean_three = (threeContainer: Ref<HTMLDivElement | null>) => {
