@@ -1,23 +1,25 @@
 <template>
-    <div class="view-tool"  ref="floatingWindowElement">
-        <div class="view-tool-icon grab-cursor" :class="{'grabbing-cursor': isDragging}" @mousedown="startDrag">
+    <div class="view-tool" ref="floatingWindowElement">
+        <div class="view-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
             <BaseIcon :Type="icon_type['drag-block']"></BaseIcon>
         </div>
-        <div class="view-tool-icon">
+        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.NormalColoring }"
+            @click="normal_coloring">
             <ToolIcon :Type="icon_type['normal-coloring']"></ToolIcon>
         </div>
-        <div class="view-tool-icon">
+        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.SidelineColoring }" @click="sideline_coloring">
             <ToolIcon :Type="icon_type['sideline-coloring']"></ToolIcon>
         </div>
-        <div class="view-tool-icon">
+        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.Wireframe }" @click="wireframe">
             <ToolIcon :Type="icon_type['wireframe']"></ToolIcon>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { reactive, ref , onUnmounted} from 'vue';
+import { reactive, ref, onUnmounted } from 'vue';
 import ToolIcon from '../icons/ToolIcon.vue';
 import BaseIcon from '../icons/BaseIcon.vue';
+import {edge_visible, object_visible} from '../core/three/init.ts'
 const icon_type = reactive({
     "drag-block": "drag-block",
     "normal-coloring": "normal-coloring",
@@ -29,10 +31,33 @@ const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
 const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
 
+const enum viewMode {
+    NormalColoring,
+    SidelineColoring,
+    Wireframe
+}
 
+const view_mode = ref<viewMode>(viewMode.SidelineColoring)
 onUnmounted(() => {
     stopDrag()
 })
+
+const normal_coloring = () => {
+    edge_visible(false)
+    object_visible(true)
+    view_mode.value = viewMode.NormalColoring
+}
+const sideline_coloring = () => {
+    edge_visible(true)
+    object_visible(true)
+    view_mode.value = viewMode.SidelineColoring
+
+}
+const wireframe = () => {
+    edge_visible(true)
+    object_visible(false)
+    view_mode.value = viewMode.Wireframe
+}
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {
     if (!floatingWindowElement.value) return;
@@ -77,8 +102,9 @@ const stopDrag = () => {
     display: flex;
     flex-direction: row;
     position: fixed;
-    top: 10vmin;
-    left: 50vmin;
+    top: 5.75vmin;
+    left: calc(50% - 8vmin);
+    /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */
     height: fit-content;
     width: fit-content;
     border: 0.25vmin solid rgba(var(--menu), var(--b-transparent));
@@ -90,8 +116,13 @@ const stopDrag = () => {
         height: 3vmin;
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: center;
         margin: 0.5vmin;
+        &.active-icon{
+            filter: brightness(1.25);
+            border-radius: 0.5vmin;
+            outline: 0.25vmin solid rgba(var(--border), var(--b-transparent));
+        }
     }
 }
 </style>
