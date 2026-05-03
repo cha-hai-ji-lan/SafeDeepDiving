@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <MainLogo></MainLogo>
     <MainThree></MainThree>
     <ViewTools></ViewTools>
   </main>
@@ -36,6 +37,7 @@ import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import MainThree from "./interface/MainThree.vue";
 import BaseIcon from "./icons/BaseIcon.vue"
+import MainLogo from "./components/MainLogo.vue";
 import ViewTools from "./components/ViewTools.vue";
 import { init_app } from "./core/init.ts";
 const appWindow = Window.getCurrent()

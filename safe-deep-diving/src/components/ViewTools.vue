@@ -79,13 +79,23 @@ const startDrag = (event: MouseEvent) => {
 // 拖拽过程
 const drag = (event: MouseEvent) => {
     if (!isDragging.value || !floatingWindowElement.value) return;
-    // 计算新的位置
-    const newX = event.clientX - dragOffset.value.x;
-    const newY = event.clientY - dragOffset.value.y;
+    
+    // 1. 计算新的位置 (像素)
+    const newX_px = event.clientX - dragOffset.value.x;
+    const newY_px = event.clientY - dragOffset.value.y;
 
-    // 应用新位置
-    floatingWindowElement.value.style.left = `${newX}px`;
-    floatingWindowElement.value.style.top = `${newY}px`;
+    // 2. 获取当前视口的 vmin 基准像素值
+    // vmin 是 vw 和 vh 中较小的那个，1vmin = 1% * min(width, height)
+    const vmin_px = Math.min(window.innerWidth, window.innerHeight) / 100;
+
+    // 3. 将像素转换为 vmin
+    // 防止除以0的情况，虽然理论上 vmin_px 不会为0
+    const newX_vmin = vmin_px > 0 ? newX_px / vmin_px : 0;
+    const newY_vmin = vmin_px > 0 ? newY_px / vmin_px : 0;
+
+    // 4. 应用新位置，使用 vmin 单位
+    floatingWindowElement.value.style.left = `${newX_vmin}vmin`;
+    floatingWindowElement.value.style.top = `${newY_vmin}vmin`;
 };
 
 // 停止拖拽
@@ -104,6 +114,7 @@ const stopDrag = () => {
     position: fixed;
     top: 5.75vmin;
     left: calc(50% - 8vmin);
+    z-index: 11;  /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */
     height: fit-content;
     width: fit-content;
