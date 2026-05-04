@@ -1,7 +1,7 @@
 {
   "name": "safe-deep-diving",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.12",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,9 @@
   "dependencies": {
     "@kitware/vtk.js": "^35.11.0",
     "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-fs": "^2.5.1",
     "@tauri-apps/plugin-opener": "^2",
+    "opencascade.js": "^1.1.4",
     "three": "^0.184.0",
     "vue": "^3.5.13"
   },
@@ -22,6 +24,8 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "typescript": "~5.6.2",
     "vite": "^6.0.3",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0",
     "vue-tsc": "^2.1.10"
   }
 }

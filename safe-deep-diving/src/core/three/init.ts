@@ -16,6 +16,8 @@ let track_controller: OrbitControls;  // 轨道控制器
 let scene_width: number  // 场景宽度
 let scene_height: number  // 场景高度
 
+let modelGroup: THREE.Group | null = null;
+
 
 export const init_three = (threeContainer: Ref<HTMLDivElement | null>) => {
     if (!threeContainer.value) return;
@@ -123,4 +125,39 @@ export const object_visible = (visible: boolean) => {
             material.needsUpdate = true; // 通知 Three.js 更新材质
         }
     }
+}
+
+export const addModelToScene = (group: THREE.Group) => {
+    if (modelGroup) {
+        scene.remove(modelGroup);
+        modelGroup.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
+                child.geometry.dispose();
+                if (Array.isArray(child.material)) {
+                    child.material.forEach(m => m.dispose());
+                } else {
+                    child.material.dispose();
+                }
+            }
+        });
+    }
+    
+    modelGroup = group;
+    
+    const box = new THREE.Box3().setFromObject(group);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const fov = camera.fov * (Math.PI / 180);
+    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+    cameraZ *= 1.5;
+    
+    camera.position.set(center.x, center.y, center.z + cameraZ);
+    camera.lookAt(center);
+    
+    track_controller.target.copy(center);
+    track_controller.update();
+    
+    scene.add(group);
 }
