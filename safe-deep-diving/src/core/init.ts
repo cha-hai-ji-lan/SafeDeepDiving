@@ -3,7 +3,7 @@
  * 作为程序载入时做基本缓存配置的执行脚本
 */
 import { invoke } from "@tauri-apps/api/core";
-import { appPath, binPath, configPath, configPathF, defaultConfigPathF, cfg, dcfg, appConfig, themeConfig, interfaceConfig } from "./cache.ts";
+import { appPath, binPath, configPath, configPathF, defaultConfigPathF, cfg, dcfg, appConfig, coreConfig, themeConfig, interfaceConfig } from "./cache.ts";
 import { PathUtils, PATH_CONSTANTS } from "./path.ts";
 
 /**
@@ -51,6 +51,8 @@ export const init_config = async () => {
     console.log(cfg.value)
     // 获取软件配置
     appConfig.value = cfg.value["app"]
+    // 获取软件核心设置
+    coreConfig.value = appConfig.value["core"]
     // 获取主题配置
     themeConfig.value = cfg.value["theme"]
     // 获取界面配置
@@ -67,7 +69,7 @@ export const init_color_palette = async () => {
     document.documentElement.style.setProperty("--normal", `${themeConfig.value["-base"]["normal"]}`)
     document.documentElement.style.setProperty("--warn", `${themeConfig.value["-base"]["warn"]}`)
     document.documentElement.style.setProperty("--err", `${themeConfig.value["-base"]["err"]}`)
-    document.documentElement.style.setProperty("--background", `${themeConfig.value[themeConfig.value["current"]]["background"]}`)
+    document.documentElement.style.setProperty("--background", `${themeConfig.value[themeConfig.value["current"]]["back-ground"]}`)
     document.documentElement.style.setProperty("--font", `${themeConfig.value[themeConfig.value["current"]]["font"]}`)
     document.documentElement.style.setProperty("--border", `${themeConfig.value[themeConfig.value["current"]]["border"]}`)
     document.documentElement.style.setProperty("--menu", `${themeConfig.value[themeConfig.value["current"]]["menu"]}`)
@@ -75,7 +77,7 @@ export const init_color_palette = async () => {
     document.documentElement.style.setProperty("--but-1", `${themeConfig.value[themeConfig.value["current"]]["button-mid"]}`)
     document.documentElement.style.setProperty("--but-2", `${themeConfig.value[themeConfig.value["current"]]["button-bgc"]}`)
     // 界面样式
-    document.documentElement.style.setProperty("--b-transparent", `${interfaceConfig.value["baseTransparency"]}`)
-    document.documentElement.style.setProperty("--w-transparent", `${interfaceConfig.value["weakTransparency"]}`)
+    document.documentElement.style.setProperty("--b-transparent", `${interfaceConfig.value["base-transparency"]}`)
+    document.documentElement.style.setProperty("--w-transparent", `${interfaceConfig.value["weak-transparency"]}`)
 
 }

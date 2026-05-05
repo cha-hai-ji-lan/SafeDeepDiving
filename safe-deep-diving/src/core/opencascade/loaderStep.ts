@@ -39,38 +39,45 @@ export async function initOpenCascadeInstance(): Promise<OpenCascadeInstance> {
  * @param stepFilePath STEP 文件的路径
  * @returns Three.js Group 包含所有网格对象
  */
-export async function loadSTEPFile(stepFilePath: string): Promise<THREE.Group> {
+export async function loadSTEPFile(stepFilePath: string){
     await initOpenCascadeInstance();
-    console.log(Object.keys(oc).filter(k => k.includes('STEP')));
     if (!oc) {
         // 如果 oc 未初始化，需要先初始化
         await initOpenCascadeInstance();
       }
-
+    console.log(oc)
     // 创建 STEP 阅读器
-    const reader = new oc.STEPControl_Reader();
+    // const reader0 = new oc.STEPControl_Reader();
+    const reader1 = new oc.STEPControl_Reader_1();
+    console.log(reader1)
+    // const reader2 = new oc.STEPControl_Reader_2();
+    // console.log(reader2)
+    let file_stream = FileRea
+    // // 读取 STEP 文件
+    console.log(stepFilePath)
+    const readResult = reader1.ReadStream(stepFilePath);
+    console.log(readResult)
+    console.log(reader1.PrintCheckLoad(true))
+    // console.log("readResult :", readResult)
 
-    // 读取 STEP 文件
-    const readResult = reader.ReadFile(stepFilePath);
+    // if (readResult !== 1) { // IFSelect_RetDone = 1
+    //     throw new Error(`无法读取STEP文件: ${stepFilePath}`);
+    // }
 
-    if (readResult !== 1) { // IFSelect_RetDone = 1
-        throw new Error(`Failed to read STEP file: ${stepFilePath}`);
-    }
+    // // 传输根实体
+    // reader.TransferRoots();
 
-    // 传输根实体
-    reader.TransferRoots();
+    // // 获取形状
+    // const shape = reader.OneShape();
 
-    // 获取形状
-    const shape = reader.OneShape();
+    // // 转换为 Three.js 网格
+    // const group = shapeToThreeJS(oc, shape);
 
-    // 转换为 Three.js 网格
-    const group = shapeToThreeJS(oc, shape);
+    // // 清理
+    // shape.delete();
+    // reader.delete();
 
-    // 清理
-    shape.delete();
-    reader.delete();
-
-    return group;
+    // return group;
 }
 
 /**
@@ -192,36 +199,6 @@ function faceToThreeJSMesh(oc: OpenCascadeInstance, face: TopoDS_Face): THREE.Me
     triangles.delete();
 
     return mesh;
-}
-
-/**
- * 从二进制数据加载 STEP 文件
- * @param stepData STEP 文件的 ArrayBuffer 数据
- * @returns Three.js Group
- */
-export async function loadSTEPFromBuffer(stepData: ArrayBuffer): Promise<THREE.Group> {
-    const openCascade = await initOpenCascadeInstance();
-
-    // 将数据写入虚拟文件系统
-    const fileName = 'temp.step';
-    openCascade.FS.writeFile(fileName, new Uint8Array(stepData));
-
-    try {
-        const group = await loadSTEPFile(fileName);
-
-        // 清理临时文件
-        openCascade.FS.unlink(fileName);
-
-        return group;
-    } catch (error) {
-        // 确保清理临时文件
-        try {
-            openCascade.FS.unlink(fileName);
-        } catch (e) {
-            // 忽略删除错误
-        }
-        throw error;
-    }
 }
 
 /**

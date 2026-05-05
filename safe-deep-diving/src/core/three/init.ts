@@ -3,9 +3,9 @@ import { Ref } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
-let renderer: THREE.WebGLRenderer;  // 渲染器
-let scene: THREE.Scene;  // 场景
-let camera: THREE.PerspectiveCamera;  // 相机
+export let renderer: THREE.WebGLRenderer;  // 渲染器
+export let scene: THREE.Scene;  // 场景
+export let camera: THREE.PerspectiveCamera;  // 相机
 let animationId: number;  // 动画帧 ID
 let geometry: THREE.BoxGeometry;
 let cube: THREE.Mesh;

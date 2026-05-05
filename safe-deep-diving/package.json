@@ -12,8 +12,10 @@
   "dependencies": {
     "@kitware/vtk.js": "^35.11.0",
     "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-dialog": "^2.7.1",
     "@tauri-apps/plugin-fs": "^2.5.1",
     "@tauri-apps/plugin-opener": "^2",
+    "occt-import-js": "^0.0.23",
     "opencascade.js": "^1.1.4",
     "three": "^0.184.0",
     "vue": "^3.5.13"

@@ -19,5 +19,6 @@ export const defaultConfigPathF = ref<string>("__DEFAULT_CONFIG_FILE_PATH__")
 export const cfg = ref<any>()                   // 配置文件
 export const dcfg = ref<any>()                  // 默认配置
 export const appConfig = ref<any>()             // 软件配置
+export const coreConfig = ref<any>()            // 核心配置
 export const themeConfig = ref<any>()           // 主题配置
 export const interfaceConfig = ref<any>()       // 界面配置

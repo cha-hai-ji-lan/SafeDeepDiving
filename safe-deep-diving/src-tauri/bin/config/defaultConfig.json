@@ -1,21 +1,33 @@
 {
     "app": {
-        "version": "0.0.1"
+        "version": "0.0.15",
+        "core":{
+            "input-path":"C:\\",
+            "output-path":"C:\\"
+        }
+
     },
     "theme": {
         "current": "light",
         "light": {
             "name": "海滨微风",
-            "background": "188, 210, 214",
-            "font": "49, 47, 54",
-            "border": "0, 181, 215"
+            "back-ground": "197, 239, 253",
+            "font": "7, 18, 38",
+            "border": "1, 185, 245",
+            "menu": "119, 181, 254",
+            "button-pro": "211, 227, 238",
+            "button-mid": "116, 175, 246",
+            "button-bgc": "7, 18, 38"
         },
         "dark": {
             "name": "墨色深海",
-            "background": "188, 210, 214",
-            "font": "49, 47, 54",
-            "border": "64, 166, 191"
-
+            "back-ground": "197, 239, 253",
+            "font": "7, 18, 38",
+            "border": "1, 185, 245",
+            "menu": "119, 181, 254",
+            "button-pro": "211, 227, 238",
+            "button-mid": "116, 175, 246",
+            "button-bgc": "7, 18, 38"
         },
         "-base": {
             "ready": "0, 162, 103",
@@ -25,8 +37,8 @@
         }
     },
     "interface": {
-        "atomicTime": 200,
-        "baseTransparency": 1,
-        "weakTransparency": 0.4
+        "atomic-time": 200,
+        "base-transparency": 1,
+        "weak-transparency": 0.4
     }
 }
