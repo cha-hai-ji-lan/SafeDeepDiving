@@ -52,7 +52,7 @@
                 stroke-dasharray="45,50" stroke-linecap="round" stroke-width="24" transform="rotate(90 512 512)" />
         </g>
     </svg>
-    <svg v-if="Type === 'read-write-file'" class="tool-main-icon" xmlns="http://www.w3.org/2000/svg" width="1024"
+    <svg v-if="Type === 'read-write-file'" class="tool-group-icon" xmlns="http://www.w3.org/2000/svg" width="1024"
         height="1024" viewBox="0 0 1024 1024">
         <g>
             <path class="d-stroke l-fill"
@@ -75,13 +75,32 @@
                 fill="#c8d7e0" />
         </g>
     </svg>
-    <svg v-if="Type === 'shrink'" class="tool-main-icon d-stroke l-fill" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-        <path d="M96 128a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" 
-             />
-        <path d="M96 448a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" 
-             />
-        <path d="M96 768a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" 
-             />
+    <svg v-if="Type === 'shrink'" class="tool-group-icon d-stroke l-fill" xmlns="http://www.w3.org/2000/svg"
+        width="1024" height="1024" viewBox="0 0 1024 1024">
+        <path d="M96 128a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" />
+        <path d="M96 448a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" />
+        <path d="M96 768a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" />
+    </svg>
+    <!-- 读写模块图标 -->
+    <svg  v-if="Type === 'import'" class="tool-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+        <g>
+            <rect width="1024" height="868" x="0" y="64" rx="64" ry="64" fill="#071226" />
+            <rect width="896" height="740" x="64" y="128" rx="32" ry="32" fill="#74aff6" />
+            <rect width="640" height="64" x="160" y="192" rx="24" ry="24" fill="#d3e3ee" />
+            <path
+                d="M749 940V1001.4C748.9 1020.7 771.3 1031.4 786.3 1019.3L1015.4 834C1026.8 824.8 1026.7 807.5 1015.3 798.3L787.3 593.2C772.3 581.2 749 591.8 748.9 611V673.1C748.9 684.8 740.9 693.2 729.5 695.8 541 693 473 689 350 320 198 909 521 912 726.7 917 739.3 917.7 749.1 927.5 749 940Z"
+                fill="#d3e3ee" />
+        </g>
+    </svg>
+    <svg  v-if="Type === 'export'" class="tool-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+        <g>
+            <rect width="1024" height="868" x="0" y="64" rx="64" ry="64" fill="#071226" />
+            <rect width="896" height="740" x="64" y="128" rx="32" ry="32" fill="#74aff6" />
+            <rect width="640" height="64" x="160" y="192" rx="24" ry="24" fill="#d3e3ee" />
+            <path
+                d="M749 940V1001.4C748.9 1020.7 771.3 1031.4 786.3 1019.3L1015.4 834C1026.8 824.8 1026.7 807.5 1015.3 798.3L787.3 593.2C772.3 581.2 749 591.8 748.9 611V673.1C748.9 684.8 740.9 693.2 729.5 695.8 541 693 473 689 350 320 198 909 521 912 726.7 917 739.3 917.7 749.1 927.5 749 940Z"
+                fill="#d3e3ee" />
+        </g>
     </svg>
 </template>
 <script setup lang="ts">
@@ -106,6 +125,17 @@ defineProps<{
     height: 5vmin;
     max-width: 60px;
     max-height: 60px;
+
+    &:active {
+        animation: act-icon 200ms ease;
+    }
+}
+
+.tool-group-icon {
+    width: 4vmin;
+    height: 4vmin;
+    max-width: 45px;
+    max-height: 45px;
 
     &:active {
         animation: act-icon 200ms ease;

@@ -36,7 +36,7 @@ const open_tools_bar = () => {
     z-index: 10;
     left: 2vmin;
     bottom: 2vmin;
-    
+
     & .tools-bar {
         display: flex;
         flex-direction: row;
@@ -49,14 +49,16 @@ const open_tools_bar = () => {
         /* 这里不需要 transition */
 
         &.open-tools-bar {
-            width: 12vmin;
-            height: 6vmin;
+            width: 10vmin;
+            height: 5vmin;
         }
 
         & .item {
+            display: flex;
+            justify-self: center;
             margin: 0.5vmin;
-            width: 5vmin;
-            height: 5vmin;
+            width: 4vmin;
+            height: 4vmin;
         }
     }
 }
