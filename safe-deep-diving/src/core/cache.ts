@@ -2,7 +2,7 @@
  * 层级 0
  * 作为程序缓存脚本,只能被调用
 */
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 /**
  * 软件内联文件路径
@@ -22,3 +22,17 @@ export const appConfig = ref<any>()             // 软件配置
 export const coreConfig = ref<any>()            // 核心配置
 export const themeConfig = ref<any>()           // 主题配置
 export const interfaceConfig = ref<any>()       // 界面配置
+
+/**
+ * 状态参数
+ * 
+ * 用于保存 一些状态标志 
+ * 
+ * 例如: 某个按钮的打开与关闭
+*/
+
+export const base_icon_ctr = reactive({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标 用于[App.vue]
+export const ele_state = reactive({ "enter-title-bar": false })  // 控制当前是否悬停在关闭栏 用于[App.vue]
+
+export const tools_state = reactive({"show-tool": false})  // 控制 tools 的状态 用于[Tools.vue]
+

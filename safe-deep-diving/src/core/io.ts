@@ -1,3 +1,7 @@
+/**
+ * 层级 0
+ * 作为与explorer文件读取写入交互的一般途径
+*/
 import {ref } from 'vue';
 import { open } from '@tauri-apps/plugin-dialog';
 import { coreConfig } from "./cache.ts";

@@ -10,7 +10,7 @@
           <BaseIcon Type="omit"></BaseIcon>
         </div>
         <div data-tauri-drag-region @click="() => { title_bar_click('pin') }" class="base-ico">
-          <BaseIcon :Type="baseIconCtr['pin']"></BaseIcon>
+          <BaseIcon :Type="base_icon_ctr['pin']"></BaseIcon>
         </div>
         <div data-tauri-drag-region class="base-ico">
           <BaseIcon Type="setting"></BaseIcon>
@@ -19,7 +19,7 @@
           <BaseIcon Type="minimize"></BaseIcon>
         </div>
         <div data-tauri-drag-region @click="() => { title_bar_click('maximize') }" class="base-ico maximize">
-          <BaseIcon :Type="baseIconCtr['maximize']"></BaseIcon>
+          <BaseIcon :Type="base_icon_ctr['maximize']"></BaseIcon>
         </div>
         <div data-tauri-drag-region @click="() => { title_bar_click('close') }" class="base-ico close">
           <BaseIcon Type="close"></BaseIcon>
@@ -29,21 +29,24 @@
     <MainLogo></MainLogo>
     <MainThree></MainThree>
     <ViewTools></ViewTools>
+    <Tools></Tools>
   </main>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, reactive } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import MainThree from "./interface/MainThree.vue";
 import BaseIcon from "./icons/BaseIcon.vue"
 import MainLogo from "./components/MainLogo.vue";
 import ViewTools from "./components/ViewTools.vue";
+import Tools from "./components/Tools.vue";
 import { init_app } from "./core/init.ts";
+import { base_icon_ctr,  ele_state} from "./core/cache.ts";
 const appWindow = Window.getCurrent()
 
-const baseIconCtr = ref({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标
-const ele_state = reactive({ "enter-title-bar": false })
+// const base_icon_ctr = ref({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标
+// const ele_state = reactive({ "enter-title-bar": false })
 
 let resize_unlisten: UnlistenFn | null = null
 
@@ -60,20 +63,20 @@ const title_bar_click = (mode: string) => {
       appWindow.minimize()
       break;
     case 'maximize':
-      if (baseIconCtr.value["maximize"] === "maximize-1") {
-        baseIconCtr.value["maximize"] = "maximize-0"
+      if (base_icon_ctr["maximize"] === "maximize-1") {
+        base_icon_ctr["maximize"] = "maximize-0"
         appWindow.toggleMaximize();
-      } else if (baseIconCtr.value["maximize"] === "maximize-0") {
-        baseIconCtr.value["maximize"] = "maximize-1"
+      } else if (base_icon_ctr["maximize"] === "maximize-0") {
+        base_icon_ctr["maximize"] = "maximize-1"
         appWindow.toggleMaximize();
       }
       break;
     case 'pin':
-      if (baseIconCtr.value["pin"] === "pin-0") {
-        baseIconCtr.value["pin"] = "pin-1"
+      if (base_icon_ctr["pin"] === "pin-0") {
+        base_icon_ctr["pin"] = "pin-1"
         appWindow.setAlwaysOnTop(true);
-      } else if (baseIconCtr.value["pin"] === "pin-1") {
-        baseIconCtr.value["pin"] = "pin-0"
+      } else if (base_icon_ctr["pin"] === "pin-1") {
+        base_icon_ctr["pin"] = "pin-0"
         appWindow.setAlwaysOnTop(false);
 
       }
@@ -97,9 +100,9 @@ onMounted(async () => {
     console.log('窗口是否最大化:', isMaximized);
 
     if (isMaximized) {
-      baseIconCtr.value["maximize"] = "maximize-1"
+      base_icon_ctr["maximize"] = "maximize-1"
     } else {
-      baseIconCtr.value["maximize"] = "maximize-0"
+      base_icon_ctr["maximize"] = "maximize-0"
     }
   });
 })

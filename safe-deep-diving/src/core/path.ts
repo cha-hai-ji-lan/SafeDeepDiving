@@ -1,6 +1,6 @@
 /**
  * 层级 0
- * 作为内联文件处理脚本,只能被调用
+ * 作为内联文件路径处理脚本,只能被调用
 */
 import { join, resolve, dirname, basename, extname } from '@tauri-apps/api/path';
 import { sep } from '@tauri-apps/api/path';

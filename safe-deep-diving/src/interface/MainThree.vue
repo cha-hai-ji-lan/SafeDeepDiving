@@ -13,7 +13,7 @@ const threeContainer = ref<HTMLDivElement | null>(null);
 
 onMounted(() => {
   init_three(threeContainer);
-  load_obj()
+  // load_obj()
   // loadExampleSTEP();
 });
 
