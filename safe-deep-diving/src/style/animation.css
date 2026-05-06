@@ -30,3 +30,25 @@
         opacity: 0;
     }
 }
+
+@keyframes bar-show {
+    0% {
+        opacity: 0;
+        width: 0%;
+    }
+    100% {
+        opacity: 1;
+        width: fit-content;
+    }
+}
+
+@keyframes bar-hide {
+    0% {
+        opacity: 1;   
+    }
+    100% {
+        opacity: 0;
+        width: 0%;
+    }
+}
+

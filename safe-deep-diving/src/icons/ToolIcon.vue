@@ -86,7 +86,7 @@
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
         <g>
             <rect class="d-fill" width="1024" height="868" x="0" y="64" rx="128" ry="128" />
-            <rect class="m-fill" width="896" height="740" x="64" y="128"rx="96" ry="96" />
+            <rect class="m-fill" width="896" height="740" x="64" y="128" rx="96" ry="96" />
             <rect class="l-fill" width="640" height="64" x="160" y="192" rx="24" ry="24" />
             <path class="d-stroke l-fill"
                 d="M399 671.9V733.3C398.9 752.6 421.3 763.3 436.3 751.2L665.4 565.9C676.8 556.7 676.7 539.4 665.3 530.2L437.3 325.1C422.3 313.1 399 323.7 398.9 342.9V405C398.9 416.7 390.9 425.1 379.5 427.7-80.2 432 14.3 755.2 3.8 1023.4 100 784.4 230.8 689 376.7 648.9 389.3 649.6 399.1 659.4 399 671.9Z"
@@ -102,6 +102,122 @@
             <path class="d-stroke l-fill"
                 d="M749 940V1001.4C748.9 1020.7 771.3 1031.4 786.3 1019.3L1015.4 834C1026.8 824.8 1026.7 807.5 1015.3 798.3L787.3 593.2C772.3 581.2 749 591.8 748.9 611V673.1C748.9 684.8 740.9 693.2 729.5 695.8 541 693 473 689 350 320 198 909 521 912 726.7 917 739.3 917.7 749.1 927.5 749 940Z"
                 stroke-width="8" />
+        </g>
+    </svg>
+    <svg v-if="Type === 'save'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <path class="d-stroke m-fill"
+            d="M128 64Q64 64 64 128V896Q64 960 128 960H896Q960 960 960 896V384Q960 320 896 256L768 128Q704 64 640 64z"
+            stroke-width="32" />
+        <path class="d-stroke l-fill"
+            d="M200 160Q160 160 160 200V812Q160 860 208 860H812q48 0 48-48V384q0-24-24-48L704 184q-40-24-64-24Z"
+            stroke-width="32" />
+        <path class="d-stroke m-fill" d="M256 160q64 0 64 64v64q0 64 64 64h96q64 0 64-64v-64q0-64 64-64Z"
+            stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+        <rect class="d-stroke m-fill" width="432" height="152" x="288" y="700" ry="32" rx="32" stroke-width="48" />
+    </svg>
+    <svg v-if="Type === 'save-as'" class="tool-icon d-stroke" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <g transform="scale(0.9 0.9) translate(-32 -32)">
+            <path class="m-fill"
+                d="M128 64Q64 64 64 128V896Q64 960 128 960H896Q960 960 960 896V384Q960 320 896 256L768 128Q704 64 640 64z"
+                stroke-width="32" />
+            <path class="l-fill"
+                d="M200 160Q160 160 160 200V812Q160 860 208 860H812q48 0 48-48V384q0-24-24-48L704 184q-40-24-64-24Z"
+                stroke-width="32" />
+            <path class="m-fill" d="M256 160q64 0 64 64v64q0 64 64 64h96q64 0 64-64v-64q0-64 64-64Z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <rect class="m-fill" width="432" height="152" x="288" y="700" ry="32" rx="32" stroke-width="48" />
+        </g>
+        <g transform="scale(0.8 0.8) translate(288 288)" fill-opacity="0.75">
+            <path class="m-fill"
+                d="M128 64Q64 64 64 128V896Q64 960 128 960H896Q960 960 960 896V384Q960 320 896 256L768 128Q704 64 640 64z"
+                stroke-width="32" />
+            <path class="l-fill"
+                d="M200 160Q160 160 160 200V812Q160 860 208 860H812q48 0 48-48V384q0-24-24-48L704 184q-40-24-64-24Z"
+                stroke-width="32" />
+            <path class="m-fill" d="M256 160q64 0 64 64v64q0 64 64 64h96q64 0 64-64v-64q0-64 64-64Z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <rect class="m-fill" width="432" height="152" x="288" y="700" ry="32" rx="32" stroke-width="48" />
+        </g>
+    </svg>
+    <!-- 实体模块 -->
+    <svg v-if="Type === 'new-part'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <g>
+            <path class=" d-stroke m-fill" d="M973 863l-630-188v-639.98L653 159V479L973 575Z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class=" d-stroke l-fill" d="M713 992l-614-178v-640L393 288V608L713 704Z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class=" d-stroke l-fill" d="M99.001 174.001 343 35.03 652.999 158.999 393.001 288.001Z"
+                stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+            <path class=" d-stroke m-fill" d="M713.001 704l259.999-129.001-.001 288.003-259.998 128.996z"
+                stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+            <path class=" d-stroke l-fill" d="M393.001 608.002 653 479.001 972.999 575.003 713.001 703.999z"
+                stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+    </svg>
+    <svg v-if="Type === 'new-asm'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <g>
+            <path class="d-stroke l-fill" d="M896 896l-576-128v-640l288 64v288l288 64z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class="d-stroke m-fill" d="M640 960l-576-128v-640L352 256V544.27L639.958 608.03z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class="d-stroke d-fill" d="M440.56 660.92 998 517v-298.4L440.5 379z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class="d-stroke m-fill" d="M998.05 218.55 790 145 190.507 298.273 440.492 378.995Z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class="d-stroke l-fill" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"
+                d="M440.503 378.995v281.875l-249.999-84.6v-278z" />
+            <path class="d-stroke l-fill" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"
+                d="M896 544.002v351.998l-256.04 64.04v-352.01z" />
+            <path class="d-stroke l-fill" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"
+                d="M320.003 128.003l287.998 63.997-256.04 64.04-287.959-64.038z" />
+        </g>
+    </svg>
+    <svg v-if="Type === 'part-transparency'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <g fill-opacity="1" stroke-linecap="round" stroke-linejoin="round">
+            <path class=" d-stroke d-fill" d="M640 640l-256-128v256l256 128z" stroke-width="16" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class=" d-stroke l-fill" d="M640 640l-256-128 256-128 256 128z" stroke-width="16"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class=" d-stroke m-fill" d="M640 640l256-128v256l-256 128z" stroke-width="16" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </g>
+        <g fill-opacity="0.6" transform="scale(0.75 0.75) translate(298.75 -85.25)" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path class=" d-stroke d-fill" d="M640 640l-256-128v256l256 128z" stroke-width="16" stroke-linejoin="round"
+                stroke-linecap="round" />
+            <path class=" d-stroke l-fill" d="M640 640l-256-128 256-128 256 128z" stroke-width="16"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <path class=" d-stroke m-fill" d="M640 640l256-128v256l-256 128z" stroke-width="16" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </g>
+        <rect class=" d-stroke m-fill" width="128" height="768" x="128" y="128" rx="64" ry="64" stroke-width="32"
+            stroke-linejoin="round" />
+        <rect class=" d-stroke l-fill" width="128" height="512" x="128" y="384" rx="64" ry="64" stroke-width="32"
+            stroke-linejoin="round" />
+        <circle class=" l-stroke m-fill" r="64" cx="192" cy="448" stroke-width="32" />
+        <g>
+            <path class=" d-stroke m-fill" d="M512 196l64-196L704 335z" stroke-width="8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class=" d-stroke l-fill" d="M512 196 320 256 704 335Z" stroke-width="8" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </g>
+    </svg>
+    <!-- 通用功能 -->
+    <svg  v-if="Type === 'drag-hand'" class="tool-icon d-stroke l-fill" :class="{ 'tool-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <g>
+            <circle r="64" cx="384" cy="256" stroke-width="32" rw-tool />
+            <circle r="64" cx="384" cy="512" stroke-width="32" rw-tool />
+            <circle r="64" cx="384" cy="768" stroke-width="32" rw-tool />
+        </g>
+        <g>
+            <circle r="64" cx="640" cy="256" stroke-width="32" rw-tool />
+            <circle r="64" cx="640" cy="512" stroke-width="32" rw-tool />
+            <circle r="64" cx="640" cy="768" stroke-width="32" rw-tool />
         </g>
     </svg>
 </template>
@@ -122,6 +238,7 @@ defineProps(
     height: 2.5vmin;
     max-width: 25px;
     max-height: 25px;
+    transition: width 500ms, height 500ms;
 
     &.tool-icon1 {
         width: 5vmin;
@@ -142,6 +259,7 @@ defineProps(
     height: 5vmin;
     max-width: 60px;
     max-height: 60px;
+    transition: width 500ms, height 500ms;
 
     &:active {
         animation: act-icon 200ms ease;
@@ -153,6 +271,7 @@ defineProps(
     height: 4vmin;
     max-width: 45px;
     max-height: 45px;
+    transition: width 500ms, height 500ms;
 
     &:active {
         animation: act-icon 200ms ease;

@@ -38,7 +38,14 @@ export const welcome_inter_ctr = reactive({ "show-inter": true , "delay-hide": f
 export const base_icon_ctr = reactive({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标 用于[App.vue]
 export const ele_state = reactive({ "enter-title-bar": false })  // 控制当前是否悬停在关闭栏 用于[App.vue]
 
-export const tools_state = reactive({ "show-tool": false, "rw-file": false})  // 控制 tools 的状态 用于[Tools.vue]
+export const tools_state = reactive({ 
+    "show-tool": false, 
+    "rw-file": {
+        "show":false,
+        "moved": false,  // 是否移动过
+        "icon-size":1,    // 未移动前图标大小
+        "delay-hide": false  // 延迟隐藏
+    }})  // 控制 tools 的状态 用于[Tools.vue]
 
 /**
  * 工具栏位置参数

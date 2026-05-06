@@ -9,7 +9,7 @@
                 <div class="item" @click="open_tools_bar">
                     <ToolIcon Type="shrink"></ToolIcon>
                 </div>
-                <div class="item">
+                <div class="item" @click="open_rw_bar">
                     <ToolIcon Type="read-write-file"></ToolIcon>
                 </div>
             </div>
@@ -26,6 +26,12 @@ const open_tools_bar = () => {
     } else {
         tools_state['show-tool'] = true;
     }
+}
+const open_rw_bar = () => {
+    if (!tools_state["rw-file"]["show"]) {
+        tools_state["rw-file"]["show"] = true;
+    }
+
 }
 </script>
 

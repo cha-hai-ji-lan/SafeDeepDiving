@@ -1,41 +1,51 @@
 <template>
-        <div v-if="welcome_inter_ctr['show-inter']" >
-            <div class="welcome" :class="{'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide']}">
-                <div class="main-logo">
-                    <BaseIcon Type="logo" :State=3></BaseIcon>
+    <div v-if="welcome_inter_ctr['show-inter']">
+        <div class="welcome"
+            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide']}">
+            <div class="main-logo">
+                <BaseIcon Type="logo" :State=3></BaseIcon>
+            </div>
+            <div class="brief-description">
+                <div class="wel-title">{{ lang?.["welcome"]?.["wel-tit"] ?? "__WELCOME__" }}
                 </div>
-                <div class="brief-description">
-                    <div class="wel-title">{{ lang?.["welcome"]?.["wel-tit"] ?? "__WELCOME__" }}
+                <div class=" wel-info">{{ lang?.["welcome"]?.["wel-msg"] ?? "__WELCOME__" }}</div>
+                <div class="methoad-bar">
+                    <div class="method-but" @click="import_model_file">
+                        <ToolIcon Type="import" :State="1"></ToolIcon>
                     </div>
-                    <div class=" wel-info">{{ lang?.["welcome"]?.["wel-msg"] ?? "__WELCOME__" }}</div>
-                    <div class="methoad-bar">
-                        <div class="method-but" @click="import_model_file">
-                            <ToolIcon Type="import" :State="1"></ToolIcon>
+                    <div class="method-but">
+                        <ToolIcon Type="new-part" :State="1"></ToolIcon>
+                    </div>
+                    <div class="method-but">
+                        <ToolIcon Type="new-asm" :State="1"></ToolIcon>
+                    </div>
+                    <div class="method-but" @click="open_url(appConfig?.['repository'])">
+                        <BaseIcon Type="github" :State="1"></BaseIcon>
+                    </div>
+                    <a href="mailto:shi2760992374@outlook.com?subject=BUG反馈&body=请发送反馈内容">
+                        <div class="method-but">
+                            <BaseIcon Type="bug-mail" :State="1"></BaseIcon>
                         </div>
-                        <div class="method-but" @click="open_url(appConfig?.['repository'])">
-                            <BaseIcon Type="github" :State="1"></BaseIcon>
-                        </div>
-                        <a href="mailto:shi2760992374@outlook.com?subject=BUG反馈&body=请发送反馈内容">
-                            <div class="method-but">
-                                <BaseIcon Type="bug-mail" :State="1"></BaseIcon>
-                            </div>
-                        </a>
-                        <div class="method-but" @click="close_inter">
-                                <BaseIcon Type="close" :State="1"></BaseIcon>
-                            </div>
+                    </a>
+                    <div class="method-but" @click="close_inter">
+                        <BaseIcon Type="close" :State="1"></BaseIcon>
                     </div>
                 </div>
             </div>
-            <div class="gradient-border" :class="{'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide']}"></div>
-            <div class="mesh" :class="{'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide']}"></div>
         </div>
+        <div class="gradient-border"
+            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide'] }">
+        </div>
+        <div class="mesh"
+            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide'] }">
+        </div>
+    </div>
 </template>
 <script setup lang="ts">
 import BaseIcon from '../icons/BaseIcon.vue';
 import { welcome_inter_ctr, lang, appConfig } from '../core/cache';
-import {file_path,  open_file_dialog } from '../core/io';
-import {close_inter } from '../core/publicMethod.ts';
-import { load_obj } from '../core/three/fileIO.ts'
+import { import_model_file, close_inter } from '../core/publicMethod.ts';
+
 import ToolIcon from '../icons/ToolIcon.vue';
 import { invoke } from '@tauri-apps/api/core';
 
@@ -44,22 +54,20 @@ const open_url = (url: string) => {
 }
 
 
-const import_model_file = async () =>{
-    await open_file_dialog()
-    if(file_path.value){
-    load_obj(file_path.value)
-
-    }
-}
-
 </script>
 <style scoped>
 .show-welcome {
     animation: interface-show 250ms ease;
 }
+
 .hide-welcome {
     animation: interface-hide 250ms ease;
 }
+
+.load-spin {
+    animation: spin linear infinite
+}
+
 .gradient-border {
     position: fixed;
     top: 19.5%;
@@ -144,7 +152,7 @@ const import_model_file = async () =>{
             height: fit-content;
             width: fit-content;
             border: 0.25vmin solid rgba(var(--menu), var(--b-transparent));
-            background-color: rgba(var(--menu), var(--w-transparent));
+            background-color: rgba(var(--border), var(--w-transparent));
             border-radius: 1vmin;
 
             & .method-but {
@@ -170,5 +178,4 @@ const import_model_file = async () =>{
     background-color: rgba(var(--font), var(--w-transparent));
 
 }
-
 </style>

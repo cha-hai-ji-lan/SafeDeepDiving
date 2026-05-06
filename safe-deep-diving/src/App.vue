@@ -31,6 +31,7 @@
     <MainThree></MainThree>
     <ViewTools></ViewTools>
     <Tools></Tools>
+    <ReadWriteTool></ReadWriteTool>
   </main>
 </template>
 <script setup lang="ts">
@@ -42,6 +43,7 @@ import BaseIcon from "./icons/BaseIcon.vue"
 import Welcome from "./interface/Welcome.vue";
 import MainLogo from "./components/MainLogo.vue";
 import ViewTools from "./components/ViewTools.vue";
+import ReadWriteTool from "./components/ReadWriteTool.vue";
 import Tools from "./components/Tools.vue";
 import { init_app } from "./core/init.ts";
 import { base_icon_ctr,  ele_state} from "./core/cache.ts";
