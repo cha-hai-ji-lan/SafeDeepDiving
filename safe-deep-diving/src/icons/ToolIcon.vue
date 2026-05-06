@@ -77,36 +77,44 @@
     </svg>
     <svg v-if="Type === 'shrink'" class="tool-group-icon d-stroke l-fill" xmlns="http://www.w3.org/2000/svg"
         width="1024" height="1024" viewBox="0 0 1024 1024">
-        <path d="M96 128a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" />
-        <path d="M96 448a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" />
-        <path d="M96 768a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64" />
+        <rect width="640" height="96" x="192" y="192" rx="48" ry="48" stroke-width="32" />
+        <rect width="640" height="96" x="192" y="448" rx="48" ry="48" stroke-width="32" />
+        <rect width="640" height="96" x="192" y="704" rx="48" ry="48" stroke-width="32" />
     </svg>
     <!-- 读写模块图标 -->
-    <svg  v-if="Type === 'import'" class="tool-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+    <svg v-if="Type === 'import'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }" viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
         <g>
-            <rect width="1024" height="868" x="0" y="64" rx="64" ry="64" fill="#071226" />
-            <rect width="896" height="740" x="64" y="128" rx="32" ry="32" fill="#74aff6" />
-            <rect width="640" height="64" x="160" y="192" rx="24" ry="24" fill="#d3e3ee" />
-            <path
-                d="M749 940V1001.4C748.9 1020.7 771.3 1031.4 786.3 1019.3L1015.4 834C1026.8 824.8 1026.7 807.5 1015.3 798.3L787.3 593.2C772.3 581.2 749 591.8 748.9 611V673.1C748.9 684.8 740.9 693.2 729.5 695.8 541 693 473 689 350 320 198 909 521 912 726.7 917 739.3 917.7 749.1 927.5 749 940Z"
-                fill="#d3e3ee" />
+            <rect class="d-fill" width="1024" height="868" x="0" y="64" rx="128" ry="128" />
+            <rect class="m-fill" width="896" height="740" x="64" y="128"rx="96" ry="96" />
+            <rect class="l-fill" width="640" height="64" x="160" y="192" rx="24" ry="24" />
+            <path class="d-stroke l-fill"
+                d="M399 671.9V733.3C398.9 752.6 421.3 763.3 436.3 751.2L665.4 565.9C676.8 556.7 676.7 539.4 665.3 530.2L437.3 325.1C422.3 313.1 399 323.7 398.9 342.9V405C398.9 416.7 390.9 425.1 379.5 427.7-80.2 432 14.3 755.2 3.8 1023.4 100 784.4 230.8 689 376.7 648.9 389.3 649.6 399.1 659.4 399 671.9Z"
+                stroke-width="8" />
         </g>
     </svg>
-    <svg  v-if="Type === 'export'" class="tool-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+    <svg v-if="Type === 'export'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }" viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
         <g>
-            <rect width="1024" height="868" x="0" y="64" rx="64" ry="64" fill="#071226" />
-            <rect width="896" height="740" x="64" y="128" rx="32" ry="32" fill="#74aff6" />
-            <rect width="640" height="64" x="160" y="192" rx="24" ry="24" fill="#d3e3ee" />
-            <path
+            <rect class="d-fill" width="1024" height="868" x="0" y="64" rx="128" ry="128" />
+            <rect class="m-fill" width="896" height="740" x="64" y="128" rx="96" ry="96" />
+            <rect class="l-fill" width="640" height="64" x="160" y="192" rx="24" ry="24" />
+            <path class="d-stroke l-fill"
                 d="M749 940V1001.4C748.9 1020.7 771.3 1031.4 786.3 1019.3L1015.4 834C1026.8 824.8 1026.7 807.5 1015.3 798.3L787.3 593.2C772.3 581.2 749 591.8 748.9 611V673.1C748.9 684.8 740.9 693.2 729.5 695.8 541 693 473 689 350 320 198 909 521 912 726.7 917 739.3 917.7 749.1 927.5 749 940Z"
-                fill="#d3e3ee" />
+                stroke-width="8" />
         </g>
     </svg>
 </template>
 <script setup lang="ts">
-defineProps<{
-    Type: string
-}>()
+defineProps(
+    {
+        Type: String,
+        State: {
+            type: Number,
+            default: 0,
+        }
+    }
+)
 </script>
 <style scoped>
 .tool-icon {
@@ -115,9 +123,18 @@ defineProps<{
     max-width: 25px;
     max-height: 25px;
 
+    &.tool-icon1 {
+        width: 5vmin;
+        height: 5vmin;
+        max-width: 60px;
+        max-height: 60px;
+    }
+
     &:active {
         animation: act-icon 200ms ease;
     }
+
+
 }
 
 .tool-main-icon {

@@ -1,11 +1,25 @@
 {
     "app": {
         "version": "0.0.15",
-        "core":{
-            "input-path":"C:\\",
-            "output-path":"C:\\"
-        }
+        "repository":"https://github.com/cha-hai-ji-lan/SafeDeepDiving",
 
+        "core": {
+            "input-path": "C:\\",
+            "output-path": "C:\\"
+        },
+        "i18n": {
+            "current-lang": "ZH",
+            "lang-list": {
+                "中文": {
+                    "type": "ZH",
+                    "completion-rate": 100.0
+                },
+                "English":{
+                    "type": "EN",
+                    "completion-rate": 100.0
+                }
+            }
+        }
     },
     "theme": {
         "current": "light",

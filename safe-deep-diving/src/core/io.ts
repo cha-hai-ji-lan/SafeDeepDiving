@@ -21,7 +21,7 @@ export const open_file_dialog = async () =>{
         }],
         defaultPath: coreConfig.value["input-path"]
       });
-
+      console.log(file_path.value)
 }
 export const open_files_dialog = async () =>{
     files_path.value = await open({
@@ -34,7 +34,7 @@ export const open_files_dialog = async () =>{
         }],
         defaultPath: coreConfig.value["input-path"]
       });
-
+      console.log(files_path.value)
 }
 export const open_folder_dialog = async () =>{
     folder_path.value = await open({
@@ -47,7 +47,7 @@ export const open_folder_dialog = async () =>{
         }],
         defaultPath: coreConfig.value["input-path"]
       });
-
+      console.log(folder_path.value)
 }
 export const open_folders_dialog = async () =>{
     folders_path.value = await open({
@@ -60,5 +60,5 @@ export const open_folders_dialog = async () =>{
         }],
         defaultPath: coreConfig.value["input-path"]
       });
-
+      console.log(folders_path.value)
 }

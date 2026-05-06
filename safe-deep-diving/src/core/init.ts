@@ -3,8 +3,14 @@
  * 作为程序载入时做基本缓存配置的执行脚本
 */
 import { invoke } from "@tauri-apps/api/core";
-import { parse } from 'smol-toml';
-import { appPath, binPath, configPath, configPathF, defaultConfigPathF, cfg, dcfg, appConfig, coreConfig, themeConfig, interfaceConfig } from "./cache.ts";
+import {
+    appPath, binPath,
+    i18nPath, configPath,
+    configPathF, defaultConfigPathF,
+    cfg, dcfg, appConfig, i18nConfig, coreConfig,
+    themeConfig, interfaceConfig,
+    lang
+} from "./cache.ts";
 import { PathUtils, PATH_CONSTANTS } from "./path.ts";
 
 /**
@@ -25,6 +31,7 @@ export const replace_config = async () => {
 export const init_app = async () => {
     await init_app_path()
     await init_config()
+    await init_i18n()
     init_color_palette()
 }
 /**
@@ -39,10 +46,12 @@ export const init_app = async () => {
 export const init_app_path = async () => {
     appPath.value = await invoke<string>("get_app_path", {})
     binPath.value = await PathUtils.buildResourcePath(appPath.value, PATH_CONSTANTS.BIN_DIR)
+    i18nPath.value = await PathUtils.buildResourcePath(binPath.value, PATH_CONSTANTS.I18N_DIR)
     configPath.value = await PathUtils.buildResourcePath(binPath.value, PATH_CONSTANTS.CONFIG_DIR)
     configPathF.value = await PathUtils.buildResourcePath(configPath.value, PATH_CONSTANTS.CONFIG_FILE);
     defaultConfigPathF.value = await PathUtils.buildResourcePath(binPath.value, PATH_CONSTANTS.DEFAULT_CONFIG_FILE);
 }
+
 /**
  * 初始化配置
 */
@@ -54,10 +63,21 @@ export const init_config = async () => {
     appConfig.value = cfg.value["app"]
     // 获取软件核心设置
     coreConfig.value = appConfig.value["core"]
+    // 获取软件国际化设置
+    i18nConfig.value = appConfig.value["i18n"]
     // 获取主题配置
     themeConfig.value = cfg.value["theme"]
     // 获取界面配置
     interfaceConfig.value = cfg.value["interface"]
+}
+/**
+ * 载入国际化资源
+*/
+export const init_i18n = async () => {
+    let temp_path = await  PathUtils.buildResourcePath(i18nPath.value, `${i18nConfig.value["current-lang"]}.json`)
+    console.log(temp_path)
+    lang.value = await invoke("read_json_file", { filePath: temp_path})
+    console.log(lang.value)
 }
 
 /**

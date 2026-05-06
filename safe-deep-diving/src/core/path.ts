@@ -90,6 +90,7 @@ export class PathUtils {
 export const PATH_CONSTANTS = {
   BIN_DIR: 'bin',
   CONFIG_DIR: 'config',
+  I18N_DIR: 'i18n',
   CONFIG_FILE: 'config.json',
   DEFAULT_CONFIG_FILE: 'defaultConfig.json',
 } as const;

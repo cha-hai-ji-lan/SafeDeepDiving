@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <Welcome></Welcome>
     <MainLogo></MainLogo>
     <MainThree></MainThree>
     <ViewTools></ViewTools>
@@ -38,6 +39,7 @@ import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import MainThree from "./interface/MainThree.vue";
 import BaseIcon from "./icons/BaseIcon.vue"
+import Welcome from "./interface/Welcome.vue";
 import MainLogo from "./components/MainLogo.vue";
 import ViewTools from "./components/ViewTools.vue";
 import Tools from "./components/Tools.vue";
@@ -126,7 +128,7 @@ onUnmounted(() => {
   /* background-color: rgba(var(--border), 1); */
   & .title {
     position: fixed;
-    z-index: 10;
+    z-index: 30;
     top: 2vmin;
     left: 2vmin;
     display: flex;
@@ -212,6 +214,7 @@ onUnmounted(() => {
 </style>
 <style>
 @import "./style/animation.css";
+@import "./style/font.css";
 @import "./style/setting.css";
 
 html, body, #app {
@@ -221,7 +224,7 @@ html, body, #app {
   padding: 0;
 }
 html {
-  font: 1.75vmin "宋体", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 1.75vmin "楷体", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   color: rgba(var(--font), 1);
   width: 100vw;

@@ -1,5 +1,5 @@
 <template>
-    <div class="main-logo">
+    <div class="main-logo" @click="open_welcom_inter">
         <div class="sdd-logo">
             <BaseIcon Type="logo"></BaseIcon>
         </div>
@@ -8,6 +8,15 @@
 </template>
 <script setup lang="ts">
 import BaseIcon from '../icons/BaseIcon.vue';
+import {welcome_inter_ctr} from "../core/cache"
+
+const open_welcom_inter = () =>{
+    if (welcome_inter_ctr["show-inter"]){
+        welcome_inter_ctr["show-inter"] = false
+    } else {
+        welcome_inter_ctr["show-inter"] = true
+    }
+}
 </script>
 <style scoped>
 .main-logo {
@@ -39,5 +48,6 @@ import BaseIcon from '../icons/BaseIcon.vue';
         margin: 0.5vmin;
 
     }
+   
 }
 </style>

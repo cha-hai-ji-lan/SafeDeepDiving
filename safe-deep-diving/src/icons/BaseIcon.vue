@@ -1,6 +1,6 @@
 <template>
-    <svg v-if="Type === 'logo'" class="logo-icon" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024"
-        viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'logo'" class="logo-icon" :class="{ 'logo-icon3': State === 3 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <g transform="scale(0.9 0.9) translate(51 51)">
             <circle class="l-fill" r="256" cx="256" cy="768" />
             <path class="l-fill" d="M895.597 128.404l-319.598-128.409L688.867 335.133z" opacity="1" />
@@ -68,14 +68,14 @@
         <rect class="l-fill" width="768" height="640" x="64" y="256" rx="128" ry="128" stroke-opacity="1"
             stroke-width="64" />
     </svg>
-    <svg v-if="Type === 'close'" class="base-icon d-stroke" xmlns="http://www.w3.org/2000/svg" width="1024"
+    <svg v-if="Type === 'close'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
         height="1024" viewBox="0 0 1024 1024">
         <path class="m-fill" d="M96 448a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64"
             transform="rotate(45 512 512)" />
         <path class="l-fill" d="M96 448a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64"
             transform="rotate(135 512 512)" />
     </svg>
-    <svg v-if="Type === 'pin-0'" class="base-icon d-stroke" xmlns="http://www.w3.org/2000/svg" width="1024"
+    <svg v-if="Type === 'pin-0'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
         height="1024" viewBox="0 0 1024 1024">
         <g transform="rotate(50 512 512) translate(16 128)">
             <rect class="m-fill" width="384" height="512" rx="64" ry="64" stroke-linejoin="round" x="320" y="192"
@@ -85,7 +85,7 @@
         </g>
 
     </svg>
-    <svg v-if="Type === 'pin-1'" class="base-icon d-stroke" xmlns="http://www.w3.org/2000/svg" width="1024"
+    <svg v-if="Type === 'pin-1'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
         height="1024" viewBox="0 0 1024 1024">
         <g>
             <rect class="m-fill" width="384" height="512" rx="64" ry="64" stroke-linejoin="round" x="320" y="192"
@@ -94,13 +94,13 @@
             <line x2="512" x1="512" y1="704" y2="960" stroke-width="64" stroke-linecap="round" />
         </g>
     </svg>
-    <svg v-if="Type === 'omit'" class="base-icon d-stroke l-fill" xmlns="http://www.w3.org/2000/svg" width="1024"
+    <svg v-if="Type === 'omit'" class="base-icon d-stroke l-fill" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
         height="1024" viewBox="0 0 1024 1024">
         <circle r="92" cx="512" cy="512" stroke-width="64" />
         <circle r="92" cx="512" cy="128" stroke-width="64" />
         <circle r="92" cx="512" cy="896" stroke-width="64" />
     </svg>
-    <svg v-if="Type === 'drag-block'" class="base-icon d-stroke" xmlns="http://www.w3.org/2000/svg" width="1024"
+    <svg v-if="Type === 'drag-block'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
         height="1024" viewBox="0 0 1024 1024">
         <path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round"
             stroke-width="64" />
@@ -110,14 +110,35 @@
             stroke-width="64" transform="rotate(180 512 512)" />
         <path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round"
             stroke-width="64" transform="rotate(270 512 512)" />
-        <rect class="l-fill m-stroke" width="384" height="384" x="320" y="320" stroke="#74aff6" ry="64" rx="64"
-            stroke-width="96" stroke-linejoin="round" />
+        <rect class="l-fill m-stroke" width="384" height="384" x="320" y="320" ry="64" rx="64" stroke-width="96"
+            stroke-linejoin="round" />
+    </svg>
+    <svg v-if="Type === 'github'" class="base-icon d-fill" :class="{ 'base-icon1': State === 1 }"
+        viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+        <path
+            d="M20.48 518c0 214.4256 137.4208 396.73856 328.94976 463.6672 25.8048 6.5536 21.87264-11.8784 21.87264-24.33024v-85.07392c-148.93056 17.44896-154.86976-81.1008-164.94592-97.52576-20.23424-34.52928-67.91168-43.33568-53.69856-59.76064 33.91488-17.44896 68.48512 4.42368 108.46208 63.61088 28.95872 42.88512 85.44256 35.6352 114.15552 28.4672a138.8544 138.8544 0 0 1 38.0928-66.7648c-154.25536-27.60704-218.60352-121.77408-218.60352-233.79968 0-54.31296 17.94048-104.2432 53.0432-144.54784-22.36416-66.43712 2.08896-123.24864 5.3248-131.6864 63.81568-5.7344 130.00704 45.6704 135.168 49.68448 36.2496-9.78944 77.57824-14.9504 123.82208-14.9504 46.4896 0 88.064 5.3248 124.5184 15.23712 12.288-9.4208 73.80992-53.53472 133.12-48.128 3.15392 8.43776 27.0336 63.93856 6.02112 129.4336 35.59424 40.38656 53.69856 90.76736 53.69856 145.24416 0 112.18944-64.7168 206.4384-219.42272 233.71776a140.0832 140.0832 0 0 1 41.7792 99.9424v123.4944c.86016 9.87136 0 19.6608 16.50688 19.6608 194.31424-65.49504 334.2336-249.15968 334.2336-465.5104 0-271.31904-219.91424-491.02848-490.98752-491.02848-271.40096-.12288-491.1104 219.62752-491.1104 490.94656z"
+            opacity="0.9" />
+    </svg>
+    <svg v-if="Type === 'bug-mail'" class="base-icon d-fill" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <rect class=" d-stroke m-fill" width="896" height="640" x="64" y="192" ry="128" rx="128" stroke-width="64" />
+        <path class=" d-stroke l-fill" d="M112 224 512 512 912 224" stroke-width="64" stroke-linejoin="round"
+            stroke-linecap="round" />
+        <circle class=" l-stroke m-fill" r="192" cx="768" cy="256" stroke-width="32" />
+        <rect class="  d-fill" width="32" height="192" x="752" y="128" rx="32" ry="32" />
+        <circle class="  d-fill" r="16" cx="768" cy="368" />
     </svg>
 </template>
 <script setup lang="ts">
-defineProps<{
-    Type: string
-}>()
+defineProps(
+    {
+        Type: String,
+        State: {
+            type: Number,
+            default: 0,
+        }
+    }
+)
 </script>
 <style scoped>
 .base-icon {
@@ -125,6 +146,13 @@ defineProps<{
     height: 2.5vmin;
     max-width: 25px;
     max-height: 25px;
+
+    &.base-icon1 {
+        width: 5vmin;
+        height: 5vmin;
+        max-width: 60px;
+        max-height: 60px;
+    }
 
     &:active {
         animation: act-icon 200ms ease;
@@ -136,6 +164,13 @@ defineProps<{
     height: 4vmin;
     max-width: 35px;
     max-height: 35px;
+
+    &.logo-icon3 {
+        width: 35vmin;
+        height: 35vmin;
+        max-width: 400px;
+        max-height: 400px;
+    }
 
     &:active {
         animation: act-icon 200ms ease;

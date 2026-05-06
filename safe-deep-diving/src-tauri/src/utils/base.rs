@@ -1,4 +1,5 @@
 use std::fs;
+use open;
 use serde_json::Value;
 use tauri::Manager;
 ///
@@ -19,6 +20,16 @@ pub async fn get_app_path(app_handle: tauri::AppHandle) -> Result<String, String
         .to_string();
 
     Ok(resources_path)
+}
+///
+/// 默认浏览器打开 URL
+///
+#[tauri::command]
+pub fn open_url(url: &str) -> Result<(), String> {
+    match open::that(url) {
+        Ok(_) => Ok(()),
+        Err(e) => Err(format!("无法打开 URL: {e}")),
+    }
 }
 ///
 /// ### 读取json文件

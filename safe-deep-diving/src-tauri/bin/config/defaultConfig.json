@@ -4,6 +4,9 @@
         "core":{
             "input-path":"C:\\",
             "output-path":"C:\\"
+        },
+        "i18n":{
+            "current-lang": "ZH"
         }
 
     },
