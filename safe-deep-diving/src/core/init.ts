@@ -3,6 +3,7 @@
  * 作为程序载入时做基本缓存配置的执行脚本
 */
 import { invoke } from "@tauri-apps/api/core";
+import { parse } from 'smol-toml';
 import { appPath, binPath, configPath, configPathF, defaultConfigPathF, cfg, dcfg, appConfig, coreConfig, themeConfig, interfaceConfig } from "./cache.ts";
 import { PathUtils, PATH_CONSTANTS } from "./path.ts";
 

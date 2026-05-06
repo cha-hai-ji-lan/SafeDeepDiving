@@ -36,3 +36,12 @@ export const ele_state = reactive({ "enter-title-bar": false })  // 控制当前
 
 export const tools_state = reactive({ "show-tool": false, "rw-file": false})  // 控制 tools 的状态 用于[Tools.vue]
 
+
+/**
+ * 工具栏位置参数
+ * 
+ * 为保证能跟随屏幕变化 都以 vmin 做单位 有特殊单位则在后续标注
+*/
+export const tool_bar_state = reactive({
+    "rw-file":{"x-vmin":0, "y-vmin":0}
+})
