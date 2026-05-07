@@ -1,7 +1,7 @@
 <template>
     <div v-if="welcome_inter_ctr['show-inter']">
         <div class="welcome"
-            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide']}">
+            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide'] }">
             <div class="main-logo">
                 <BaseIcon Type="logo" :State=3></BaseIcon>
             </div>
@@ -110,7 +110,7 @@ const open_url = (url: string) => {
         flex-direction: column;
 
         & .wel-title {
-            font: 10vmin "LXGW", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font: 5.5vw "LXGW", "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 900;
             margin-top: 3vmin;
             background-image: linear-gradient(to bottom right, rgba(var(--font), 1), rgba(var(--but-2), 1));
@@ -128,7 +128,7 @@ const open_url = (url: string) => {
         }
 
         & .wel-info {
-            font: 3.5vmin "楷体", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font: 2vw "楷体", "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 600;
             margin-top: 3vmin;
             background-image: linear-gradient(to bottom right, rgba(var(--font), 1), rgba(var(--but-2), 1));
@@ -149,17 +149,24 @@ const open_url = (url: string) => {
             align-items: center;
             justify-content: center;
             flex-direction: row;
+            flex-wrap: wrap; /* 允许换行 */
             height: fit-content;
             width: fit-content;
             border: 0.25vmin solid rgba(var(--menu), var(--b-transparent));
             background-color: rgba(var(--border), var(--w-transparent));
             border-radius: 1vmin;
 
+            /* 添加媒体查询 */
+            @media (max-width: 768px) {
+                width: 60%;
+            }
+
             & .method-but {
                 height: fit-content;
                 width: fit-content;
                 margin: 0.5vmin 1vmin;
             }
+
         }
 
 

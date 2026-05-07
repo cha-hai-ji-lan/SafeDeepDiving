@@ -1,28 +1,23 @@
 <template>
-    <div v-if="tools_state['rw-file']['show']" class="rw-tool" :class="{'show-bar': tools_state['rw-file']['delay-hide'] === false, 'hide-bar':tools_state['rw-file']['delay-hide']}" ref="floatingWindowElement">
+    <div v-if="tools_state['feature']['show']" class="rw-tool"
+        :class="{ 'show-bar': tools_state['feature']['delay-hide'] === false, 'hide-bar': tools_state['feature']['delay-hide'] }"
+        ref="floatingWindowElement">
         <div class="rw-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
-            <ToolIcon Type="drag-hand" :State="tools_state['rw-file']['icon-size']"></ToolIcon>
+            <ToolIcon Type="drag-hand" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="import_model_file">
-            <ToolIcon Type="import" :State="tools_state['rw-file']['icon-size']"></ToolIcon>
+            <ToolIcon Type="feature-stretch" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="export" :State="tools_state['rw-file']['icon-size']"></ToolIcon>
+            <ToolIcon Type="part-transparency" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
-        <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="save" :State="tools_state['rw-file']['icon-size']"></ToolIcon>
-        </div>
-        <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="save-as" :State="tools_state['rw-file']['icon-size']"></ToolIcon>
-        </div>
-
-        <div v-if="tools_state['rw-file']['moved']" class="rw-tool-icon" @click="() => { close_bar('rw-file') }">
-            <BaseIcon Type="close" :State="tools_state['rw-file']['icon-size']"></BaseIcon>
+        <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
+            <BaseIcon Type="close" :State="tools_state['feature']['icon-size']"></BaseIcon>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { ref,onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import ToolIcon from '../icons/ToolIcon.vue';
 import BaseIcon from '../icons/BaseIcon.vue';
 import { tools_state } from '../core/cache'
@@ -58,9 +53,9 @@ const startDrag = (event: MouseEvent) => {
 // 拖拽过程
 const drag = (event: MouseEvent) => {
     if (!isDragging.value || !floatingWindowElement.value) return;
-    tools_state['rw-file']['moved'] = true
-    tools_state['rw-file']['icon-size'] = 0
-    if(tools_state["current-focus-bar"] === "rw-file")tools_state["current-focus-bar"] = "__FOCUS_BAR__"
+    tools_state['feature']['moved'] = true
+    tools_state['feature']['icon-size'] = 0
+    if (tools_state["current-focus-bar"] === "feature") tools_state["current-focus-bar"] = "__FOCUS_BAR__"
 
 
     // 1. 计算新的位置 (像素)
@@ -91,12 +86,14 @@ const stopDrag = () => {
 
 </script>
 <style scoped>
-.show-bar{
+.show-bar {
     animation: bar-show 200ms ease-in-out forwards;
 }
-.hide-bar{
+
+.hide-bar {
     animation: bar-hide 200ms ease-in-out forwards;
 }
+
 .rw-tool {
     display: flex;
     flex-direction: row;
@@ -118,7 +115,7 @@ const stopDrag = () => {
         align-items: center;
         justify-content: center;
         margin: 0.5vmin;
-        
+
 
     }
 }

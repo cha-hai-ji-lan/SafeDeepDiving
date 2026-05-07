@@ -6,11 +6,20 @@
                 <ToolIcon Type="tools"></ToolIcon>
             </div>
             <div v-else class="tools-bar open-tools-bar">
-                <div class="item" @click="open_tools_bar">
+                <div class="item" @click="open_tools_bar" @dblclick="">
                     <ToolIcon Type="shrink"></ToolIcon>
                 </div>
-                <div class="item" @click="open_rw_bar">
-                    <ToolIcon Type="read-write-file"></ToolIcon>
+                <div class="item" @click="() => { handleClick(focus_rw_bar) }"
+                    @dblclick="() => { handleDoubleClick(open_rw_bar) }">
+                    <ToolIcon Type="rw-file"></ToolIcon>
+                </div>
+                <div class="item" @click="() => { handleClick(focus_sketch_bar) }"
+                    @dblclick="() => { handleDoubleClick(open_sketch_bar) }">
+                    <ToolIcon Type="sketch"></ToolIcon>
+                </div>
+                <div class="item" @click="() => { handleClick(focus_feature_bar) }"
+                    @dblclick="() => { handleDoubleClick(open_feature_bar) }">
+                    <ToolIcon Type="feature"></ToolIcon>
                 </div>
             </div>
         </Transition>
@@ -19,7 +28,35 @@
 <script setup lang="ts">
 import ToolIcon from "../icons/ToolIcon.vue";
 import { tools_state } from "../core/cache";
+import { close_bar } from "../core/publicMethod";
 
+let clickTimer: number | null = null;
+const handleClick = (callback: () => void) => {
+    if (clickTimer) {
+        // 如果定时器存在，说明这是第二次点击，清除定时器，等待 dblclick 触发
+        clearTimeout(clickTimer);
+        clickTimer = null;
+    } else {
+        // 第一次点击，设置定时器
+        clickTimer = window.setTimeout(() => {
+            callback()  // 回调传递的方法
+            console.log('确认为单击');
+            // 执行单击逻辑
+            clickTimer = null;
+        }, 250); // 延迟时间略小于浏览器默认双击间隔
+    }
+};
+
+const handleDoubleClick = (callback: () => void) => {
+    // 双击触发时，清除单击的定时器，防止单击逻辑执行
+    if (clickTimer) {
+        clearTimeout(clickTimer);
+        clickTimer = null;
+    }
+    callback()  // 回调传递的方法
+    console.log('确认为双击');
+    // 执行双击逻辑
+};
 const open_tools_bar = () => {
     if (tools_state['show-tool']) {
         tools_state['show-tool'] = false;
@@ -27,11 +64,76 @@ const open_tools_bar = () => {
         tools_state['show-tool'] = true;
     }
 }
+const focus_rw_bar = () => {
+    if (!tools_state["has-focus-bar"]) {  // 如果当前无注视工具栏 
+        if (!tools_state["rw-file"]["show"]) {
+            tools_state["rw-file"]["show"] = true;
+            tools_state["current-focus-bar"] = "rw-file"
+            tools_state["has-focus-bar"] = true
+        }
+    } else {  // 当前有注视的工具栏
+        if (!tools_state["rw-file"]["show"]) {
+            close_bar(tools_state["current-focus-bar"])
+            tools_state["rw-file"]["show"] = true;
+            tools_state["current-focus-bar"] = "rw-file"
+            tools_state["has-focus-bar"] = true
+        }
+    }
+}
+const focus_sketch_bar = () => {
+    if (!tools_state["has-focus-bar"]) {
+        if (!tools_state["sketch"]["show"]) {
+            tools_state["sketch"]["show"] = true;
+            tools_state["current-focus-bar"] = "sketch"
+            tools_state["has-focus-bar"] = true
+        }
+    } else {
+        if (!tools_state["sketch"]["show"]) {
+            close_bar(tools_state["current-focus-bar"])
+            tools_state["sketch"]["show"] = true;
+            tools_state["current-focus-bar"] = "sketch"
+            tools_state["has-focus-bar"] = true
+        }
+    }
+}
+const focus_feature_bar = () => {
+    if (!tools_state["has-focus-bar"]) {
+        if (!tools_state["feature"]["show"]) {
+            tools_state["feature"]["show"] = true;
+            tools_state["current-focus-bar"] = "feature"
+            tools_state["has-focus-bar"] = true
+        }
+    } else {
+        if (!tools_state["feature"]["show"]) {
+            close_bar(tools_state["current-focus-bar"])
+            tools_state["feature"]["show"] = true;
+            tools_state["current-focus-bar"] = "feature"
+            tools_state["has-focus-bar"] = true
+        }
+    }
+}
+
 const open_rw_bar = () => {
     if (!tools_state["rw-file"]["show"]) {
         tools_state["rw-file"]["show"] = true;
+        tools_state['rw-file']['moved'] = true
+        tools_state['rw-file']['icon-size'] = 0
     }
+}
+const open_sketch_bar = () => {
+    if (!tools_state["sketch"]["show"]) {
+        tools_state["sketch"]["show"] = true;
+        tools_state['sketch']['moved'] = true
+        tools_state['sketch']['icon-size'] = 0
+    }
+}
+const open_feature_bar = () => {
+    if (!tools_state["feature"]["show"]) {
+        tools_state["feature"]["show"] = true;
+        tools_state['feature']['moved'] = true
+        tools_state['feature']['icon-size'] = 0
 
+    }
 }
 </script>
 
@@ -55,8 +157,8 @@ const open_rw_bar = () => {
         /* 这里不需要 transition */
 
         &.open-tools-bar {
-            width: 10vmin;
-            height: 5vmin;
+            width: fit-content;
+            height: fit-content;
         }
 
         & .item {

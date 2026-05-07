@@ -2,7 +2,7 @@
  *  层级 1
  *  公共方法脚本, 用于各组件间使用共性的方法
 */
-import { welcome_inter_ctr, tools_state } from '../core/cache';
+import { welcome_inter_ctr, tools_state, tool_bar_state } from '../core/cache';
 import { file_path, open_file_dialog } from '../core/io';
 
 import { load_obj } from '../core/three/fileIO'
@@ -33,6 +33,8 @@ export const close_inter = () => {
 */
 
 export const close_bar = (bar_name: string, delay_time: number = 200) => {
+    if(bar_name === "__FOCUS_BAR__") return // 这里未来应该有一个报错
+    console.log(bar_name)
     tools_state[bar_name]["delay-hide"] = true
     setTimeout(() => {
         tools_state[bar_name]["show"] = false
@@ -41,4 +43,18 @@ export const close_bar = (bar_name: string, delay_time: number = 200) => {
         tools_state[bar_name]["delay-hide"] = false
     }, delay_time)
 
+}
+
+/**
+ * 打开对应工具模块
+*/
+
+export const open_bar = (bar_name: string) => {
+    tool_bar_state[bar_name]["ref-obj"].value.style.left = `${tool_bar_state['queue']['x'][0]}vmin`
+    tool_bar_state[bar_name]["ref-obj"].value.style.top  = `${tool_bar_state['queue']['y'][0]}vmin`
+    tool_bar_state['queue']['y'].push(tool_bar_state['queue']['y'][0] + 5)
+    // if(tool_bar_state['queue']['y'][0] > 80){
+    //     tool_bar_state['queue']['x'][0] += 10
+
+    // }
 }

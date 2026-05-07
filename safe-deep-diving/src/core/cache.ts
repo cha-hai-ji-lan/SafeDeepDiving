@@ -40,12 +40,27 @@ export const ele_state = reactive({ "enter-title-bar": false })  // 控制当前
 
 export const tools_state = reactive({ 
     "show-tool": false, 
+    "has-focus-bar": false, // 是否已经有聚焦的工具栏
+    "current-focus-bar":"__FOCUS_BAR__",  // 当前注视工具栏
     "rw-file": {
         "show":false,
         "moved": false,  // 是否移动过
         "icon-size":1,    // 未移动前图标大小
         "delay-hide": false  // 延迟隐藏
-    }})  // 控制 tools 的状态 用于[Tools.vue]
+    },
+    "sketch": {
+        "show":false,
+        "moved": false,  
+        "icon-size":1,    
+        "delay-hide": false 
+    },
+    "feature": {
+        "show":false,
+        "moved": false,  
+        "icon-size":1,    
+        "delay-hide": false 
+    },
+})  // 控制 tools 的状态 用于[Tools.vue]
 
 /**
  * 工具栏位置参数
@@ -53,5 +68,10 @@ export const tools_state = reactive({
  * 为保证能跟随屏幕变化 都以 vmin 做单位 有特殊单位则在后续标注
 */
 export const tool_bar_state = reactive({
-    "rw-file":{"x-vmin":0, "y-vmin":0}
+    "queue":{
+        // 默认位置 70vmin - 20vmin
+        "x":[70],  
+        "y":[20]
+    },
+    "rw-file":{"ref-obj":"__REF_OBJ__","x-vmin":0, "y-vmin":0}
 })
