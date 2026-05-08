@@ -60,6 +60,12 @@ export const tools_state = reactive({
         "icon-size":1,    
         "delay-hide": false 
     },
+    "rib-layout": {
+        "show":false,
+        "moved": false,  
+        "icon-size":1,    
+        "delay-hide": false 
+    },
 })  // 控制 tools 的状态 用于[Tools.vue]
 
 /**

@@ -5,11 +5,14 @@
         <div class="rw-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
             <ToolIcon Type="drag-hand" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
-        <div class="rw-tool-icon" @click="import_model_file">
+        <div class="rw-tool-icon" @click="">
             <ToolIcon Type="feature-stretch" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
             <ToolIcon Type="part-transparency" :State="tools_state['feature']['icon-size']"></ToolIcon>
+        </div>
+        <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
+            <ToolIcon Type="omit" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
             <BaseIcon Type="close" :State="tools_state['feature']['icon-size']"></BaseIcon>
@@ -17,11 +20,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onUnmounted } from 'vue';
 import ToolIcon from '../icons/ToolIcon.vue';
 import BaseIcon from '../icons/BaseIcon.vue';
 import { tools_state } from '../core/cache'
-import { import_model_file, close_bar } from '../core/publicMethod';
+import {close_bar } from '../core/publicMethod';
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽

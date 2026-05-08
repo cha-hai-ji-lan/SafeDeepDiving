@@ -34,6 +34,7 @@
     <ReadWriteTool></ReadWriteTool>
     <SketchTool></SketchTool>
     <FeatureTool></FeatureTool>
+    <RibLayout></RibLayout>
   </main>
 </template>
 <script setup lang="ts">
@@ -49,6 +50,7 @@ import ViewTools from "./components/ViewTools.vue";                 // 引入视
 import ReadWriteTool from "./components/ReadWriteTool.vue";         // 引入读写工具模块
 import SketchTool from "./components/SketchTool.vue";               // 引入草绘工具模块
 import FeatureTool from "./components/FeatureTool.vue";             // 引入特征工具模块
+import RibLayout from "./components/RibLayout.vue";             // 引入特征工具模块
 import { init_app } from "./core/init.ts";                          // 初始化应用脚本
 import { base_icon_ctr,  ele_state} from "./core/cache.ts";         // 引入缓存数据动态脚本
 const appWindow = Window.getCurrent()

@@ -10,7 +10,7 @@
                 </div>
                 <div class=" wel-info">{{ lang?.["welcome"]?.["wel-msg"] ?? "__WELCOME__" }}</div>
                 <div class="methoad-bar">
-                    <div class="method-but" @click="import_model_file">
+                    <div class="method-but" @click="()=>{module_loader()}">
                         <ToolIcon Type="import" :State="1"></ToolIcon>
                     </div>
                     <div class="method-but">
@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import BaseIcon from '../icons/BaseIcon.vue';
 import { welcome_inter_ctr, lang, appConfig } from '../core/cache';
-import { import_model_file, close_inter } from '../core/publicMethod.ts';
+import { close_inter, module_loader } from '../core/publicMethod.ts';
 
 import ToolIcon from '../icons/ToolIcon.vue';
 import { invoke } from '@tauri-apps/api/core';

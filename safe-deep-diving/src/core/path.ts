@@ -18,7 +18,7 @@ export class PathUtils {
   static async joinPaths(...paths: string[]): Promise<string> {
     if (paths.length === 0) return '';
     if (paths.length === 1) return paths[0];
-    
+
     return await join(...paths);
   }
 
@@ -49,6 +49,14 @@ export class PathUtils {
   static async getFileName(filePath: string, ext: boolean = true): Promise<string> {
     const fileName = await basename(filePath);
     return ext ? fileName : fileName.replace(new RegExp(`${await extname(filePath)}$`), '');
+  }
+  /**
+   * 获取文件扩展名
+   * @param filePath 文件路径
+   * @returns 文件扩展名
+  */
+  static async getFileExt(filePath: string): Promise<string> {
+    return await extname(filePath);
   }
 
   /**

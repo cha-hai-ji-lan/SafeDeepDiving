@@ -1,8 +1,11 @@
+/**
+ * 层级 2
+ * three.js 初始化装载脚本
+*/
 import { Ref, ref } from 'vue';
-
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { Reflector } from 'three/examples/jsm/objects/Reflector.js'; // 引入 Reflector
+import { init_opencascade} from "../opencascade/init"
 
 export let renderer: THREE.WebGLRenderer;  // 渲染器
 export let scene: THREE.Scene;  // 场景
@@ -14,9 +17,9 @@ export const entitys = ref<any>([])  // 实体组
 
 
 let animationId: number;  // 动画帧 ID
-let geometry: THREE.BoxGeometry;
-let cube: THREE.Mesh;
-let edges: THREE.LineSegments; // 保存边线引用
+// let geometry: THREE.BoxGeometry;
+// let cube: THREE.Mesh;
+// let edges: THREE.LineSegments; // 保存边线引用
 let axesHelper: THREE.AxesHelper;  // 坐标轴
 let track_controller: OrbitControls;  // 轨道控制器
 
@@ -27,8 +30,15 @@ let scene_height: number  // 场景高度
 
 let modelGroup: THREE.Group | null = null;
 
-
-export const init_three = (threeContainer: Ref<HTMLDivElement | null>) => {
+/**
+ * 插件加载项
+ * 
+ * 用于加载非 基础Three.js内容
+ */
+const add_in = async () =>{
+    // await init_opencascade()
+}
+export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => {
     if (!threeContainer.value) return;
 
     scene_width = threeContainer.value.clientWidth;
@@ -81,6 +91,9 @@ export const init_three = (threeContainer: Ref<HTMLDivElement | null>) => {
     
     // 创建边线材质
     edgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
+
+    // 导入加载项
+    add_in()
 
     // 4. 添加一个物体测试
     // geometry = new THREE.BoxGeometry();  // 立方体几何体

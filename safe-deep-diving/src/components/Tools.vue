@@ -21,6 +21,10 @@
                     @dblclick="() => { handleDoubleClick(open_feature_bar) }">
                     <ToolIcon Type="feature"></ToolIcon>
                 </div>
+                <div class="item" @click="() => { handleClick(focus_rib_layout_bar) }"
+                    @dblclick="() => { handleDoubleClick(open_rib_layout_bar) }">
+                    <ToolIcon Type="rib-layout"></ToolIcon>
+                </div>
             </div>
         </Transition>
     </div>
@@ -112,6 +116,22 @@ const focus_feature_bar = () => {
         }
     }
 }
+const focus_rib_layout_bar = () => {
+    if (!tools_state["has-focus-bar"]) {
+        if (!tools_state["rib-layout"]["show"]) {
+            tools_state["rib-layout"]["show"] = true;
+            tools_state["current-focus-bar"] = "rib-layout"
+            tools_state["has-focus-bar"] = true
+        }
+    } else {
+        if (!tools_state["rib-layout"]["show"]) {
+            close_bar(tools_state["current-focus-bar"])
+            tools_state["rib-layout"]["show"] = true;
+            tools_state["current-focus-bar"] = "rib-layout"
+            tools_state["has-focus-bar"] = true
+        }
+    }
+}
 
 const open_rw_bar = () => {
     if (!tools_state["rw-file"]["show"]) {
@@ -132,6 +152,14 @@ const open_feature_bar = () => {
         tools_state["feature"]["show"] = true;
         tools_state['feature']['moved'] = true
         tools_state['feature']['icon-size'] = 0
+
+    }
+}
+const open_rib_layout_bar = () => {
+    if (!tools_state["rib-layout"]["show"]) {
+        tools_state["rib-layout"]["show"] = true;
+        tools_state['rib-layout']['moved'] = true
+        tools_state['rib-layout']['icon-size'] = 0
 
     }
 }
