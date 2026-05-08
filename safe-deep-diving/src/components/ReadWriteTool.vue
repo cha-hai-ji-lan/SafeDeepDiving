@@ -63,7 +63,7 @@ const drag = (event: MouseEvent) => {
     if (!isDragging.value || !floatingWindowElement.value) return;
     tools_state['rw-file']['moved'] = true
     tools_state['rw-file']['icon-size'] = 0
-    if(tools_state["current-focus-bar"] === "rw-file")tools_state["current-focus-bar"] = "__FOCUS_BAR__"
+    if (tools_state["current-focus-bar"] === "rw-file") tools_state["current-focus-bar"] = "__FOCUS_BAR__"
 
 
     // 1. 计算新的位置 (像素)

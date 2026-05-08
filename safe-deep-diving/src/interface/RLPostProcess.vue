@@ -1,5 +1,5 @@
 <template>
-    <div class="setting" ref="floatingWindowElement">
+    <div class="pl-post-process" ref="floatingWindowElement">
         <div class="title" @mousedown="startDrag"></div>
 
     </div>
@@ -61,12 +61,10 @@ const stopDrag = () => {
 };
 </script>
 <style scoped>
-.setting {
+.pl-post-process {
     position: fixed;
-    left: 20vmin;
-    top: 20vmin;
-    width: 60vmin;
-    height: 60vmin;
+    top: 75vmin;
+    left:5vmin;
 }
 .title{
     

@@ -1,3 +1,7 @@
+<!-- 
+  @contextmenu 是 Vue 中绑定右键点击事件的指令
+  .prevent 是事件修饰符,用于阻止浏览器默认的右键菜单弹出 
+-->
 <template>
   <main id="container">
     <div data-tauri-drag-region class="title">
