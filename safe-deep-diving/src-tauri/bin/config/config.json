@@ -5,7 +5,10 @@
 
         "core": {
             "input-path": "C:\\",
-            "output-path": "C:\\"
+            "output-path": "C:\\",
+            "support-import-format":["obj", "step"],
+            "support-export-format":[]
+
         },
         "i18n": {
             "current-lang": "ZH",

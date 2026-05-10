@@ -68,15 +68,15 @@
         <rect class="l-fill" width="768" height="640" x="64" y="256" rx="128" ry="128" stroke-opacity="1"
             stroke-width="64" />
     </svg>
-    <svg v-if="Type === 'close'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
-        height="1024" viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'close'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <path class="m-fill" d="M96 448a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64"
             transform="rotate(45 512 512)" />
         <path class="l-fill" d="M96 448a1 1 0 0 0 0 128h832a1 1 0 0 0 0-128z" stroke-opacity="1" stroke-width="64"
             transform="rotate(135 512 512)" />
     </svg>
-    <svg v-if="Type === 'pin-0'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
-        height="1024" viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'pin-0'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <g transform="rotate(50 512 512) translate(16 128)">
             <rect class="m-fill" width="384" height="512" rx="64" ry="64" stroke-linejoin="round" x="320" y="192"
                 stroke-width="64" />
@@ -85,8 +85,8 @@
         </g>
 
     </svg>
-    <svg v-if="Type === 'pin-1'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
-        height="1024" viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'pin-1'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <g>
             <rect class="m-fill" width="384" height="512" rx="64" ry="64" stroke-linejoin="round" x="320" y="192"
                 stroke-width="64" />
@@ -94,14 +94,14 @@
             <line x2="512" x1="512" y1="704" y2="960" stroke-width="64" stroke-linecap="round" />
         </g>
     </svg>
-    <svg v-if="Type === 'omit'" class="base-icon d-stroke l-fill" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
-        height="1024" viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'omit'" class="base-icon d-stroke l-fill" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <circle r="92" cx="512" cy="512" stroke-width="64" />
         <circle r="92" cx="512" cy="128" stroke-width="64" />
         <circle r="92" cx="512" cy="896" stroke-width="64" />
     </svg>
-    <svg v-if="Type === 'drag-block'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
-        height="1024" viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'drag-block'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round"
             stroke-width="64" />
         <path d="M512 512 128 128v192M128 128h192" fill="none" stroke-linejoin="round" stroke-linecap="round"
@@ -127,6 +127,53 @@
         <circle class=" l-stroke m-fill" r="192" cx="768" cy="256" stroke-width="32" />
         <rect class="  d-fill" width="32" height="192" x="752" y="128" rx="32" ry="32" />
         <circle class="  d-fill" r="16" cx="768" cy="368" />
+    </svg>
+    <!-- 提示性图标 -->
+    <svg v-if="Type === 'question'" class="base-icon" :class="{ 'base-icon1': State === 1 }" viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+        <circle r="448" cx="512" cy="512" stroke-width="32" stroke="#071226" fill="#74aff6" />
+        <path
+            d="M500.382.006c-177.646 19.719-276.341 96.721-296.085 230.93-3.949 43.437 17.757 67.13 65.143 71.066 23.667 3.961 43.411-13.808 59.207-53.296 23.692-82.9 80.862-124.35 171.735-124.35 110.479 7.885 169.698 63.156 177.671 165.8 0 94.759-64.313 110.202-99.248 138.774-44.267 36.218-73.217 72.952-108.655 135.216-29.779 52.314-34.91 164.227-34.91 164.227 0 47.373 21.655 71.066 65.143 71.066 39.413 0 61.194-23.693 65.155-71.066 0 0 5.219-125.594 55.925-181.129 57.472-62.942 194.749-107.071 198.698-268.922C804.365 108.561 697.772 15.789 500.382.006zM500.382 859.162c-45.524 0-82.409 36.91-82.409 82.41 0 45.523 36.885 82.422 82.409 82.422s82.422-36.898 82.422-82.422c0-45.5-36.898-82.41-82.422-82.41z"
+            fill="#d3e3ee" transform="scale(0.7 0.7) translate(224 224)" stroke="#071226" stroke-width="32" />
+    </svg>
+    <svg v-if="Type === 'notice'" class="base-icon" :class="{ 'base-icon1': State === 1 }" viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+        <circle r="448" cx="512" cy="512" stroke-width="32" stroke="#071226" fill="#74aff6" />
+        <path
+            d="M468.114286 621.714286c7.314286 21.942857 21.942857 36.571429 43.885714 36.571428s36.571429-14.628571 43.885714-36.571428L585.142857 219.428571c0-43.885714-36.571429-73.142857-73.142857-73.142857-43.885714 0-73.142857 36.571429-73.142857 80.457143l29.257143 394.971429zM512 731.428571c-43.885714 0-73.142857 29.257143-73.142857 73.142858s29.257143 73.142857 73.142857 73.142857 73.142857-29.257143 73.142857-73.142857-29.257143-73.142857-73.142857-73.142858z"
+            stroke-width="32" stroke="#071226" fill="#d3e3ee" />
+    </svg>
+    <svg v-if="Type === 'general-warn'" class="base-icon" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <path
+            d="M128 928c-56.9-6.1-94.1-68.4-64-128l373-684c30.9-53.6 108.8-65.47 150 0l373 684c39.7 76.4-31.31 130.67-76 128z"
+            stroke-width="32" stroke="#071226" fill="#cc7832" fill-opacity="0.35" />
+        <path
+            d="M468.114286 621.714286c7.314286 21.942857 21.942857 36.571429 43.885714 36.571428s36.571429-14.628571 43.885714-36.571428L585.142857 219.428571c0-43.885714-36.571429-73.142857-73.142857-73.142857-43.885714 0-73.142857 36.571429-73.142857 80.457143l29.257143 394.971429zM512 731.428571c-43.885714 0-73.142857 29.257143-73.142857 73.142858s29.257143 73.142857 73.142857 73.142857 73.142857-29.257143 73.142857-73.142857-29.257143-73.142857-73.142857-73.142858z"
+            fill="#cc7832" stroke-width="16" stroke="#071226" />
+    </svg>
+    <svg v-if="Type === 'serious-warn'" class="base-icon" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <path
+            d="M128 928c-56.9-6.1-94.1-68.4-64-128l373-684c30.9-53.6 108.8-65.47 150 0l373 684c39.7 76.4-31.31 130.67-76 128z"
+            stroke-width="32" stroke="#cc7832" fill="#cc7832" fill-opacity="0.35" />
+        <path
+            d="M468.114286 621.714286c7.314286 21.942857 21.942857 36.571429 43.885714 36.571428s36.571429-14.628571 43.885714-36.571428L585.142857 219.428571c0-43.885714-36.571429-73.142857-73.142857-73.142857-43.885714 0-73.142857 36.571429-73.142857 80.457143l29.257143 394.971429zM512 731.428571c-43.885714 0-73.142857 29.257143-73.142857 73.142858s29.257143 73.142857 73.142857 73.142857 73.142857-29.257143 73.142857-73.142857-29.257143-73.142857-73.142857-73.142858z"
+            fill="#cc7832" />
+    </svg>
+    <svg v-if="Type === 'general-error'" class="base-icon" :class="{ 'base-icon1': State === 1 }"
+        viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+        <circle r="448" cx="512" cy="512" stroke-width="32" stroke="#071226" fill="#e81123" fill-opacity="0.35" />
+        <path
+            d="M468.114286 621.714286c7.314286 21.942857 21.942857 36.571429 43.885714 36.571428s36.571429-14.628571 43.885714-36.571428L585.142857 219.428571c0-43.885714-36.571429-73.142857-73.142857-73.142857-43.885714 0-73.142857 36.571429-73.142857 80.457143l29.257143 394.971429zM512 731.428571c-43.885714 0-73.142857 29.257143-73.142857 73.142858s29.257143 73.142857 73.142857 73.142857 73.142857-29.257143 73.142857-73.142857-29.257143-73.142857-73.142857-73.142858z"
+            fill="#e81123" stroke="#071226" stroke-width="16" />
+    </svg>
+    <svg v-if="Type === 'serious-error'" class="base-icon" :class="{ 'base-icon1': State === 1 }"
+        viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+        <circle r="448" cx="512" cy="512" stroke-width="32" stroke="#e81123" fill="#e81123" fill-opacity="0.35" />
+        <path
+            d="M468.114286 621.714286c7.314286 21.942857 21.942857 36.571429 43.885714 36.571428s36.571429-14.628571 43.885714-36.571428L585.142857 219.428571c0-43.885714-36.571429-73.142857-73.142857-73.142857-43.885714 0-73.142857 36.571429-73.142857 80.457143l29.257143 394.971429zM512 731.428571c-43.885714 0-73.142857 29.257143-73.142857 73.142858s29.257143 73.142857 73.142857 73.142857 73.142857-29.257143 73.142857-73.142857-29.257143-73.142857-73.142857-73.142858z"
+            fill="#e81123" />
     </svg>
 </template>
 <script setup lang="ts">

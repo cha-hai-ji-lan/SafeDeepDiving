@@ -8,13 +8,13 @@
 </template>
 <script setup lang="ts">
 import BaseIcon from '../icons/BaseIcon.vue';
-import {welcome_inter_ctr} from "../core/cache"
+import {interface_state} from "../core/cache"
 
 const open_welcom_inter = () =>{
-    if (welcome_inter_ctr["show-inter"]){
-        welcome_inter_ctr["show-inter"] = false
+    if (interface_state['welcome']["show"]){
+        interface_state['welcome']["show"] = false
     } else {
-        welcome_inter_ctr["show-inter"] = true
+        interface_state['welcome']["show"] = true
     }
 }
 </script>

@@ -2,12 +2,12 @@
  *  层级 1
  *  公共方法脚本, 用于各组件间使用共性的方法
 */
-import { welcome_inter_ctr, tools_state, tool_bar_state } from './cache';
+import { coreConfig, interface_state, tools_state, tool_bar_state } from './cache';
 import { file_path, open_file_dialog } from './io';
 import { PathUtils } from "./path";
+// 存在环
 import { load_obj } from './three/io'
 import { load_step } from './opencascade/init'
-
 
 let clickTimer: number | null = null;  // 单双击切换计时器
 /**
@@ -15,14 +15,17 @@ let clickTimer: number | null = null;  // 单双击切换计时器
  * 
  * 支持模型 obj, stp
 */
-
 export const module_loader = async (load_mode: number = 0) => {
     switch (load_mode) {
         case 0:  // 读取单个模型文件
             await open_file_dialog()
             if (file_path.value) {
                 let ext = await PathUtils.getFileExt(file_path.value)
-                console.log(ext)
+                console.log(ext.toLowerCase())
+                if(!coreConfig.value['support-import-format'].includes(ext.toLowerCase())){
+                    console.error("不支持的导入格式")
+                    return
+                }
                 switch (ext) {
                     case "obj":
                         load_obj(file_path.value)
@@ -44,10 +47,10 @@ export const module_loader = async (load_mode: number = 0) => {
  * 关闭欢迎界面
 */
 export const close_inter = () => {
-    welcome_inter_ctr["delay-hide"] = true;
+    interface_state['welcome']["delay-hide"] = true;
     setTimeout(() => {
-        welcome_inter_ctr["show-inter"] = false;
-        welcome_inter_ctr["delay-hide"] = false;
+        interface_state['welcome']["show"] = false;
+        interface_state['welcome']["delay-hide"] = false;
 
     }, 250)
 }

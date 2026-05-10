@@ -9,7 +9,8 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 export let renderer: THREE.WebGLRenderer;  // 渲染器
 export let scene: THREE.Scene;  // 场景
-export let camera: THREE.PerspectiveCamera;  // 相机
+// export let camera: THREE.PerspectiveCamera;  // 相机 透视
+export let camera: THREE.OrthographicCamera;  // 相机 透视
 export let edgesMaterial: THREE.LineBasicMaterial;  // 边线材质
 
 export const entity_edges = ref<any>([])  // 边线组
@@ -28,7 +29,6 @@ let track_controller: OrbitControls;  // 轨道控制器
 let scene_width: number  // 场景宽度
 let scene_height: number  // 场景高度
 
-let modelGroup: THREE.Group | null = null;
 
 // 添加小坐标系相关变量
 let miniScene: THREE.Scene;
@@ -57,8 +57,18 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
     scene.background = null;
 
     // 2. 创建相机
-    camera = new THREE.PerspectiveCamera(75, scene_width / scene_height, 0.1, 1000);
-    camera.position.z = 5;  // 设置相机位置
+    // camera = new THREE.PerspectiveCamera(75, scene_width / scene_height, 0.1, 1000);  透视相机
+    const frustumSize = 100;  // 视锥体大小，控制视野范围
+    const aspect = scene_width / scene_height;
+    camera = new THREE.OrthographicCamera(
+        frustumSize * aspect / -2,  // left
+        frustumSize * aspect / 2,   // right
+        frustumSize / 2,            // top
+        frustumSize / -2,           // bottom
+        0.01,                        // near
+        10000                        // far
+    );
+    camera.position.z = 100;  // 设置相机位置
 
     // 3. 创建渲染器
     // 【关键】设置 alpha: true
@@ -143,9 +153,11 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
         // 重置渲染器宽高比
         renderer.setSize(window.innerWidth, window.innerHeight);
         // 重置相机宽高比
-        camera.aspect = window.innerWidth / window.innerHeight;
-        // 更新相机投影矩阵
-        camera.updateProjectionMatrix();
+        if (camera instanceof THREE.PerspectiveCamera) {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            // 更新相机投影矩阵
+            camera.updateProjectionMatrix();
+        }
         
         // 更新小坐标系尺寸
         updateMiniCoordinateSystemSize();
@@ -196,40 +208,7 @@ export const object_visible = (visible: boolean) => {
     // }
 }
 
-export const addModelToScene = (group: THREE.Group) => {
-    if (modelGroup) {
-        scene.remove(modelGroup);
-        modelGroup.traverse((child) => {
-            if (child instanceof THREE.Mesh) {
-                child.geometry.dispose();
-                if (Array.isArray(child.material)) {
-                    child.material.forEach(m => m.dispose());
-                } else {
-                    child.material.dispose();
-                }
-            }
-        });
-    }
 
-    modelGroup = group;
-
-    const box = new THREE.Box3().setFromObject(group);
-    const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3());
-
-    const maxDim = Math.max(size.x, size.y, size.z);
-    const fov = camera.fov * (Math.PI / 180);
-    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-    cameraZ *= 1.5;
-
-    camera.position.set(center.x, center.y, center.z + cameraZ);
-    camera.lookAt(center);
-
-    track_controller.target.copy(center);
-    track_controller.update();
-
-    scene.add(group);
-}
 
 const initMiniCoordinateSystem = (container: HTMLElement) => {
     // 创建小坐标系的容器

@@ -1,7 +1,7 @@
 <template>
-    <div v-if="welcome_inter_ctr['show-inter']">
+    <div v-if="interface_state['welcome']['show']">
         <div class="welcome"
-            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide'] }">
+            :class="{ 'opacity-show': interface_state['welcome']['delay-hide'] === false, 'opacity-hide': interface_state['welcome']['delay-hide'] }">
             <div class="main-logo">
                 <BaseIcon Type="logo" :State=3></BaseIcon>
             </div>
@@ -34,16 +34,16 @@
             </div>
         </div>
         <div class="gradient-border"
-            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide'] }">
+            :class="{ 'show-welcome': interface_state['welcome']['delay-hide'] === false, 'hide-welcome': interface_state['welcome']['delay-hide'] }">
         </div>
         <div class="mesh"
-            :class="{ 'show-welcome': welcome_inter_ctr['delay-hide'] === false, 'hide-welcome': welcome_inter_ctr['delay-hide'] }">
+            :class="{ 'show-welcome': interface_state['welcome']['delay-hide'] === false, 'hide-welcome': interface_state['welcome']['delay-hide'] }">
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import BaseIcon from '../icons/BaseIcon.vue';
-import { welcome_inter_ctr, lang, appConfig } from '../core/cache';
+import { interface_state, lang, appConfig } from '../core/cache';
 import { close_inter, module_loader } from '../core/publicMethod.ts';
 
 import ToolIcon from '../icons/ToolIcon.vue';

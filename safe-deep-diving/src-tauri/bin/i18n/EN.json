@@ -11,7 +11,12 @@
                 "inn-p-sur": "Internal pressure direct contact surface",
                 "ext-p": "external pressure value",
                 "inn-p": "internal pressure value",
-                "div-depth": "Dive depth"
+                "ori-wall-thick": "Initial wall thickness",
+                "div-depth": "Diving depth",
+                "Work-cond": "Dive conditions",
+                "wc-ashore": "Before diving",
+                "wc-dive": "Descending into the submarine",
+                "wc-f-dive": "The dive is complete"
             }
         },
         "post-process": {
@@ -21,5 +26,11 @@
                 "sol-echo": "Solution echo"
             }
         }
+    },
+    "universal":{
+          "self-resol" :"Self-resolving",
+          "export-rec":"Export records",
+          "default":"default",
+          "close":"close"
     }
 }

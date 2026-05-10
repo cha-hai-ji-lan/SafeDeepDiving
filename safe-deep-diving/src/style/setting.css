@@ -1,31 +1,68 @@
 .l-fill {
     fill: rgba(var(--but-0), 1)
 }
+
 .m-fill {
     fill: rgba(var(--but-1), 1)
 }
+
 .d-fill {
     fill: rgba(var(--but-2), 1)
 }
+
+.re-fill {
+    fill: rgba(var(--ready), 1)
+}
+
+.no-fill {
+    fill: rgba(var(--normal), 1)
+}
+
+.wa-fill {
+    fill: rgba(var(--warn), 1)
+}
+
+.er-fill {
+    fill: rgba(var(--err), 1)
+}
+
 .l-stroke {
     stroke: rgba(var(--but-0), 1)
 }
+
 .m-stroke {
     stroke: rgba(var(--but-1), 1)
 }
+
 .d-stroke {
     stroke: rgba(var(--but-2), 1)
+}
+
+.re-stroke {
+    stroke: rgba(var(--ready), 1)
+}
+
+.no-stroke {
+    stroke: rgba(var(--normal), 1)
+}
+
+.wa-stroke {
+    stroke: rgba(var(--warn), 1)
+}
+
+.er-stroke {
+    stroke: rgba(var(--err), 1)
 }
 
 .grab-cursor {
     cursor: grab;
 }
 
-.grabbing-cursor{
+.grabbing-cursor {
     cursor: grabbing;
 }
 
-.ban-select{
+.ban-select {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -59,6 +96,7 @@
         /* 滑块悬停时的颜色 */
     }
 }
+
 .scroll-bar-1 {
     &::-webkit-scrollbar {
         width: 0.75vmin;
@@ -86,7 +124,7 @@
     }
 }
 
-.input-sty-0{
+.input-sty-0 {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -97,20 +135,21 @@
     margin: 0;
     box-shadow: none;
     border-radius: 0;
+
     &:focus {
         outline: none;
         box-shadow: none;
     }
+
     &[type="number"]::-webkit-inner-spin-button,
     &[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
-   
+
     border-radius: 0.5vmin;
     padding-left: 0.5vmin;
     background-color: rgba(var(--but-1), var(--w-transparent));
     border: 0.2vmin solid rgba(var(--border), var(--w-transparent));
- 
-}
 
+}

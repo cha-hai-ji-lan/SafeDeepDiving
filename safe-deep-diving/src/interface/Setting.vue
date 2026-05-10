@@ -1,11 +1,12 @@
 <template>
-    <div class="setting" ref="floatingWindowElement">
+    <div v-if="interface_state['setting']['show']" class="setting" ref="floatingWindowElement">
         <div class="title" @mousedown="startDrag"></div>
 
     </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import { interface_state } from "../core/cache";
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
 const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
@@ -69,6 +70,9 @@ const stopDrag = () => {
     height: 60vmin;
 }
 .title{
-    
+    display: flex;
+    justify-items:start;
+    align-items: center;
+    height: 5vmin;
 }
 </style>

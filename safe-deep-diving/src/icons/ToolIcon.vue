@@ -207,6 +207,17 @@
                 stroke-linejoin="round" />
         </g>
     </svg>
+    <svg v-if="Type === 'perspective-camera'" class="tool-icon d-stroke" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <g transform="translate(-72 4)">
+            <path class="l-fill" d="M768 960h-576v-576h576z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class="d-fill" stroke-width="32" d="M768 960l208-416v-492.79l-208 332.79z" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class="m-fill" d="M192 384l301.598-332.79h482.405L768 384z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </g>
+    </svg>
     <!-- 草绘编辑模块 -->
     <svg v-if="Type === 'sketch'" class="tool-group-icon" :class="{ 'tool-icon1': State === 1 }"
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
@@ -492,10 +503,10 @@
     </svg>
     <svg v-if="Type === 'arrow'" class="tool-icon d-stroke l-fill" :class="{ 'tool-icon1': State === 1 }"
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-        <path class="d-stroke m-fill" d="M128 128 986 429 718 561 957 781 928.695 840.811" fill="#74aff6" stroke-width="32" stroke="#071226"
-            stroke-linecap="round" stroke-linejoin="round" />
-        <path class="d-stroke l-fill" d="M128 128 554 900 635 641 889 866 928.698 840.805" fill="#d3e3ee" stroke-width="32" stroke="#071226"
-            stroke-linecap="round" stroke-linejoin="round" />
+        <path class="d-stroke m-fill" d="M128 128 986 429 718 561 957 781 928.695 840.811" fill="#74aff6"
+            stroke-width="32" stroke="#071226" stroke-linecap="round" stroke-linejoin="round" />
+        <path class="d-stroke l-fill" d="M128 128 554 900 635 641 889 866 928.698 840.805" fill="#d3e3ee"
+            stroke-width="32" stroke="#071226" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 </template>
 <script setup lang="ts">

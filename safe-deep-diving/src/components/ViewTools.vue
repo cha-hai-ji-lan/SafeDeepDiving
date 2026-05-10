@@ -1,17 +1,20 @@
 <template>
     <div class="view-tool" ref="floatingWindowElement">
         <div class="view-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
-            <BaseIcon :Type="icon_type['drag-block']"></BaseIcon>
+            <BaseIcon Type='drag-block'></BaseIcon>
         </div>
         <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.NormalColoring }"
             @click="normal_coloring">
-            <ToolIcon :Type="icon_type['normal-coloring']"></ToolIcon>
+            <ToolIcon Type='normal-coloring'></ToolIcon>
         </div>
         <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.SidelineColoring }" @click="sideline_coloring">
-            <ToolIcon :Type="icon_type['sideline-coloring']"></ToolIcon>
+            <ToolIcon Type='sideline-coloring'></ToolIcon>
         </div>
         <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.Wireframe }" @click="wireframe">
-            <ToolIcon :Type="icon_type['wireframe']"></ToolIcon>
+            <ToolIcon Type="wireframe"></ToolIcon>
+        </div>
+        <div class="view-tool-icon" :class="{ 'active-icon': false }" @click="">
+            <ToolIcon Type="perspective-camera"></ToolIcon>
         </div>
     </div>
 </template>
@@ -20,12 +23,7 @@ import { reactive, ref, onUnmounted } from 'vue';
 import ToolIcon from '../icons/ToolIcon.vue';
 import BaseIcon from '../icons/BaseIcon.vue';
 import {edge_visible, object_visible} from '../core/three/init.ts'
-const icon_type = reactive({
-    "drag-block": "drag-block",
-    "normal-coloring": "normal-coloring",
-    "sideline-coloring": "sideline-coloring",
-    "wireframe": "wireframe",
-})
+
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
@@ -113,7 +111,7 @@ const stopDrag = () => {
     flex-direction: row;
     position: fixed;
     top: 5.75vmin;
-    left: calc(50% - 8vmin);
+    left: calc(50% - (5 * 2vmin));
     z-index: 11;  /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */
     height: fit-content;
