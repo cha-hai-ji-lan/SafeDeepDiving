@@ -22,7 +22,7 @@ export const module_loader = async (load_mode: number = 0) => {
             if (file_path.value) {
                 let ext = await PathUtils.getFileExt(file_path.value)
                 console.log(ext.toLowerCase())
-                if(!coreConfig.value['support-import-format'].includes(ext.toLowerCase())){
+                if (!coreConfig.value['support-import-format'].includes(ext.toLowerCase())) {
                     console.error("不支持的导入格式")
                     return
                 }
@@ -35,7 +35,7 @@ export const module_loader = async (load_mode: number = 0) => {
                         break;
                     default:
                         break;
-                }  
+                }
             }
             break;
         default:
@@ -46,13 +46,27 @@ export const module_loader = async (load_mode: number = 0) => {
 /**
  * 关闭欢迎界面
 */
-export const close_inter = () => {
-    interface_state['welcome']["delay-hide"] = true;
-    setTimeout(() => {
-        interface_state['welcome']["show"] = false;
-        interface_state['welcome']["delay-hide"] = false;
+export const close_inter = (bar_name: string, delay_time: number = 200) => {
+    if (bar_name.includes("/")) {
+        let name_chain = bar_name.split("/")
+        // 使用 reduce 逐级访问嵌套对象
+        const result = name_chain.reduce((obj, key) => {
+            return obj?.[key]
+        }, interface_state)
+        result["delay-hide"] = true
+        setTimeout(() => {
+            result["show"] = false;
+            result["delay-hide"] = false;
+        }, delay_time)
+    } else {
+        interface_state[bar_name]["delay-hide"] = true;
+        setTimeout(() => {
+            interface_state[bar_name]["show"] = false;
+            interface_state[bar_name]["delay-hide"] = false;
 
-    }, 250)
+        }, delay_time)
+    }
+
 }
 
 /**

@@ -19,7 +19,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { reactive, ref, onUnmounted } from 'vue';
+import { ref, onUnmounted } from 'vue';
 import ToolIcon from '../icons/ToolIcon.vue';
 import BaseIcon from '../icons/BaseIcon.vue';
 import {edge_visible, object_visible} from '../core/three/init.ts'

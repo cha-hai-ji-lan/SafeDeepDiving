@@ -27,7 +27,7 @@
                             <BaseIcon Type="bug-mail" :State="1"></BaseIcon>
                         </div>
                     </a>
-                    <div class="method-but" @click="close_inter">
+                    <div class="method-but" @click="()=>{close_inter('welcome')}">
                         <BaseIcon Type="close" :State="1"></BaseIcon>
                     </div>
                 </div>

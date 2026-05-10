@@ -23,7 +23,7 @@
 import { ref, onUnmounted } from 'vue';
 import ToolIcon from '../icons/ToolIcon.vue';
 import BaseIcon from '../icons/BaseIcon.vue';
-import { tools_state } from '../core/cache'
+import { tools_state, interface_state } from '../core/cache'
 import {close_bar } from '../core/publicMethod';
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
@@ -36,10 +36,10 @@ onUnmounted(() => {
 })
 
 const show_pre_process_interface = () =>{
-    tools_state['rib-layout']['pre-process-show'] = true;
+    interface_state['rib-layout']['pre-process']['show'] = true;
 }
 const show_post_process_interface = () =>{
-    tools_state['rib-layout']['post-process-show'] = true;
+    interface_state['rib-layout']['post-process']['show'] = true;
 }
 
 

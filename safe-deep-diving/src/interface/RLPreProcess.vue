@@ -1,12 +1,14 @@
 <template>
-    <div v-if="tools_state['rib-layout']['pre-process-show']" class="pl-pre-process" ref="floatingWindowElement">
+    <div v-if="interface_state['rib-layout']['pre-process']['show']" class="pl-pre-process"
+    :class="{ 'opacity-show': interface_state['rib-layout']['pre-process']['delay-hide'] === false, 'opacity-hide': interface_state['rib-layout']['pre-process']['delay-hide'] }"
+    ref="floatingWindowElement">
         <div class="title ban-select" @mousedown="startDrag">
             <div class="title-icon" @click="">
                 <ToolIcon Type="rl-pre-process"></ToolIcon>
             </div>
 
             <div class="title-msg">{{ lang?.["rib-layout"]?.["pre-process"]?.["title"] }}</div>
-            <div class="title-close-icon" @click="close_pre_process">
+            <div class="title-close-icon" @click="()=>{close_inter('rib-layout/pre-process')}">
                 <BaseIcon Type="close"></BaseIcon>
             </div>
         </div>
@@ -114,7 +116,7 @@
                 <div class="item-contain">
                     <input class="nor-input-1 input-sty-0" type="number"
                         placeholder="10">
-                    <div>mm</div>
+                    <div> mm</div>
                 </div>
             </div>
         </div>
@@ -124,7 +126,8 @@
 import { ref, reactive } from "vue";
 import BaseIcon from "../icons/BaseIcon.vue";
 import ToolIcon from "../icons/ToolIcon.vue";
-import { lang, tools_state } from "../core/cache";
+import { lang, tools_state, interface_state } from "../core/cache";
+import { close_inter } from "../core/publicMethod";
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
@@ -171,9 +174,6 @@ const focus_unit = (type: number, unit: number) => {
         }
     }
 
-}
-const close_pre_process = () => {
-    tools_state['rib-layout']['pre-process-show'] = false
 }
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {
@@ -233,9 +233,10 @@ const stopDrag = () => {
     flex-direction: column;
     width: 30vmin;
     height: 60vmin;
-    border: 0.25vmin solid rgba(var(--border), 1);
+    border: 0.25vmin solid rgba(var(--border), var(--w-transparent));
     background-color: rgba(var(--but-0), var(--b-transparent));
     border-radius: 3vmin;
+    overflow: hidden;
 
     & .title {
         display: flex;
@@ -244,20 +245,20 @@ const stopDrag = () => {
         flex-direction: row;
         width: 100%;
         height: 5vmin;
-        border-top-left-radius: 3vmin;
-        border-top-right-radius: 3vmin;
+        border-top-left-radius: 2.5vmin;
+        border-top-right-radius: 2.5vmin;
         background-color: rgba(var(--menu), var(--b-transparent));
 
 
         & .title-icon {
-            margin: 0 1vmin;
+            margin: 0 1.5vmin;
             width: fit-content;
             height: fit-content;
         }
 
         & .title-close-icon {
             margin-left: auto;
-            margin-right: 1vmin;
+            margin-right: 1.5vmin;
             width: fit-content;
             height: fit-content;
         }

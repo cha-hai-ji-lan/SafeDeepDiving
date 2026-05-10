@@ -39,12 +39,22 @@ export const ele_state = reactive({ "enter-title-bar": false })  // 控制当前
 // 内联界面开关及其状态
 export const interface_state = reactive({
     "welcome": { // 欢迎界面
-        "show": false,
+        "show": true, // 欢迎界面默认开软件自出现
         "delay-hide": false,  // 延迟隐藏
     },
     "setting": {
         "show": false,
         "delay-hide": false,  // 延迟隐藏
+    },
+    "rib-layout":{
+        "pre-process":{
+            "show":false,
+            "delay-hide":false,
+        },
+        "post-process":{
+            "show":false,
+            "delay-hide":false,
+        },
     }
 })
 // 控制工具栏开关及其状态

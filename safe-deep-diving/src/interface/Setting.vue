@@ -1,11 +1,25 @@
 <template>
-    <div v-if="interface_state['setting']['show']" class="setting" ref="floatingWindowElement">
-        <div class="title" @mousedown="startDrag"></div>
+    <div v-if="interface_state['setting']['show']" class="setting"
+        :class="{ 'opacity-show': interface_state['setting']['delay-hide'] === false, 'opacity-hide': interface_state['setting']['delay-hide'] }"
+        ref="floatingWindowElement">
+        <div class="title" @mousedown="startDrag">
+            <div class="title-base-icon title-icon">
+                <BaseIcon Type="setting"></BaseIcon>
+            </div>
+            
+            <div>设置切页栏</div>
+            <div class="title-close-icon" @click="()=>{close_inter('setting')}">
+                <BaseIcon Type="close"></BaseIcon>
+            </div>
+        </div>
+        <div class="main">这是设置界面的主体</div>
 
     </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import BaseIcon from "../icons/BaseIcon.vue";
+import { close_inter} from '../core/publicMethod';
 import { interface_state } from "../core/cache";
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
@@ -64,15 +78,50 @@ const stopDrag = () => {
 <style scoped>
 .setting {
     position: fixed;
-    left: 20vmin;
-    top: 20vmin;
-    width: 60vmin;
-    height: 60vmin;
-}
-.title{
     display: flex;
-    justify-items:start;
-    align-items: center;
-    height: 5vmin;
+    justify-items: start;
+    align-items: start;
+    flex-direction: column;
+    z-index: 20;
+    left: 20%;
+    top: 20%;
+    width: 60%;
+    height: 60%;
+    border: 0.2vmin solid rgba(var(--border), var(--w-transparent));
+    border-radius: 3vmin;
+    background-color: rgba(var(--but-0), var(--b-transparent));
+
+    & .title {
+        display: flex;
+        justify-items: start;
+        align-items: center;
+        flex-direction: row;
+
+        width: 100%;
+        height: 5vmin;
+        border-top-left-radius: 2.5vmin;
+        border-top-right-radius: 2.5vmin;
+        background-color: rgba(var(--menu), var(--b-transparent));
+
+        & .title-base-icon {
+            margin: 0 1.5vmin;
+            width: 2.5vmin;
+            height: 2.5vmin;
+        }
+        & .title-close-icon{
+            margin-left: auto;
+            margin-right: 1.5vmin;
+            width: 2.5vmin;
+            height: 2.5vmin;
+        }
+    }
+
+    & .main {
+        flex: 1;
+        display: flex;
+        justify-items: start;
+        align-items: center;
+        flex-direction: column;
+    }
 }
 </style>

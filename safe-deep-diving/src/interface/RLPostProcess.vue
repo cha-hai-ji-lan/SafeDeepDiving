@@ -1,12 +1,14 @@
 <template>
-    <div v-if="tools_state['rib-layout']['post-process-show']" class="pl-post-process" ref="floatingWindowElement">
+    <div v-if="interface_state['rib-layout']['post-process']['show']" class="pl-post-process"
+    :class="{ 'opacity-show': interface_state['rib-layout']['post-process']['delay-hide'] === false, 'opacity-hide': interface_state['rib-layout']['post-process']['delay-hide'] }"
+     ref="floatingWindowElement">
         <div class="title ban-select" @mousedown="startDrag">
 
             <div class="title-icon" @click="">
                 <ToolIcon Type="rl-post-process"></ToolIcon>
             </div>
             <div class="title-msg">{{ lang?.["rib-layout"]?.["post-process"]?.["title"] }}</div>
-            <div class="title-close-icon" @click="close_post_process">
+            <div class="title-close-icon" @click="()=>{close_inter('rib-layout/post-process')}">
                 <BaseIcon Type="close"></BaseIcon>
             </div>
         </div>
@@ -71,7 +73,8 @@
 import { ref } from "vue";
 import BaseIcon from "../icons/BaseIcon.vue";
 import ToolIcon from "../icons/ToolIcon.vue";
-import { lang, tools_state } from "../core/cache";
+import { lang, tools_state, interface_state } from "../core/cache";
+import { close_inter } from "../core/publicMethod";
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
@@ -79,9 +82,6 @@ const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
 
 
 
-const close_post_process = () => {
-    tools_state['rib-layout']['post-process-show'] = false
-}
 
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {
@@ -141,9 +141,10 @@ const stopDrag = () => {
     flex-direction: column;
     width: 30vmin;
     height: 60vmin;
-    border: 0.25vmin solid rgba(var(--border), 1);
+    border: 0.25vmin solid rgba(var(--border),var(--w-transparent));
     background-color: rgba(var(--but-0), var(--b-transparent));
     border-radius: 3vmin;
+    overflow: hidden;
 
     & .title {
         display: flex;
@@ -153,19 +154,19 @@ const stopDrag = () => {
 
         width: 100%;
         height: 5vmin;
-        border-top-left-radius: 3vmin;
-        border-top-right-radius: 3vmin;
+        border-top-left-radius: 2.5vmin;
+        border-top-right-radius: 2.5vmin;
         background-color: rgba(var(--menu), var(--b-transparent));
 
         & .title-icon {
-            margin: 0 1vmin;
+            margin: 0 1.5vmin;
             width: fit-content;
             height: fit-content;
         }
 
         & .title-close-icon {
             margin-left: auto;
-            margin-right: 1vmin;
+            margin-right: 1.5vmin;
             width: fit-content;
             height: fit-content;
         }
@@ -193,6 +194,7 @@ const stopDrag = () => {
             width: 95%;
             height: fit-content;
             border-bottom: 0.25vmin solid rgba(var(--but-1), 1);
+            overflow: hidden;
 
             & .item-title {
                 font-size: 2vmin;
@@ -213,6 +215,7 @@ const stopDrag = () => {
                 font-size: 2vmin;
                 font-weight: 400;
                 font-family: "LXGW", "楷体", 'Courier New', Courier, monospace;
+                overflow: hidden;
 
                 & .attention{
                     margin-left: 2vmin;
@@ -245,13 +248,14 @@ const stopDrag = () => {
                 flex-direction: column;
                 font-size: 1vmin;
                 height: 15vmin;
-                width: calc(100% - 1vmin);
+                width: 100%;
                 padding: 0.25vmin 0.25vmin 0 0.5vmin;
                 border: 0.25vmin solid rgba(var(--but-1), 1);
                 background-color: rgba(var(--menu), var(--w-transparent));
                 border-radius: 1.25vmin;
                 margin-bottom: 0.25vmin;
                 overflow: auto;
+                box-sizing: border-box;
                 & p {
                     margin: 0.1vmin;
                     white-space: nowrap;

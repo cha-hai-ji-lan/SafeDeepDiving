@@ -68,7 +68,8 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
         0.01,                        // near
         10000                        // far
     );
-    camera.position.z = 100;  // 设置相机位置
+    camera.position.set(20, 20, 20)
+    camera.lookAt(0, 0, 0);
 
     // 3. 创建渲染器
     // 【关键】设置 alpha: true
@@ -218,7 +219,7 @@ const initMiniCoordinateSystem = (container: HTMLElement) => {
     miniContainer.style.bottom = '20px';
     miniContainer.style.width = '100px';
     miniContainer.style.height = '100px';
-    miniContainer.style.zIndex = '1000';
+    miniContainer.style.zIndex = '17';  // 保证幕布蒙版高于它
     miniContainer.style.pointerEvents = 'none'; // 不响应鼠标事件
     container.appendChild(miniContainer);
 
@@ -229,9 +230,6 @@ const initMiniCoordinateSystem = (container: HTMLElement) => {
     // 创建正交相机
     const size = 100;
     miniCamera = new THREE.OrthographicCamera(-size, size, size, -size, 0.1, 1000);
-    miniCamera.position.set(20, 20, 20);
-    miniCamera.lookAt(0, 0, 0);
-
     // 创建小渲染器
     miniRenderer = new THREE.WebGLRenderer({
         alpha: true,
@@ -242,48 +240,10 @@ const initMiniCoordinateSystem = (container: HTMLElement) => {
     miniContainer.appendChild(miniRenderer.domElement);
 
     // 添加坐标轴
-    miniAxesHelper = new THREE.AxesHelper(120);
+    miniAxesHelper = new THREE.AxesHelper(60);
     miniScene.add(miniAxesHelper);
-
-    // 添加标签
-    addAxisLabels();
 }
 
-/**
- * 添加坐标轴标签
- */
-const addAxisLabels = () => {
-    const createLabel = (text: string, position: THREE.Vector3, color: string) => {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        if (!context) return;
-
-        canvas.width = 64;
-        canvas.height = 64;
-        context.font = 'Bold 20vmin Arial';
-        context.fillStyle = color;
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.fillText(text, 32, 32);
-
-        const texture = new THREE.CanvasTexture(canvas);
-        const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(spriteMaterial);
-        sprite.position.copy(position);
-        sprite.scale.set(1, 1, 1);
-        miniScene.add(sprite);
-    };
-
-    // 坐标轴标签
-    createLabel('X', new THREE.Vector3(18, 0, 0), '#ff0000');
-    createLabel('Y', new THREE.Vector3(0, 18, 0), '#00ff00');
-    createLabel('Z', new THREE.Vector3(0, 0, 18), '#0000ff');
-
-    // 平面标签
-    createLabel('X-Y', new THREE.Vector3(100, 100, 0), '#ffaa00');
-    createLabel('X-Z', new THREE.Vector3(100, 0, 100), '#aa00ff');
-    createLabel('Y-Z', new THREE.Vector3(0, 100, 100), '#00aaff');
-}
 
 
 /**
@@ -298,7 +258,7 @@ const updateMiniCoordinateSystem = () => {
     
     // 设置小相机位置,保持固定距离但跟随旋转
     const distance = 30;
-    const direction = new THREE.Vector3(1, 1, 1).normalize();
+    const direction = new THREE.Vector3(0, 0, 30).normalize();
     direction.applyQuaternion(quaternion);
     
     miniCamera.position.copy(direction.multiplyScalar(distance));

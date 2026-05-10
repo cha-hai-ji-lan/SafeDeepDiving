@@ -16,7 +16,7 @@
         <div data-tauri-drag-region @click="() => { title_bar_click('pin') }" class="base-ico">
           <BaseIcon :Type="base_icon_ctr['pin']"></BaseIcon>
         </div>
-        <div data-tauri-drag-region class="base-ico">
+        <div data-tauri-drag-region class="base-ico" @click="() => { title_bar_click('setting') }">
           <BaseIcon Type="setting"></BaseIcon>
         </div>
         <div data-tauri-drag-region @click="() => { title_bar_click('minimize') }" class="base-ico minimize">
@@ -31,6 +31,7 @@
       </div>
     </div>
     <Welcome></Welcome>
+    <Setting></Setting>
     <MainLogo></MainLogo>
     <MainThree></MainThree>
     <ViewTools></ViewTools>
@@ -53,6 +54,7 @@ import BaseIcon from "./icons/BaseIcon.vue"                         // 引入基
 import MainThree from "./interface/MainThree.vue";                  // 引入主界面模块
 
 import Welcome from "./interface/Welcome.vue";                      // 引入欢迎界面
+import Setting from "./interface/Setting.vue";                      // 引入欢迎界面
 import MainLogo from "./components/MainLogo.vue";                   // 引入主logo
 // 模块
 import Tools from "./components/Tools.vue";                         // 引入工具组模块
@@ -66,7 +68,8 @@ import RLPreProcess from "./interface/RLPreProcess.vue";            // 引入预
 import RLPostProcess from "./interface/RLPostProcess.vue";          // 引入后处理界面
 // 初始化关联脚本
 import { init_app } from "./core/init.ts";                          // 初始化应用脚本
-import { base_icon_ctr, ele_state } from "./core/cache.ts";         // 引入缓存数据动态脚本
+import { base_icon_ctr, ele_state , interface_state} from "./core/cache.ts";         // 引入缓存数据动态脚本
+import { close_inter} from './core/publicMethod.ts';
 const appWindow = Window.getCurrent()
 
 // const base_icon_ctr = ref({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标
@@ -83,6 +86,9 @@ const title_bar_mouse_leave = () => {
 const title_bar_click = (mode: string) => {
 
   switch (mode) {
+    case 'close':
+      appWindow.close();
+      break;
     case 'minimize':
       appWindow.minimize()
       break;
@@ -105,8 +111,13 @@ const title_bar_click = (mode: string) => {
 
       }
       break;
-    case 'close':
-      appWindow.close();
+    case "setting":
+      console.log("点击设置")
+      if (interface_state['setting']['show']){
+        close_inter('setting');
+      } else {
+        interface_state['setting']['show'] = true ;
+      }
       break;
     default:
 
@@ -141,11 +152,12 @@ onUnmounted(() => {
 <style scoped>
 #container {
   position: relative;
-  width: calc(100vw - 6px);
-  height: calc(100vh - 6px);
+  width: 100vw;
+  height: 100vh;
   border: 3px solid rgba(var(--border), 1);
   outline: 3px solid rgba(var(--border), 1);
   border-radius: 10px;
+  box-sizing: border-box;
 
   /* background-color: rgba(var(--border), 1); */
   & .title {

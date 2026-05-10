@@ -53,7 +53,7 @@ export const load_obj = async (obj_path: string) => {
         scene.add(object);
 
         console.log('从本地文件系统加载 OBJ');
-        close_inter()
+        close_inter('welcome')
     } catch (error) {
         console.error('未能从文件系统加载OBJ：', error);
     }
