@@ -110,7 +110,7 @@ const open_url = (url: string) => {
         flex-direction: column;
 
         & .wel-title {
-            font: 5.5vw "LXGW", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font: 5.5vw "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 900;
             margin-top: 3vmin;
             background-image: linear-gradient(to bottom right, rgba(var(--font), 1), rgba(var(--but-2), 1));
@@ -128,7 +128,7 @@ const open_url = (url: string) => {
         }
 
         & .wel-info {
-            font: 2vw "楷体", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font: 2vw "LXGW", "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 600;
             margin-top: 3vmin;
             background-image: linear-gradient(to bottom right, rgba(var(--font), 1), rgba(var(--but-2), 1));

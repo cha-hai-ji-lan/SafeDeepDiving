@@ -2,5 +2,24 @@
     "welcome": {
         "wel-tit": "Safe Deep Diving",
         "wel-msg": "welcome to use SDD"
+    },
+    "rib-layout": {
+        "pre-process": {
+            "title": "Pre-solution process of rib layout",
+            "info": {
+                "ext-p-sur": "external pressure direct contact surface",
+                "inn-p-sur": "Internal pressure direct contact surface",
+                "ext-p": "external pressure value",
+                "inn-p": "internal pressure value",
+                "div-depth": "Dive depth"
+            }
+        },
+        "post-process": {
+            "title": "Solution results of the tendon layout",
+            "info": {
+                "cur-sol-depth": "Current solution depth",
+                "sol-echo": "Solution echo"
+            }
+        }
     }
 }

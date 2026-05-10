@@ -34,37 +34,39 @@ export const interfaceConfig = ref<any>()       // 界面配置
  * 
  * 例如: 某个按钮的打开与关闭
 */
-export const welcome_inter_ctr = reactive({ "show-inter": true , "delay-hide": false})
+export const welcome_inter_ctr = reactive({ "show-inter": true, "delay-hide": false })
 export const base_icon_ctr = reactive({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标 用于[App.vue]
 export const ele_state = reactive({ "enter-title-bar": false })  // 控制当前是否悬停在关闭栏 用于[App.vue]
 
-export const tools_state = reactive({ 
-    "show-tool": false, 
+export const tools_state = reactive({
+    "show-tool": false,
     "has-focus-bar": false, // 是否已经有聚焦的工具栏
-    "current-focus-bar":"__FOCUS_BAR__",  // 当前注视工具栏
+    "current-focus-bar": "__FOCUS_BAR__",  // 当前注视工具栏
     "rw-file": {
-        "show":false,
+        "show": false,
         "moved": false,  // 是否移动过
-        "icon-size":1,    // 未移动前图标大小
-        "delay-hide": false  // 延迟隐藏
+        "icon-size": 1,    // 未移动前图标大小
+        "delay-hide": false,  // 延迟隐藏
     },
     "sketch": {
-        "show":false,
-        "moved": false,  
-        "icon-size":1,    
-        "delay-hide": false 
+        "show": false,
+        "moved": false,
+        "icon-size": 1,
+        "delay-hide": false,
     },
     "feature": {
-        "show":false,
-        "moved": false,  
-        "icon-size":1,    
-        "delay-hide": false 
+        "show": false,
+        "moved": false,
+        "icon-size": 1,
+        "delay-hide": false,
     },
     "rib-layout": {
-        "show":false,
-        "moved": false,  
-        "icon-size":1,    
-        "delay-hide": false 
+        "show": false,
+        "moved": false,
+        "icon-size": 1,
+        "delay-hide": false,
+        "pre-process-show":false,
+        "post-process-show":false,
     },
 })  // 控制 tools 的状态 用于[Tools.vue]
 
@@ -74,10 +76,10 @@ export const tools_state = reactive({
  * 为保证能跟随屏幕变化 都以 vmin 做单位 有特殊单位则在后续标注
 */
 export const tool_bar_state = reactive({
-    "queue":{
+    "queue": {
         // 默认位置 70vmin - 20vmin
-        "x":[70],  
-        "y":[20]
+        "x": [70],
+        "y": [20]
     },
-    "rw-file":{"ref-obj":"__REF_OBJ__","x-vmin":0, "y-vmin":0}
+    "rw-file": { "ref-obj": "__REF_OBJ__", "x-vmin": 0, "y-vmin": 0 }
 })

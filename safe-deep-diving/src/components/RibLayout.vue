@@ -5,10 +5,10 @@
         <div class="rw-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
             <ToolIcon Type="drag-hand" :State="tools_state['rib-layout']['icon-size']"></ToolIcon>
         </div>
-        <div class="rw-tool-icon" @click="">
+        <div class="rw-tool-icon" @click="show_pre_process_interface">
             <ToolIcon Type="rl-pre-process" :State="tools_state['rib-layout']['icon-size']"></ToolIcon>
         </div>
-        <div class="rw-tool-icon" @click="">
+        <div class="rw-tool-icon" @click="show_post_process_interface">
             <ToolIcon Type="rl-post-process" :State="tools_state['rib-layout']['icon-size']"></ToolIcon>
         </div>
         <div v-if="tools_state['rib-layout']['moved']" class="rw-tool-icon" @click="() => { close_bar('rib-layout') }">
@@ -34,6 +34,14 @@ const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
 onUnmounted(() => {
     stopDrag()
 })
+
+const show_pre_process_interface = () =>{
+    tools_state['rib-layout']['pre-process-show'] = true;
+}
+const show_post_process_interface = () =>{
+    tools_state['rib-layout']['post-process-show'] = true;
+}
+
 
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {
@@ -102,7 +110,7 @@ const stopDrag = () => {
     flex-direction: row;
     position: fixed;
     bottom: 5.75vmin;
-    left: calc(50% - 10vmin);
+    left: calc(50% - 7.5vmin);
     z-index: 11;
     /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */

@@ -1,15 +1,87 @@
 <template>
-    <div class="pl-post-process" ref="floatingWindowElement">
-        <div class="title" @mousedown="startDrag"></div>
+    <div v-if="tools_state['rib-layout']['post-process-show']" class="pl-post-process" ref="floatingWindowElement">
+        <div class="title ban-select" @mousedown="startDrag">
 
+            <div class="title-icon" @click="">
+                <ToolIcon Type="rl-post-process"></ToolIcon>
+            </div>
+            <div class="title-msg">{{ lang?.["rib-layout"]?.["post-process"]?.["title"] }}</div>
+            <div class="title-close-icon" @click="close_post_process">
+                <BaseIcon Type="close"></BaseIcon>
+            </div>
+        </div>
+        <div class="main">
+            <div class="item">
+                <div class="item-title">
+                    {{ lang?.["rib-layout"]?.["post-process"]?.["info"]["cur-sol-depth"] }}
+                </div>
+                <div class="item-contain">
+                    <div>3000m</div><div class="attention">目标:6500m</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-title">
+                    {{ lang?.["rib-layout"]?.["post-process"]?.["info"]["sol-echo"] }}
+                </div>
+                <div class="item-contain echo-frame scroll-bar-0">
+                    <p>[echo1]:SDD Core 初始化中</p>
+                    <p>[echo2]:SDD Core 就绪</p>
+                    <p>[echo3]:SDD Core 开始解算</p>
+                    <p>[echo4]:开始粗大解算逼近</p>
+                    <p>[echo5]:插值解算 500m 外压</p>
+                    <p>[echo6]:The layout of the 500m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo7]:插值解算 1000m 外压</p>
+                    <p>[echo8]:The layout of the 1000m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo9]:插值解算 1500m 外压</p>
+                    <p>[echo10]:The layout of the 1500m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo11]:插值解算 2000m 外压</p>
+                    <p>[echo12]:The layout of the 2000m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo13]:插值解算 2500m 外压</p>
+                    <p>[echo14]:The layout of the 2500m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo15]:插值解算 3000m 外压</p>
+                    <p>[echo16]:The layout of the 3000m depth external pressure limit reinforcement structure is completed</p>
+                    <!-- <p>[echo17]:插值解算 3500m 外压</p>
+                    <p>[echo18]:The layout of the 3500m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo19]:插值解算 4000m 外压</p>
+                    <p>[echo20]:The layout of the 4000m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo21]:插值解算 4500m 外压</p>
+                    <p>[echo22]:The layout of the 4500m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo23]:插值解算 5000m 外压</p>
+                    <p>[echo24]:The layout of the 5000m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo25]:插值解算 5500m 外压</p>
+                    <p>[echo26]:The layout of the 5500m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo27]:插值解算 6000m 外压</p>
+                    <p>[echo28]:The layout of the 6000m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo29]:插值解算 6500m 外压</p>
+                    <p>[echo30]:The layout of the 6500m depth external pressure limit reinforcement structure is completed</p>
+                    <p>[echo31]:解算完成</p> -->
+
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-contain">
+                    <div class="opr-button">{{ lang?.['universal']?.['export-rec'] }}</div><div class="opr-w-button">{{ lang?.['universal']?.['close'] }}</div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import BaseIcon from "../icons/BaseIcon.vue";
+import ToolIcon from "../icons/ToolIcon.vue";
+import { lang, tools_state } from "../core/cache";
+
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
 const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
 
+
+
+const close_post_process = () => {
+    tools_state['rib-layout']['post-process-show'] = false
+}
 
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {
@@ -63,10 +135,129 @@ const stopDrag = () => {
 <style scoped>
 .pl-post-process {
     position: fixed;
-    top: 75vmin;
-    left:5vmin;
-}
-.title{
-    
+    top: 15vmin;
+    left: 60vmin;
+    display: flex;
+    flex-direction: column;
+    width: 30vmin;
+    height: 60vmin;
+    border: 0.25vmin solid rgba(var(--border), 1);
+    background-color: rgba(var(--but-0), var(--b-transparent));
+    border-radius: 3vmin;
+
+    & .title {
+        display: flex;
+        align-items: center;
+        justify-items: start;
+        flex-direction: row;
+
+        width: 100%;
+        height: 5vmin;
+        border-top-left-radius: 3vmin;
+        border-top-right-radius: 3vmin;
+        background-color: rgba(var(--menu), var(--b-transparent));
+
+        & .title-icon {
+            margin: 0 1vmin;
+            width: fit-content;
+            height: fit-content;
+        }
+
+        & .title-close-icon {
+            margin-left: auto;
+            margin-right: 1vmin;
+            width: fit-content;
+            height: fit-content;
+        }
+
+        & .title-msg {
+            font-size: 2vmin;
+            font-weight: 900;
+        }
+    }
+
+    & .main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        flex-direction: column;
+        overflow: hidden;
+        overflow-y: auto;
+
+        & .item {
+            display: flex;
+            align-items: start;
+            justify-items: center;
+            flex-direction: column;
+            width: 95%;
+            height: fit-content;
+            border-bottom: 0.25vmin solid rgba(var(--but-1), 1);
+
+            & .item-title {
+                font-size: 2vmin;
+                font-weight: 600;
+                font-family: "LXGW", "楷体", 'Courier New', Courier, monospace;
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                min-height: 4vmin;
+            }
+
+            & .item-contain {
+                min-height: 4vmin;
+                display: flex;
+                align-items: center;
+                justify-items: start;
+                flex-direction: row;
+                font-size: 2vmin;
+                font-weight: 400;
+                font-family: "LXGW", "楷体", 'Courier New', Courier, monospace;
+
+                & .attention{
+                    margin-left: 2vmin;
+                    padding: 0 0.75vmin;
+                    color: rgb(var(--warn));
+                    border-radius: 0.75vmin;
+                    border: 0.25vmin solid rgba(var(--warn), 1);
+                    background-color: rgba(var(--warn), var(--w-transparent));
+                }
+                & .opr-button{
+                    margin-left: 2.5vmin;
+                    padding: 0 0.75vmin;
+                    border-radius: 0.75vmin;
+                    border: 0.25vmin solid rgba(var(--normal), 1);
+                    background-color: rgba(var(--normal), var(--w-transparent));
+                }
+                & .opr-w-button{
+                    margin-left: 2.5vmin;
+                    padding: 0 0.75vmin;
+                    border-radius: 0.75vmin;
+                    border: 0.25vmin solid rgba(var(--warn), 1);
+                    background-color: rgba(var(--warn), var(--w-transparent));
+                }
+            }
+
+            & .echo-frame {
+                display: flex;
+                align-items: start;
+                justify-items: start;
+                flex-direction: column;
+                font-size: 1vmin;
+                height: 15vmin;
+                width: calc(100% - 1vmin);
+                padding: 0.25vmin 0.25vmin 0 0.5vmin;
+                border: 0.25vmin solid rgba(var(--but-1), 1);
+                background-color: rgba(var(--menu), var(--w-transparent));
+                border-radius: 1.25vmin;
+                margin-bottom: 0.25vmin;
+                overflow: auto;
+                & p {
+                    margin: 0.1vmin;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
 }
 </style>

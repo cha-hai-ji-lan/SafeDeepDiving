@@ -210,16 +210,16 @@
     <!-- 草绘编辑模块 -->
     <svg v-if="Type === 'sketch'" class="tool-group-icon" :class="{ 'tool-icon1': State === 1 }"
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-        <rect class="d-stroke m-fill" width="896" height="896" x="64" y="64" rx="128" stroke-width="32"
-            stroke-dasharray="65,75" fill-opacity="0.35" stroke-linejoin="round" ry="128" />
-        <path class="d-stroke d-fill" d="M64 512h896M512 64v896" stroke-width="16" stroke-dasharray="65,75"
-            stroke-linecap="round" stroke-linejoin="round" />
-        <path class="d-stroke" d="M768 768A1 1 0 0 0 768 512L512 256s256 512-256 256a1 1 0 0 0 10 355 1 1 0 0 0-10-355"
-            stroke-width="64" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-        <circle class="d-stroke l-fill" r="64" cx="256" cy="512" stroke-width="32" />
-        <circle class="d-stroke l-fill" r="64" cx="512" cy="256" stroke-width="32" />
-        <circle class="d-stroke l-fill" r="64" cx="768" cy="512" stroke-width="32" />
-        <circle class="d-stroke l-fill" r="64" cx="768" cy="768" stroke-width="32" />
+        <path class=" d-stroke "
+            d="M64 64h896M64 192h896M64 320h896M64 448h896M64 576h896M64 704h896M64 832h896M64 960h896M64 64v896M192 64v896M320 64v896M448 64v896M576 64v896M704 64v896M832 64v896M960 64v896"
+            stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="20 60" />
+        <path class=" d-stroke " d="M128 192h512l256 256c0 384 0 384-384 384C128 1216 512 320 128 704" stroke-width="64"
+            stroke-linejoin="round" stroke-linecap="round" fill="none" />
+        <circle class=" d-stroke l-fill" r="64" cx="128" cy="192" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="640" cy="192" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="896" cy="448" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="512" cy="832" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="128" cy="704" stroke-width="32" />
     </svg>
     <svg v-if="Type === 'sketch-straight-line'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
@@ -254,6 +254,38 @@
             stroke-width="32" />
         <circle class=" d-stroke l-fill" r="64" cx="512" cy="512" stroke-width="32" />
     </svg>
+    <svg v-if="Type === 'sketch-polygon'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <circle class=" d-stroke l-fill" r="64" cx="512" cy="512" stroke-width="32" />
+        <path class=" d-stroke " d="M128 353v318L353 896h318L896 671v-318L671 128h-318Z" stroke-width="64"
+            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    </svg>
+    <svg v-if="Type === 'sketch-oval'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <ellipse class=" d-stroke " rx="320" ry="512" cx="512" cy="512" transform="rotate(45 512 512)" stroke-width="64"
+            fill="none" />
+        <circle class=" d-stroke l-fill" r="64" cx="512" cy="512" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="738.25" cy="738.25" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="150" cy="874" stroke-width="32" />
+        <path class=" d-stroke " d="M512 512 150 874M512 512 738.25 738.25" stroke-width="32" stroke-linecap="round"
+            stroke-linejoin="round" />
+    </svg>
+    <svg v-if="Type === 'sketch-spline'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <path class=" d-stroke " d="M896 896c0-1792-768 1024-768-768" stroke-width="64" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" />
+        <circle class=" d-stroke l-fill" r="64" cx="896" cy="896" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="128" cy="128" stroke-width="32" />
+    </svg>
+    <svg v-if="Type === 'sketch-mirror'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <line class=" d-stroke " x2="512" y2="896" x1="512" y1="128" stroke-width="32" stroke-dasharray="30 60"
+            stroke-linecap="round" />
+        <path class=" d-stroke l-fill" d="M384 832v-640L64 832z" stroke-width="32" stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path class=" d-stroke m-fill" d="M640 832v-640l320 640z" stroke-width="32" stroke-linecap="round"
+            stroke-linejoin="round" stroke-dasharray="30 40" />
+    </svg>
     <!-- 特征编辑模块 -->
     <svg v-if="Type === 'feature'" class="tool-group-icon" :class="{ 'tool-icon1': State === 1 }"
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
@@ -287,6 +319,65 @@
             <path class=" d-stroke m-fill" d="M512 756l224-28v-576l-224 28z" stroke-width="32" stroke-linecap="round"
                 stroke-linejoin="round" />
             <path class=" d-stroke m-fill" d="M512 756l-224-28v-576l224 28z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </g>
+    </svg>
+    <svg v-if="Type === 'feature-rounded-corners'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <path class=" d-stroke l-fill" d="M512 736l384-192L896 768 512 960Z" stroke-width="32" stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path class=" d-stroke l-fill" d="M512 512l-384-192 0 448L512 960z" stroke-width="32" stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path class=" d-stroke l-fill" d="M320 416 128 320 512 128 704 224z" stroke-width="32" stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path class=" d-stroke m-fill" d="M320 416c192 96 192 96 192 320L896 544c0-224 0-224-192-320z" stroke-width="32"
+            stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <svg v-if="Type === 'feature-rotating'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <g transform="translate(0 96)">
+            <path class=" d-stroke m-fill"
+                d="M393.299 587.45C395.7 470 634 473 630.697 587.448L992 512C992 64 32 64 32 512Z" stroke-width="32"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <ellipse class=" d-stroke l-fill" rx="192" ry="160" cx="224" cy="512" stroke-width="32" />
+            <ellipse class=" d-stroke l-fill" rx="192" ry="160" cx="800" cy="512" stroke-width="32"
+                transform="skewX(0)" />
+        </g>
+        <line class=" d-stroke " x2="512" y2="896" x1="512" y1="128" stroke-width="32" stroke-dasharray="30 60"
+            stroke-linecap="round" />
+    </svg>
+    <svg v-if="Type === 'feature-scan'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <ellipse class=" d-stroke l-fill" rx="192" ry="96" cx="256" cy="768" stroke-width="32" />
+        <path class=" d-stroke l-fill" d="M64.08 763.68q26-353 352.42-468.78l191.4 332.3q-179.098 38.751-159.9 140.801"
+            stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+        <ellipse class=" d-stroke m-fill" rx="192" ry="96" cx="118.657121" cy="392.654845"
+            transform="rotate(60 256 768)" stroke-width="32" stroke-dasharray="20 40" stroke-linecap="round" />
+        <path class=" d-stroke " d="M512.391 461.385q408.609-29.385 383.61-333.384" stroke-width="32" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" />
+        <ellipse class=" d-stroke l-fill" rx="192" ry="96" cx="256" cy="768" stroke-width="16" stroke-dasharray="20 40"
+            stroke-linecap="round" />
+        <path class=" d-stroke " d="M256 768C256 256 896 640 896 128" fill="none" stroke-width="16"
+            stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="20 40" />
+    </svg>
+    <svg v-if="Type === 'feature-mirror'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <line class=" d-stroke " x2="512" y2="896" x1="512" y1="128" stroke-width="32" stroke-dasharray="30 60"
+            stroke-linecap="round" />
+        <g>
+            <path class=" d-stroke l-fill" d="M256 320l160-32v448l-160 32z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class=" d-stroke l-fill" d="M256 320l-160-32v448l160 32z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class=" d-stroke m-fill" d="M256 320l-160-32 160-32 160 32z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </g>
+        <g transform="translate(512 0)" stroke-dasharray="30 40">
+            <path class=" d-stroke m-fill" d="M256 320l160-32v448l-160 32z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class=" d-stroke m-fill" d="M256 320l-160-32v448l160 32z" stroke-width="32" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path class=" d-stroke m-fill" d="M256 320l-160-32 160-32 160 32z" stroke-width="32" stroke-linecap="round"
                 stroke-linejoin="round" />
         </g>
     </svg>
@@ -398,6 +489,13 @@
         <circle class=" d-stroke d-fill" r="185" cx="768" cy="512" stroke-width="32" />
         <circle class=" d-stroke m-fill" r="192" cx="512" cy="512" stroke-width="32" />
         <circle class=" d-stroke l-fill" r="192" cx="256" cy="512" stroke-width="32" />
+    </svg>
+    <svg v-if="Type === 'arrow'" class="tool-icon d-stroke l-fill" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <path class="d-stroke m-fill" d="M128 128 986 429 718 561 957 781 928.695 840.811" fill="#74aff6" stroke-width="32" stroke="#071226"
+            stroke-linecap="round" stroke-linejoin="round" />
+        <path class="d-stroke l-fill" d="M128 128 554 900 635 641 889 866 928.698 840.805" fill="#d3e3ee" stroke-width="32" stroke="#071226"
+            stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 </template>
 <script setup lang="ts">

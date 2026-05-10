@@ -105,7 +105,7 @@ const stopDrag = () => {
     flex-direction: row;
     position: fixed;
     bottom: 5.75vmin;
-    left: calc(50% - 10vmin);
+    left: calc(50% - 12.5vmin);
     z-index: 11;
     /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */

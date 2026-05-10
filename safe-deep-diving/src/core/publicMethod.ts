@@ -8,6 +8,8 @@ import { PathUtils } from "./path";
 import { load_obj } from './three/io'
 import { load_step } from './opencascade/init'
 
+
+let clickTimer: number | null = null;  // 单双击切换计时器
 /**
  * 导入模型分配器
  * 
@@ -37,16 +39,7 @@ export const module_loader = async (load_mode: number = 0) => {
             break;
     }
 }
-// /**
-//  * 导入模型 目前支持 OBJ
-// */
-// export const import_model_file = async () => {
-//     await open_file_dialog()
-//     if (file_path.value) {
-//         load_obj(file_path.value)
 
-//     }
-// }
 /**
  * 关闭欢迎界面
 */
@@ -89,3 +82,30 @@ export const open_bar = (bar_name: string) => {
 
     // }
 }
+
+export const handleClick = (callback: () => void) => {
+    if (clickTimer) {
+        // 如果定时器存在，说明这是第二次点击，清除定时器，等待 dblclick 触发
+        clearTimeout(clickTimer);
+        clickTimer = null;
+    } else {
+        // 第一次点击，设置定时器
+        clickTimer = window.setTimeout(() => {
+            callback()  // 回调传递的方法
+            console.log('确认为单击');
+            // 执行单击逻辑
+            clickTimer = null;
+        }, 250); // 延迟时间略小于浏览器默认双击间隔
+    }
+};
+
+export const handleDoubleClick = (callback: () => void) => {
+    // 双击触发时，清除单击的定时器，防止单击逻辑执行
+    if (clickTimer) {
+        clearTimeout(clickTimer);
+        clickTimer = null;
+    }
+    callback()  // 回调传递的方法
+    console.log('确认为双击');
+    // 执行双击逻辑
+};

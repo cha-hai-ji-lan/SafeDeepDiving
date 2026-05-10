@@ -1,6 +1,6 @@
 @font-face {
-    font-family:'Judou-Heavy';
-    src: url('/fonts/LXGW.ttf') format('truetype');
+    font-family: 'LXGW';
+    src: url('/font/LXGW.ttf') format('truetype');
     font-weight: 400;
     font-display: swap;
 }

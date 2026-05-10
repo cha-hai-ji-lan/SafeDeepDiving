@@ -24,3 +24,93 @@
 .grabbing-cursor{
     cursor: grabbing;
 }
+
+.ban-select{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* 滚动条样式 */
+.scroll-bar-0 {
+    &::-webkit-scrollbar {
+        width: 0.75vmin;
+        /* 垂直滚动条宽度 */
+        height: 0.75vmin;
+        /* 水平滚动条高度 */
+
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(var(--but-1), 1);
+        /* 滚动条轨道背景色 */
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(var(--but-2), var(--w-transparent));
+        /* 滚动条滑块颜色 */
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        filter: brightness(1.2);
+        /* 滑块悬停时的颜色 */
+    }
+}
+.scroll-bar-1 {
+    &::-webkit-scrollbar {
+        width: 0.75vmin;
+        /* 垂直滚动条宽度 */
+        height: 0.75vmin;
+        /* 水平滚动条高度 */
+
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(var(--border), var(--w-transparent));
+        /* 滚动条轨道背景色 */
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(var(--but-1), var(--b-transparent));
+        /* 滚动条滑块颜色 */
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        filter: brightness(1.2);
+        /* 滑块悬停时的颜色 */
+    }
+}
+
+.input-sty-0{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+   
+    border-radius: 0.5vmin;
+    padding-left: 0.5vmin;
+    background-color: rgba(var(--but-1), var(--w-transparent));
+    border: 0.2vmin solid rgba(var(--border), var(--w-transparent));
+ 
+}
+

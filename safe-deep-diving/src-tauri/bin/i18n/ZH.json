@@ -2,5 +2,37 @@
     "welcome": {
         "wel-tit": "Safe Deep Diving",
         "wel-msg": "欢迎使用SDD"
+    },
+    "rib-layout": {
+        "pre-process": {
+            "title": "筋布局求解前过程",
+            "info":{
+                "ext-p-sur":"外压直接接触面",
+                "inn-p-sur":"内压直接接触面",
+                "ext-p":"外压值",
+                "inn-p":"内压值",
+                "ori-wall-thick":"初始壁厚",
+                "div-depth":"下潜深度",
+                "Work-cond":"下潜工况",
+                "wc-ashore": "下潜前",
+                "wc-dive": "下潜中",
+                "wc-f-dive": "下潜完成"
+            }
+            
+        },
+        "post-process": {
+            "title": "筋布局求解结果",
+            "info":{
+                "cur-sol-depth":"当前求解深度",
+                "sol-echo":"求解回显"
+            }
+        }
+
+    },
+    "universal":{
+          "self-resol" :"自解算",
+          "export-rec":"导出记录",
+          "default":"默认",
+          "close":"关闭"
     }
 }
