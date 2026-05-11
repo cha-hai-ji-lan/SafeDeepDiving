@@ -18,7 +18,7 @@
                     {{ lang?.["rib-layout"]?.["post-process"]?.["info"]["cur-sol-depth"] }}
                 </div>
                 <div class="item-contain">
-                    <div>3000m</div><div class="attention">目标:6500m</div>
+                    <div>6500m</div><div class="attention">目标:6500m</div>
                 </div>
             </div>
             <div class="item">
@@ -42,7 +42,7 @@
                     <p>[echo14]:The layout of the 2500m depth external pressure limit reinforcement structure is completed</p>
                     <p>[echo15]:插值解算 3000m 外压</p>
                     <p>[echo16]:The layout of the 3000m depth external pressure limit reinforcement structure is completed</p>
-                    <!-- <p>[echo17]:插值解算 3500m 外压</p>
+                    <p>[echo17]:插值解算 3500m 外压</p>
                     <p>[echo18]:The layout of the 3500m depth external pressure limit reinforcement structure is completed</p>
                     <p>[echo19]:插值解算 4000m 外压</p>
                     <p>[echo20]:The layout of the 4000m depth external pressure limit reinforcement structure is completed</p>
@@ -56,7 +56,7 @@
                     <p>[echo28]:The layout of the 6000m depth external pressure limit reinforcement structure is completed</p>
                     <p>[echo29]:插值解算 6500m 外压</p>
                     <p>[echo30]:The layout of the 6500m depth external pressure limit reinforcement structure is completed</p>
-                    <p>[echo31]:解算完成</p> -->
+                    <p>[echo31]:解算完成</p>
 
                 </div>
             </div>

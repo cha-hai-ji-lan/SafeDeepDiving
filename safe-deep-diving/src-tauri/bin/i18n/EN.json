@@ -5,18 +5,23 @@
     },
     "rib-layout": {
         "pre-process": {
-            "title": "Pre-solution process of rib layout",
+            "title": "Pre-solution process of pressure hull",
             "info": {
                 "ext-p-sur": "external pressure direct contact surface",
                 "inn-p-sur": "Internal pressure direct contact surface",
                 "ext-p": "external pressure value",
                 "inn-p": "internal pressure value",
+                "shell-config":"Shell configuration",
                 "ori-wall-thick": "Initial wall thickness",
                 "div-depth": "Diving depth",
+                "shell-mtl": "Shell material",
                 "Work-cond": "Dive conditions",
                 "wc-ashore": "Before diving",
                 "wc-dive": "Descending into the submarine",
-                "wc-f-dive": "The dive is complete"
+                "wc-f-dive": "The dive is complete",
+                "shell-in-dim":"Inner diameter",
+                "shell-len":"length",
+                "start-shell-thick":"Starting shell thickness"
             }
         },
         "post-process": {
@@ -27,10 +32,10 @@
             }
         }
     },
-    "universal":{
-          "self-resol" :"Self-resolving",
-          "export-rec":"Export records",
-          "default":"default",
-          "close":"close"
+    "universal": {
+        "self-resol": "Self-resolving",
+        "export-rec": "Export records",
+        "default": "default",
+        "close": "close"
     }
 }

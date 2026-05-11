@@ -41,6 +41,7 @@
     <SketchTool></SketchTool>
     <FeatureTool></FeatureTool>
     <RibLayout></RibLayout>
+    <CurvedSurface></CurvedSurface>
     <!-- 内联界面 -->
     <RLPreProcess></RLPreProcess>
     <RLPostProcess></RLPostProcess>
@@ -63,6 +64,7 @@ import ReadWriteTool from "./components/ReadWriteTool.vue";         // 引入读
 import SketchTool from "./components/SketchTool.vue";               // 引入草绘工具模块
 import FeatureTool from "./components/FeatureTool.vue";             // 引入特征工具模块
 import RibLayout from "./components/RibLayout.vue";                 // 引入特征工具模块
+import CurvedSurface from "./components/CurvedSurface.vue";                 // 引入特征工具模块
 // 内联页面
 import RLPreProcess from "./interface/RLPreProcess.vue";            // 引入预处理界面
 import RLPostProcess from "./interface/RLPostProcess.vue";          // 引入后处理界面

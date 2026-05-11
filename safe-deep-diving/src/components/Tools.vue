@@ -21,6 +21,10 @@
                     @dblclick="() => { handleDoubleClick(open_feature_bar) }">
                     <ToolIcon Type="feature"></ToolIcon>
                 </div>
+                <div class="item" @click="() => { handleClick(focus_curved_surface_bar) }"
+                    @dblclick="() => { handleDoubleClick(open_curved_surface_bar) }">
+                    <ToolIcon Type="curved-surface"></ToolIcon>
+                </div>
                 <div class="item" @click="() => { handleClick(focus_rib_layout_bar) }"
                     @dblclick="() => { handleDoubleClick(open_rib_layout_bar) }">
                     <ToolIcon Type="rib-layout"></ToolIcon>
@@ -116,6 +120,22 @@ const focus_feature_bar = () => {
         }
     }
 }
+const focus_curved_surface_bar = () => {
+    if (!tools_state["has-focus-bar"]) {
+        if (!tools_state["curved-surface"]["show"]) {
+            tools_state["curved-surface"]["show"] = true;
+            tools_state["current-focus-bar"] = "curved-surface"
+            tools_state["has-focus-bar"] = true
+        }
+    } else {
+        if (!tools_state["curved-surface"]["show"]) {
+            close_bar(tools_state["current-focus-bar"])
+            tools_state["curved-surface"]["show"] = true;
+            tools_state["current-focus-bar"] = "curved-surface"
+            tools_state["has-focus-bar"] = true
+        }
+    }
+}
 const focus_rib_layout_bar = () => {
     if (!tools_state["has-focus-bar"]) {
         if (!tools_state["rib-layout"]["show"]) {
@@ -152,6 +172,14 @@ const open_feature_bar = () => {
         tools_state["feature"]["show"] = true;
         tools_state['feature']['moved'] = true
         tools_state['feature']['icon-size'] = 0
+
+    }
+}
+const open_curved_surface_bar = () => {
+    if (!tools_state["curved-surface"]["show"]) {
+        tools_state["curved-surface"]["show"] = true;
+        tools_state['curved-surface']['moved'] = true
+        tools_state['curved-surface']['icon-size'] = 0
 
     }
 }

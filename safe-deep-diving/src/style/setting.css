@@ -54,6 +54,34 @@
     stroke: rgba(var(--err), 1)
 }
 
+.l-stop-color {
+    stop-color: rgba(var(--but-0), 1)
+}
+
+.m-stop-color {
+    stop-color: rgba(var(--but-1), 1)
+}
+
+.d-stop-color {
+    stop-color: rgba(var(--but-2), 1)
+}
+
+.re-stop-color {
+    stop-color: rgba(var(--ready), 1)
+}
+
+.no-stop-color {
+    stop-color: rgba(var(--normal), 1)
+}
+
+.wa-stop-color {
+    stop-color: rgba(var(--warn), 1)
+}
+
+.er-stop-color {
+    stop-color: rgba(var(--err), 1)
+}
+
 .grab-cursor {
     cursor: grab;
 }

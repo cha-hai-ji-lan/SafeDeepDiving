@@ -1,22 +1,34 @@
 <template>
     <div v-if="interface_state['rib-layout']['pre-process']['show']" class="pl-pre-process"
-    :class="{ 'opacity-show': interface_state['rib-layout']['pre-process']['delay-hide'] === false, 'opacity-hide': interface_state['rib-layout']['pre-process']['delay-hide'] }"
-    ref="floatingWindowElement">
+        :class="{ 'opacity-show': interface_state['rib-layout']['pre-process']['delay-hide'] === false, 'opacity-hide': interface_state['rib-layout']['pre-process']['delay-hide'] }"
+        ref="floatingWindowElement">
         <div class="title ban-select" @mousedown="startDrag">
             <div class="title-icon" @click="">
                 <ToolIcon Type="rl-pre-process"></ToolIcon>
             </div>
 
-            <div class="title-msg">{{ lang?.["rib-layout"]?.["pre-process"]?.["title"] }}</div>
-            <div class="title-close-icon" @click="()=>{close_inter('rib-layout/pre-process')}">
+            <div class="title-msg">{{ lang?.["rib-layout"]["pre-process"]["title"] }}</div>
+            <div class="title-close-icon" @click="() => { close_inter('rib-layout/pre-process') }">
                 <BaseIcon Type="close"></BaseIcon>
             </div>
         </div>
         <div class="main scroll-bar-1">
             <div class="item">
                 <div class="item-title">
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["shell-config"] }}
+                </div>
+                <div class="item-contain">
+                    <input class="nor-input input-sty-0" type="text">
+                    <div class="burron">
+                        <BaseIcon Type="option-bar-ide"></BaseIcon>
+                    </div>
+                </div>
+
+            </div>
+            <div class="item">
+                <div class="item-title">
                     <!-- 外压直接接触面 -->
-                    {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["ext-p-sur"] }}
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["ext-p-sur"] }}
                 </div>
                 <div class="item-contain">
                     <input class="nor-input input-sty-0" type="text">
@@ -28,7 +40,7 @@
             </div>
             <div class="item">
                 <div class="item-title">
-                    {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["inn-p-sur"] }}
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["inn-p-sur"] }}
                 </div>
                 <div class="item-contain">
                     <input class="nor-input input-sty-0" type="text">
@@ -39,27 +51,38 @@
             </div>
             <div class="item">
                 <div class="item-title">
-                    {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["Work-cond"] }}
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["shell-mtl"] }}
                 </div>
                 <div class="item-contain">
-                    <div class="unit ban-select" :class="{ 'cur-unit': dive_state['start'] }"
-                        @click="() => { focus_unit(3, 0) }">
-                        {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["wc-ashore"] }}</div>
-                    <div class="unit ban-select" :class="{ 'cur-unit': dive_state['exe'] }"
-                        @click="() => { focus_unit(3, 1) }">
-                        {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["wc-dive"] }}</div>
-                    <div class="unit ban-select" :class="{ 'cur-unit': dive_state['fin'] }"
-                        @click="() => { focus_unit(3, 2) }">
-                        {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["wc-f-dive"] }}</div>
+                    <input class="nor-input input-sty-0" placeholder="NS-110" type="text">
+                    <div class="burron">
+                        <ToolIcon Type="omit"></ToolIcon>
+                    </div>
                 </div>
             </div>
             <div class="item">
                 <div class="item-title">
-                    {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["div-depth"] }}
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["Work-cond"] }}
+                </div>
+                <div class="item-contain">
+                    <div class="unit ban-select" :class="{ 'cur-unit': dive_state['start'] }"
+                        @click="() => { focus_unit(3, 0) }">
+                        {{ lang?.["rib-layout"]["pre-process"]["info"]["wc-ashore"] }}</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': dive_state['exe'] }"
+                        @click="() => { focus_unit(3, 1) }">
+                        {{ lang?.["rib-layout"]["pre-process"]["info"]["wc-dive"] }}</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': dive_state['fin'] }"
+                        @click="() => { focus_unit(3, 2) }">
+                        {{ lang?.["rib-layout"]["pre-process"]["info"]["wc-f-dive"] }}</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-title">
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["div-depth"] }}
                 </div>
                 <div class="item-contain">
                     <input class="nor-input-1 input-sty-0" type="number"
-                        :placeholder="lang?.['universal']?.['self-resol']">
+                        :placeholder="lang?.['universal']['self-resol']">
                     <div class="unit ban-select" :class="{ 'cur-unit': unit_m === 0 }"
                         @click="() => { focus_unit(2, 0) }">
                         m</div>
@@ -70,11 +93,11 @@
             </div>
             <div class="item">
                 <div class="item-title">
-                    {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["ext-p"] }}
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["ext-p"] }}
                 </div>
                 <div class="item-contain">
                     <input class="nor-input-1 input-sty-0" type="number"
-                        :placeholder="lang?.['universal']?.['self-resol']">
+                        :placeholder="lang?.['universal']['self-resol']">
                     <div class="unit ban-select" :class="{ 'cur-unit': unit_pa === 0 }"
                         @click="() => { focus_unit(0, 0) }">
                         Pa</div>
@@ -91,10 +114,10 @@
             </div>
             <div class="item">
                 <div class="item-title">
-                    {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["inn-p"] }}
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["inn-p"] }}
                 </div>
                 <div class="item-contain">
-                    <input class="nor-input-1 input-sty-0" type="number">
+                    <input class="nor-input-1 input-sty-0" type="text" placeholder="1atm">
                     <div class="unit ban-select" :class="{ 'cur-unit': unit1_pa === 0 }"
                         @click="() => { focus_unit(1, 0) }">
                         Pa</div>
@@ -111,12 +134,62 @@
             </div>
             <div class="item">
                 <div class="item-title">
-                    {{ lang?.["rib-layout"]?.["pre-process"]?.["info"]["ori-wall-thick"] }}
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["shell-in-dim"] }}
                 </div>
                 <div class="item-contain">
-                    <input class="nor-input-1 input-sty-0" type="number"
-                        placeholder="10">
-                    <div> mm</div>
+                    <input class="nor-input-1 input-sty-0" type="number" placeholder="10">
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m0 === 0 }"
+                        @click="() => { focus_unit(4, 0) }">
+                        mm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m0 === 1 }"
+                        @click="() => { focus_unit(4, 1) }">
+                        cm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m0 === 2 }"
+                        @click="() => { focus_unit(4, 2) }">
+                        dm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m0 === 3 }"
+                        @click="() => { focus_unit(4, 3) }">
+                        m</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-title">
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["shell-len"] }}
+                </div>
+                <div class="item-contain">
+                    <input class="nor-input-1 input-sty-0" type="number" placeholder="10">
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m1  === 0 }"
+                        @click="() => { focus_unit(5, 0) }">
+                        mm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m1  === 1 }"
+                        @click="() => { focus_unit(5, 1) }">
+                        cm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m1  === 2 }"
+                        @click="() => { focus_unit(5, 2) }">
+                        dm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m1  === 3 }"
+                        @click="() => { focus_unit(5, 3) }">
+                        m</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item-title">
+                    {{ lang?.["rib-layout"]["pre-process"]["info"]["start-shell-thick"] }}
+                </div>
+                <div class="item-contain">
+                    <input class="nor-input-1 input-sty-0" type="number" placeholder="0">
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m2  === 0 }"
+                        @click="() => { focus_unit(6, 0) }">
+                        mm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m2  === 1 }"
+                        @click="() => { focus_unit(6, 1) }">
+                        cm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m2  === 2 }"
+                        @click="() => { focus_unit(6, 2) }">
+                        dm</div>
+                    <div class="unit ban-select" :class="{ 'cur-unit': unit_m2  === 3 }"
+                        @click="() => { focus_unit(6, 3) }">
+                        m</div>
                 </div>
             </div>
         </div>
@@ -126,7 +199,7 @@
 import { ref, reactive } from "vue";
 import BaseIcon from "../icons/BaseIcon.vue";
 import ToolIcon from "../icons/ToolIcon.vue";
-import { lang, tools_state, interface_state } from "../core/cache";
+import { lang, interface_state } from "../core/cache";
 import { close_inter } from "../core/publicMethod";
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
@@ -137,6 +210,9 @@ const dive_state = reactive({ "start": false, "exe": false, "fin": false })
 const unit_pa = ref<number>(-1)
 const unit1_pa = ref<number>(-1)
 const unit_m = ref<number>(-1)
+const unit_m0 = ref<number>(-1)
+const unit_m1 = ref<number>(-1)
+const unit_m2 = ref<number>(-1)
 
 
 const focus_unit = (type: number, unit: number) => {
@@ -172,8 +248,28 @@ const focus_unit = (type: number, unit: number) => {
             default:
                 break;
         }
-    }
+    } else if (type === 4) {
+        if (unit_m0.value === unit) {
+            unit_m0.value = -1
+        } else {
+            unit_m0.value = unit
+        }
 
+    }else if (type === 5) {
+        if (unit_m1.value === unit) {
+            unit_m1.value = -1
+        } else {
+            unit_m1.value = unit
+        }
+
+    }
+    else if (type === 6) {
+        if (unit_m2.value === unit) {
+            unit_m2.value = -1
+        } else {
+            unit_m2.value = unit
+        }
+    }
 }
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {

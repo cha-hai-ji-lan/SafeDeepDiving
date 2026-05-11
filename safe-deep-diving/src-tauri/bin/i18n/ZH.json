@@ -5,23 +5,28 @@
     },
     "rib-layout": {
         "pre-process": {
-            "title": "筋布局求解前过程",
+            "title": "耐压壳求解前过程",
             "info":{
                 "ext-p-sur":"外压直接接触面",
                 "inn-p-sur":"内压直接接触面",
                 "ext-p":"外压值",
                 "inn-p":"内压值",
+                "shell-config":"壳体构型",
                 "ori-wall-thick": "初始壁厚",
                 "div-depth": "下潜深度",
+                "shell-mtl": "壳体材料",
                 "Work-cond": "下潜工况",
                 "wc-ashore": "下潜前",
                 "wc-dive": "下潜中",
-                "wc-f-dive": "下潜完成"
+                "wc-f-dive": "下潜完成",
+                "shell-in-dim":"内径",
+                "shell-len":"长度",
+                "start-shell-thick":"起算壳体厚度"
             }
             
         },
         "post-process": {
-            "title": "筋布局求解结果",
+            "title": "耐压壳求解结果",
             "info":{
                 "cur-sol-depth":"当前求解深度",
                 "sol-echo":"求解回显"

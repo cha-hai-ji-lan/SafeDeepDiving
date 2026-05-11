@@ -65,10 +65,10 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
         frustumSize * aspect / 2,   // right
         frustumSize / 2,            // top
         frustumSize / -2,           // bottom
-        0.01,                        // near
-        10000                        // far
+        0.001,                        // near
+        100000                        // far
     );
-    camera.position.set(20, 20, 20)
+    camera.position.set(1000, 1000, 1000)
     camera.lookAt(0, 0, 0);
 
     // 3. 创建渲染器

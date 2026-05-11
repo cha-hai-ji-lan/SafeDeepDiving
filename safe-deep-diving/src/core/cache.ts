@@ -80,13 +80,23 @@ export const tools_state = reactive({
         "icon-size": 1,
         "delay-hide": false,
     },
+    "curved-surface": {
+        "show": false,
+        "moved": false,
+        "icon-size": 1,
+        "delay-hide": false,
+    },
     "rib-layout": {
         "show": false,
         "moved": false,
         "icon-size": 1,
         "delay-hide": false,
-        "pre-process-show": false,
-        "post-process-show": false,
+    },
+    "accessibility-bar": {
+        "show": false,
+        "moved": false,
+        "icon-size": 1,
+        "delay-hide": false,
     },
 })  // 控制 tools 的状态 用于[Tools.vue]
 

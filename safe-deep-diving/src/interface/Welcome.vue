@@ -8,7 +8,7 @@
             <div class="brief-description">
                 <div class="wel-title">{{ lang?.["welcome"]?.["wel-tit"] ?? "__WELCOME__" }}
                 </div>
-                <div class=" wel-info">{{ lang?.["welcome"]?.["wel-msg"] ?? "__WELCOME__" }}</div>
+                <div class=" wel-info">{{ lang?.["welcome"]?.["wel-msg"] ?? "__WELCOME_MSG__" }}</div>
                 <div class="methoad-bar">
                     <div class="method-but" @click="()=>{module_loader()}">
                         <ToolIcon Type="import" :State="1"></ToolIcon>
