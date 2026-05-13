@@ -26,11 +26,12 @@
         "width": 640,
         "height": 400,
         "title": "SafeDeepDiving-SplashScreen",
-        "decorations": false,
+        "decorations": true,
         "transparent": true,
         "alwaysOnTop": true,
         "center": true,
         "shadow": false,
+        "skipTaskbar": true,
         "url": "/page/splashScreen.html",
         "label": "splashScreen"
 

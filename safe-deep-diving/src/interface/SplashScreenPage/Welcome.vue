@@ -23,7 +23,7 @@ import { appConfig } from "../../core/cache";
 import { invoke } from "@tauri-apps/api/core";
 
 onMounted(async () => {
-    await invoke('set_click_through', { ignore: true });
+    // await invoke('set_click_through', { ignore: true });
 })
 </script>
 <style scoped>

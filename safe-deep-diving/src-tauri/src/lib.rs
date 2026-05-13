@@ -12,7 +12,7 @@ pub fn run() {
             open_url,               // 默认浏览器打开链接
             read_json_file,         // 读取 json 文件
             write_json_file,        // 写入 json 文件
-            set_click_through,      // 设置点击穿透
+            set_click_through,      // 设置点击窗口穿透
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
