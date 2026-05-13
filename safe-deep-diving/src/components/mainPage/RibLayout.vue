@@ -21,10 +21,10 @@
 </template>
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue';
-import ToolIcon from '../icons/ToolIcon.vue';
-import BaseIcon from '../icons/BaseIcon.vue';
-import { tools_state, interface_state } from '../core/cache'
-import {close_bar } from '../core/publicMethod';
+import ToolIcon from '../../icons/ToolIcon.vue';
+import BaseIcon from '../../icons/BaseIcon.vue';
+import { tools_state, interface_state } from '../../core/cache'
+import {close_bar } from '../../core/publicMethod';
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽

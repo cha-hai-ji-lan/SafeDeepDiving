@@ -12,9 +12,9 @@
 
 </template>
 <script setup lang="ts">
-import BaseIcon from '../icons/BaseIcon.vue';
-import { interface_state, tools_state } from "../core/cache"
-import { handleClick, handleDoubleClick } from "../core/publicMethod";
+import BaseIcon from '../../icons/BaseIcon.vue';
+import { interface_state, tools_state } from "../../core/cache"
+import { handleClick, handleDoubleClick } from "../../core/publicMethod";
 
 const open_welcom_inter = () => {
     if (interface_state['welcome']["show"]) {

@@ -5,8 +5,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 
-import { init_three, clean_three } from '../core/three/init.ts'
-// import { loadSTEPFile } from '../core/opencascade/loaderStep.ts'
+import { init_three, clean_three } from '../../core/three/init.ts'
 
 const threeContainer = ref<HTMLDivElement | null>(null);
 

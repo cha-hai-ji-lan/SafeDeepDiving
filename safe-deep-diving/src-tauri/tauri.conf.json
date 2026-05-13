@@ -12,13 +12,26 @@
   "app": {
     "windows": [
       {
-        "title": "safe-deep-diving",
+        "title": "safeDeepDiving",
         "width": 1280,
         "height": 720,
         "minWidth": 512,
         "minHeight": 288,
         "decorations": false,
+        "center": true,
         "transparent": true
+      },
+      {
+        "width": 480,
+        "height": 270,
+        "title": "SafeDeepDiving-SplashScreen",
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "center": true,
+        "url": "/page/splashScreen.html",
+        "label": "splashScreen"
+
       }
     ],
     "security": {

@@ -30,52 +30,55 @@
         </div>
       </div>
     </div>
+    <!-- 内联界面 -->
     <Welcome></Welcome>
-    <Setting></Setting>
-    <MainLogo></MainLogo>
     <MainThree></MainThree>
-    <ViewTools></ViewTools>
+    <Setting></Setting>
+    <RLPreProcess></RLPreProcess>
+    <RLPostProcess></RLPostProcess>
+
+
+
     <!-- 工具模块 -->
+    <MainLogo></MainLogo>
     <Tools></Tools>
+    <ViewTools></ViewTools>
     <ReadWriteTool></ReadWriteTool>
     <SketchTool></SketchTool>
     <FeatureTool></FeatureTool>
     <RibLayout></RibLayout>
     <CurvedSurface></CurvedSurface>
-    <!-- 内联界面 -->
-    <RLPreProcess></RLPreProcess>
-    <RLPostProcess></RLPostProcess>
+
   </main>
 </template>
 <script setup lang="ts">
 import { onMounted, onUnmounted } from "vue";
 import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
-import BaseIcon from "../icons/BaseIcon.vue"                         // 引入基础图标组件
-import MainThree from "../interface/MainThree.vue";                  // 引入主界面模块
+import BaseIcon from "../icons/BaseIcon.vue"                                          // 引入基础图标组件
 
-import Welcome from "../interface/Welcome.vue";                      // 引入欢迎界面
-import Setting from "../interface/Setting.vue";                      // 引入欢迎界面
-import MainLogo from "../components/MainLogo.vue";                   // 引入主logo
-// 模块
-import Tools from "../components/Tools.vue";                         // 引入工具组模块
-import ViewTools from "../components/ViewTools.vue";                 // 引入视图工具模块
-import ReadWriteTool from "../components/ReadWriteTool.vue";         // 引入读写工具模块
-import SketchTool from "../components/SketchTool.vue";               // 引入草绘工具模块
-import FeatureTool from "../components/FeatureTool.vue";             // 引入特征工具模块
-import RibLayout from "../components/RibLayout.vue";                 // 引入特征工具模块
-import CurvedSurface from "../components/CurvedSurface.vue";                 // 引入特征工具模块
 // 内联页面
-import RLPreProcess from "../interface/RLPreProcess.vue";            // 引入预处理界面
-import RLPostProcess from "../interface/RLPostProcess.vue";          // 引入后处理界面
+import Welcome from "../interface/mainPage/Welcome.vue";                              // 引入内联欢迎界面
+import MainThree from "../interface/mainPage/MainThree.vue";                          // 引入主界面模块
+import Setting from "../interface/mainPage/Setting.vue";                              // 引入内联设置界面
+import RLPreProcess from "../interface/mainPage/RLPreProcess.vue";                    // 引入预处理界面
+import RLPostProcess from "../interface/mainPage/RLPostProcess.vue";                  // 引入后处理界面
+// 模块
+import MainLogo from "../components/mainPage/MainLogo.vue";                           // 引入主logo
+import Tools from "../components/mainPage/Tools.vue";                                 // 引入工具组模块
+import ViewTools from "../components/mainPage/ViewTools.vue";                         // 引入视图工具模块
+import ReadWriteTool from "../components/mainPage/ReadWriteTool.vue";                 // 引入读写工具模块
+import SketchTool from "../components/mainPage/SketchTool.vue";                       // 引入草绘工具模块
+import FeatureTool from "../components/mainPage/FeatureTool.vue";                     // 引入特征工具模块
+import RibLayout from "../components/mainPage/RibLayout.vue";                         // 引入筋布局工具模块
+import CurvedSurface from "../components/mainPage/CurvedSurface.vue";                 // 引入特征工具模块
+
 // 初始化关联脚本
-import { init_app } from "../core/init.ts";                          // 初始化应用脚本
-import { base_icon_ctr, ele_state , interface_state} from "../core/cache.ts";         // 引入缓存数据动态脚本
-import { close_inter} from '../core/publicMethod.ts';
+import { init_app } from "../core/init.ts";                                           // 初始化应用脚本
+import { base_icon_ctr, ele_state, interface_state } from "../core/cache.ts";         // 引入缓存数据动态脚本
+import { close_inter } from '../core/publicMethod.ts';
 const appWindow = Window.getCurrent()
 
-// const base_icon_ctr = ref({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标
-// const ele_state = reactive({ "enter-title-bar": false })
 
 let resize_unlisten: UnlistenFn | null = null
 
@@ -114,10 +117,10 @@ const title_bar_click = (mode: string) => {
       }
       break;
     case "setting":
-      if (interface_state['setting']['show']){
+      if (interface_state['setting']['show']) {
         close_inter('setting');
       } else {
-        interface_state['setting']['show'] = true ;
+        interface_state['setting']['show'] = true;
       }
       break;
     default:

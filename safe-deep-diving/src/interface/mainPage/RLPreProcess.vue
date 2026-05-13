@@ -197,10 +197,10 @@
 </template>
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import BaseIcon from "../icons/BaseIcon.vue";
-import ToolIcon from "../icons/ToolIcon.vue";
-import { lang, interface_state } from "../core/cache";
-import { close_inter } from "../core/publicMethod";
+import BaseIcon from "../../icons/BaseIcon.vue";
+import ToolIcon from "../../icons/ToolIcon.vue";
+import { lang, interface_state } from "../../core/cache";
+import { close_inter } from "../../core/publicMethod";
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽

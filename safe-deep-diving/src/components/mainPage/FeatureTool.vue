@@ -1,36 +1,42 @@
 <template>
-    <div v-if="tools_state['curved-surface']['show']" class="rw-tool"
-        :class="{ 'show-bar': tools_state['curved-surface']['delay-hide'] === false, 'hide-bar': tools_state['curved-surface']['delay-hide'] }"
+    <div v-if="tools_state['feature']['show']" class="rw-tool"
+        :class="{ 'show-bar': tools_state['feature']['delay-hide'] === false, 'hide-bar': tools_state['feature']['delay-hide'] }"
         ref="floatingWindowElement">
         <div class="rw-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
-            <ToolIcon Type="drag-hand" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+            <ToolIcon Type="drag-hand" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="curved-border-blend" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+            <ToolIcon Type="feature-stretch" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="curved-thicken" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+            <ToolIcon Type="feature-rounded-corners" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="curved-extend" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+            <ToolIcon Type="feature-rotating" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="curved-offset" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+            <ToolIcon Type="feature-scan" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
-        <div v-if="tools_state['curved-surface']['moved']" class="rw-tool-icon" @click="() => { close_bar('curved-surface') }">
-            <ToolIcon Type="omit" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="feature-mirror" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
-        <div v-if="tools_state['curved-surface']['moved']" class="rw-tool-icon" @click="() => { close_bar('curved-surface') }">
-            <BaseIcon Type="close" :State="tools_state['curved-surface']['icon-size']"></BaseIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="part-transparency" :State="tools_state['feature']['icon-size']"></ToolIcon>
+        </div>
+        <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
+            <ToolIcon Type="omit" :State="tools_state['feature']['icon-size']"></ToolIcon>
+        </div>
+        <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
+            <BaseIcon Type="close" :State="tools_state['feature']['icon-size']"></BaseIcon>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue';
-import ToolIcon from '../icons/ToolIcon.vue';
-import BaseIcon from '../icons/BaseIcon.vue';
-import { tools_state } from '../core/cache'
-import {close_bar } from '../core/publicMethod';
+import ToolIcon from '../../icons/ToolIcon.vue';
+import BaseIcon from '../../icons/BaseIcon.vue';
+import { tools_state } from '../../core/cache'
+import {close_bar } from '../../core/publicMethod';
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
@@ -62,9 +68,9 @@ const startDrag = (event: MouseEvent) => {
 // 拖拽过程
 const drag = (event: MouseEvent) => {
     if (!isDragging.value || !floatingWindowElement.value) return;
-    tools_state['curved-surface']['moved'] = true
-    tools_state['curved-surface']['icon-size'] = 0
-    if (tools_state["current-focus-bar"] === "curved-surface") tools_state["current-focus-bar"] = "__FOCUS_BAR__"
+    tools_state['feature']['moved'] = true
+    tools_state['feature']['icon-size'] = 0
+    if (tools_state["current-focus-bar"] === "feature") tools_state["current-focus-bar"] = "__FOCUS_BAR__"
 
 
     // 1. 计算新的位置 (像素)

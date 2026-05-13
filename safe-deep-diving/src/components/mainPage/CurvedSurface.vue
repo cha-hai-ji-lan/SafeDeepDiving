@@ -1,61 +1,46 @@
 <template>
-    <div class="view-tool" ref="floatingWindowElement">
-        <div class="view-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
-            <BaseIcon Type='drag-block'></BaseIcon>
+    <div v-if="tools_state['curved-surface']['show']" class="rw-tool"
+        :class="{ 'show-bar': tools_state['curved-surface']['delay-hide'] === false, 'hide-bar': tools_state['curved-surface']['delay-hide'] }"
+        ref="floatingWindowElement">
+        <div class="rw-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
+            <ToolIcon Type="drag-hand" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
         </div>
-        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.NormalColoring }"
-            @click="normal_coloring">
-            <ToolIcon Type='normal-coloring'></ToolIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="curved-border-blend" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
         </div>
-        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.SidelineColoring }" @click="sideline_coloring">
-            <ToolIcon Type='sideline-coloring'></ToolIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="curved-thicken" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
         </div>
-        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.Wireframe }" @click="wireframe">
-            <ToolIcon Type="wireframe"></ToolIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="curved-extend" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
         </div>
-        <div class="view-tool-icon" :class="{ 'active-icon': false }" @click="">
-            <ToolIcon Type="perspective-camera"></ToolIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="curved-offset" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+        </div>
+        <div v-if="tools_state['curved-surface']['moved']" class="rw-tool-icon" @click="() => { close_bar('curved-surface') }">
+            <ToolIcon Type="omit" :State="tools_state['curved-surface']['icon-size']"></ToolIcon>
+        </div>
+        <div v-if="tools_state['curved-surface']['moved']" class="rw-tool-icon" @click="() => { close_bar('curved-surface') }">
+            <BaseIcon Type="close" :State="tools_state['curved-surface']['icon-size']"></BaseIcon>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue';
-import ToolIcon from '../icons/ToolIcon.vue';
-import BaseIcon from '../icons/BaseIcon.vue';
-import {edge_visible, object_visible} from '../core/three/init.ts'
-
+import ToolIcon from '../../icons/ToolIcon.vue';
+import BaseIcon from '../../icons/BaseIcon.vue';
+import { tools_state } from '../../core/cache'
+import {close_bar } from '../../core/publicMethod';
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
 const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
 
-const enum viewMode {
-    NormalColoring,
-    SidelineColoring,
-    Wireframe
-}
 
-const view_mode = ref<viewMode>(viewMode.SidelineColoring)
 onUnmounted(() => {
     stopDrag()
 })
 
-const normal_coloring = () => {
-    edge_visible(false)
-    object_visible(true)
-    view_mode.value = viewMode.NormalColoring
-}
-const sideline_coloring = () => {
-    edge_visible(true)
-    object_visible(true)
-    view_mode.value = viewMode.SidelineColoring
-
-}
-const wireframe = () => {
-    edge_visible(true)
-    object_visible(false)
-    view_mode.value = viewMode.Wireframe
-}
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {
     if (!floatingWindowElement.value) return;
@@ -77,7 +62,11 @@ const startDrag = (event: MouseEvent) => {
 // 拖拽过程
 const drag = (event: MouseEvent) => {
     if (!isDragging.value || !floatingWindowElement.value) return;
-    
+    tools_state['curved-surface']['moved'] = true
+    tools_state['curved-surface']['icon-size'] = 0
+    if (tools_state["current-focus-bar"] === "curved-surface") tools_state["current-focus-bar"] = "__FOCUS_BAR__"
+
+
     // 1. 计算新的位置 (像素)
     const newX_px = event.clientX - dragOffset.value.x;
     const newY_px = event.clientY - dragOffset.value.y;
@@ -106,13 +95,22 @@ const stopDrag = () => {
 
 </script>
 <style scoped>
-.view-tool {
+.show-bar {
+    animation: bar-show 200ms ease-in-out forwards;
+}
+
+.hide-bar {
+    animation: bar-hide 200ms ease-in-out forwards;
+}
+
+.rw-tool {
     display: flex;
     flex-direction: row;
     position: fixed;
-    top: 5.75vmin;
-    left: calc(50% - (5 * 2vmin));
-    z-index: 11;  /* 工具放在第11层 */
+    bottom: 5.75vmin;
+    left: calc(50% - (7 * 2.5vmin));
+    z-index: 11;
+    /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */
     height: fit-content;
     width: fit-content;
@@ -120,18 +118,14 @@ const stopDrag = () => {
     background-color: rgba(var(--menu), var(--w-transparent));
     border-radius: 1vmin;
 
-    & .view-tool-icon {
-        width: 3vmin;
-        height: 3vmin;
+
+    & .rw-tool-icon {
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0.5vmin;
-        &.active-icon{
-            filter: brightness(1.25);
-            border-radius: 0.5vmin;
-            outline: 0.25vmin solid rgba(var(--border), var(--b-transparent));
-        }
+
+
     }
 }
 </style>

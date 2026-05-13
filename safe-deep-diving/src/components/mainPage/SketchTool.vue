@@ -1,48 +1,56 @@
 <template>
-    <div v-if="tools_state['feature']['show']" class="rw-tool"
-        :class="{ 'show-bar': tools_state['feature']['delay-hide'] === false, 'hide-bar': tools_state['feature']['delay-hide'] }"
+    <div v-if="tools_state['sketch']['show']" class="rw-tool"
+        :class="{ 'show-bar': tools_state['sketch']['delay-hide'] === false, 'hide-bar': tools_state['sketch']['delay-hide'] }"
         ref="floatingWindowElement">
         <div class="rw-tool-icon grab-cursor" :class="{ 'grabbing-cursor': isDragging }" @mousedown="startDrag">
-            <ToolIcon Type="drag-hand" :State="tools_state['feature']['icon-size']"></ToolIcon>
+            <ToolIcon Type="drag-hand" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="feature-stretch" :State="tools_state['feature']['icon-size']"></ToolIcon>
+            <ToolIcon Type="sketch-straight-line" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="feature-rounded-corners" :State="tools_state['feature']['icon-size']"></ToolIcon>
+            <ToolIcon Type="sketch-rectangle" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="feature-rotating" :State="tools_state['feature']['icon-size']"></ToolIcon>
+            <ToolIcon Type="sketch-circles" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="feature-scan" :State="tools_state['feature']['icon-size']"></ToolIcon>
+            <ToolIcon Type="sketch-3p-arc" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="feature-mirror" :State="tools_state['feature']['icon-size']"></ToolIcon>
+            <ToolIcon Type="sketch-polygon" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
         <div class="rw-tool-icon" @click="">
-            <ToolIcon Type="part-transparency" :State="tools_state['feature']['icon-size']"></ToolIcon>
+            <ToolIcon Type="sketch-oval" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
-        <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
-            <ToolIcon Type="omit" :State="tools_state['feature']['icon-size']"></ToolIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="sketch-spline" :State="tools_state['sketch']['icon-size']"></ToolIcon>
         </div>
-        <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
-            <BaseIcon Type="close" :State="tools_state['feature']['icon-size']"></BaseIcon>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="sketch-mirror" :State="tools_state['sketch']['icon-size']"></ToolIcon>
+        </div>
+        <div v-if="tools_state['sketch']['moved']" class="rw-tool-icon" @click="() => { close_bar('sketch') }">
+            <ToolIcon Type="omit" :State="tools_state['sketch']['icon-size']"></ToolIcon>
+        </div>
+        <div v-if="tools_state['sketch']['moved']" class="rw-tool-icon" @click="() => { close_bar('sketch') }">
+            <BaseIcon Type="close" :State="tools_state['sketch']['icon-size']"></BaseIcon>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue';
-import ToolIcon from '../icons/ToolIcon.vue';
-import BaseIcon from '../icons/BaseIcon.vue';
-import { tools_state } from '../core/cache'
-import {close_bar } from '../core/publicMethod';
+import { ref, onMounted, onUnmounted } from 'vue';
+import ToolIcon from '../../icons/ToolIcon.vue';
+import BaseIcon from '../../icons/BaseIcon.vue';
+import { tools_state } from '../../core/cache'
+import { close_bar } from '../../core/publicMethod';
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
 const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
 
+onMounted(() => {
 
+})
 onUnmounted(() => {
     stopDrag()
 })
@@ -68,10 +76,9 @@ const startDrag = (event: MouseEvent) => {
 // 拖拽过程
 const drag = (event: MouseEvent) => {
     if (!isDragging.value || !floatingWindowElement.value) return;
-    tools_state['feature']['moved'] = true
-    tools_state['feature']['icon-size'] = 0
-    if (tools_state["current-focus-bar"] === "feature") tools_state["current-focus-bar"] = "__FOCUS_BAR__"
-
+    tools_state['sketch']['moved'] = true
+    tools_state['sketch']['icon-size'] = 0
+    if (tools_state["current-focus-bar"] === "sketch") tools_state["current-focus-bar"] = "__FOCUS_BAR__"
 
     // 1. 计算新的位置 (像素)
     const newX_px = event.clientX - dragOffset.value.x;
@@ -114,7 +121,7 @@ const stopDrag = () => {
     flex-direction: row;
     position: fixed;
     bottom: 5.75vmin;
-    left: calc(50% - (7 * 2.5vmin));
+    left: calc(50% - (9 * 2.5vmin));
     z-index: 11;
     /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */

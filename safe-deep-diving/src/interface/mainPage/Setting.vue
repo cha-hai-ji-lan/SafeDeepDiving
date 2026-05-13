@@ -18,9 +18,9 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import BaseIcon from "../icons/BaseIcon.vue";
-import { close_inter} from '../core/publicMethod';
-import { interface_state } from "../core/cache";
+import BaseIcon from "../../icons/BaseIcon.vue";
+import { close_inter} from '../../core/publicMethod';
+import { interface_state } from "../../core/cache";
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
 const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量

@@ -28,6 +28,11 @@ export const replace_config = async () => {
     await invoke("write_json_file", { filePath: configPathF.value, data: dcfg.value })
 }
 
+/**
+ * 初始化设置函数
+ * 
+ * 每个页面都需要 调用一次
+*/
 export const init_app = async () => {
     await init_app_path()
     await init_config()

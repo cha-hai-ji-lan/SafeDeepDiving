@@ -42,11 +42,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import BaseIcon from '../icons/BaseIcon.vue';
-import { interface_state, lang, appConfig } from '../core/cache';
-import { close_inter, module_loader } from '../core/publicMethod.ts';
+import ToolIcon from '../../icons/ToolIcon.vue';
+import BaseIcon from '../../icons/BaseIcon.vue';
+import { interface_state, lang, appConfig } from '../../core/cache.ts';
+import { close_inter, module_loader } from '../../core/publicMethod.ts';
 
-import ToolIcon from '../icons/ToolIcon.vue';
 import { invoke } from '@tauri-apps/api/core';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
@@ -57,7 +57,7 @@ const open_url = (url: string) => {
 const creat = async () => {
     console.log("打开界面")
     const webview = await new WebviewWindow('splashScreen', {
-        url: "/splashScreen.html",
+        url: "/page/splashScreen.html",
         title: "splashScreen",
         width: 800,
         height: 600,
@@ -76,7 +76,7 @@ const creat = async () => {
         // webview window successfully created
     })
     webview.once('tauri://error', function (e) {
-        console.log(e)
+        console.log
         // an error occurred during webview window creation
     })
 }

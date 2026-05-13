@@ -44,7 +44,7 @@ export default defineConfig(async () => ({
     target: 'esnext', // 确保支持顶层 await，如果后续需要
     rollupOptions: {
       input: {
-        main: './public/index.html',           // 👈 主入口
+        main: './index.html',           // 👈 主入口
         splashScreen: './public/splashScreen.html'  // 👈 新增 splashScreen 入口
       },
       external: [],

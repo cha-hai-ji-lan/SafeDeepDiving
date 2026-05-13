@@ -34,37 +34,10 @@
     </div>
 </template>
 <script setup lang="ts">
-import ToolIcon from "../icons/ToolIcon.vue";
-import { tools_state } from "../core/cache";
-import { close_bar,handleClick, handleDoubleClick } from "../core/publicMethod";
+import ToolIcon from "../../icons/ToolIcon.vue";
+import { tools_state } from "../../core/cache";
+import { close_bar,handleClick, handleDoubleClick } from "../../core/publicMethod";
 
-// let clickTimer: number | null = null;
-// const handleClick = (callback: () => void) => {
-//     if (clickTimer) {
-//         // 如果定时器存在，说明这是第二次点击，清除定时器，等待 dblclick 触发
-//         clearTimeout(clickTimer);
-//         clickTimer = null;
-//     } else {
-//         // 第一次点击，设置定时器
-//         clickTimer = window.setTimeout(() => {
-//             callback()  // 回调传递的方法
-//             console.log('确认为单击');
-//             // 执行单击逻辑
-//             clickTimer = null;
-//         }, 250); // 延迟时间略小于浏览器默认双击间隔
-//     }
-// };
-
-// const handleDoubleClick = (callback: () => void) => {
-//     // 双击触发时，清除单击的定时器，防止单击逻辑执行
-//     if (clickTimer) {
-//         clearTimeout(clickTimer);
-//         clickTimer = null;
-//     }
-//     callback()  // 回调传递的方法
-//     console.log('确认为双击');
-//     // 执行双击逻辑
-// };
 const open_tools_bar = () => {
     if (tools_state['show-tool']) {
         tools_state['show-tool'] = false;
