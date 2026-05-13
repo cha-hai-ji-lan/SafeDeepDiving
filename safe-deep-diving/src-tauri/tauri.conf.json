@@ -29,6 +29,7 @@
         "transparent": true,
         "alwaysOnTop": true,
         "center": true,
+        "shadow": false,
         "url": "/page/splashScreen.html",
         "label": "splashScreen"
 

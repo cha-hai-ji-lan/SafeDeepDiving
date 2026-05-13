@@ -20,6 +20,7 @@ onMounted(() => {
 html,
 body,
 #splashScreen {
+    overflow: hidden;
     width: 100%;
     height: 100%;
     margin: 0;
