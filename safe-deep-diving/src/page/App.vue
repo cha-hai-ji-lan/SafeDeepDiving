@@ -155,11 +155,13 @@ onUnmounted(() => {
 <style scoped>
 #container {
   position: relative;
+  display: flex;
+  justify-items: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
-  border: 3px solid rgba(var(--border), 1);
-  outline: 3px solid rgba(var(--border), 1);
-  border-radius: 10px;
+  border: 2px solid rgba(var(--border), 1);
+  border-radius: 8px;
   box-sizing: border-box;
 
   /* background-color: rgba(var(--border), 1); */

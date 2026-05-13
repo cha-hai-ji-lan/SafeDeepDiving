@@ -18,12 +18,13 @@
         "minWidth": 512,
         "minHeight": 288,
         "decorations": false,
+        "shadow": false,
         "center": true,
         "transparent": true
       },
       {
-        "width": 480,
-        "height": 270,
+        "width": 640,
+        "height": 400,
         "title": "SafeDeepDiving-SplashScreen",
         "decorations": false,
         "transparent": true,

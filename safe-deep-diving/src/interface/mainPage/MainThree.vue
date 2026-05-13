@@ -27,9 +27,10 @@ onUnmounted(() => {
   align-self: center;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: rgba(var(--background), var(--b-transparent));
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 </style>

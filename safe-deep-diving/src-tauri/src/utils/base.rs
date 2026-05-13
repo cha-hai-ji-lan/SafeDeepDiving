@@ -50,3 +50,12 @@ pub async fn write_json_file(file_path: String, data: Value) -> Result<(), Strin
     fs::write(file_path, content).map_err(|e| e.to_string())?;
     Ok(())
 }
+
+
+///
+/// ### 设置窗口穿透
+///
+#[tauri::command]
+pub fn set_click_through(window: tauri::Window, ignore: bool) {
+    let _ = window.set_ignore_cursor_events(ignore);
+}

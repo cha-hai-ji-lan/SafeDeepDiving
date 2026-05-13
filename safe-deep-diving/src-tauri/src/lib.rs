@@ -1,6 +1,6 @@
 mod utils;
 
-use utils::base::{get_app_path, open_url, read_json_file, write_json_file};
+use utils::base::{get_app_path, open_url, read_json_file, write_json_file, set_click_through};
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -12,6 +12,7 @@ pub fn run() {
             open_url,               // 默认浏览器打开链接
             read_json_file,         // 读取 json 文件
             write_json_file,        // 写入 json 文件
+            set_click_through,      // 设置点击穿透
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
