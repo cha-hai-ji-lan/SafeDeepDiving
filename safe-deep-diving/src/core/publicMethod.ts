@@ -21,7 +21,6 @@ export const module_loader = async (load_mode: number = 0) => {
             await open_file_dialog()
             if (file_path.value) {
                 let ext = await PathUtils.getFileExt(file_path.value)
-                console.log(ext.toLowerCase())
                 if (!coreConfig.value['support-import-format'].includes(ext.toLowerCase())) {
                     console.error("不支持的导入格式")
                     return
@@ -75,7 +74,6 @@ export const close_inter = (bar_name: string, delay_time: number = 200) => {
 
 export const close_bar = (bar_name: string, delay_time: number = 200) => {
     if (bar_name === "__FOCUS_BAR__") return // 这里未来应该有一个报错
-    console.log(bar_name)
     tools_state[bar_name]["delay-hide"] = true
     setTimeout(() => {
         tools_state[bar_name]["show"] = false
@@ -109,7 +107,6 @@ export const handleClick = (callback: () => void) => {
         // 第一次点击，设置定时器
         clickTimer = window.setTimeout(() => {
             callback()  // 回调传递的方法
-            console.log('确认为单击');
             // 执行单击逻辑
             clickTimer = null;
         }, 250); // 延迟时间略小于浏览器默认双击间隔
@@ -123,6 +120,5 @@ export const handleDoubleClick = (callback: () => void) => {
         clickTimer = null;
     }
     callback()  // 回调传递的方法
-    console.log('确认为双击');
     // 执行双击逻辑
 };

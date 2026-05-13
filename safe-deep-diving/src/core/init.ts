@@ -57,8 +57,6 @@ export const init_app_path = async () => {
 */
 export const init_config = async () => {
     cfg.value = await invoke("read_json_file", { filePath: configPathF.value })
-    console.log(configPathF.value)
-    console.log(cfg.value)
     // 获取软件配置
     appConfig.value = cfg.value["app"]
     // 获取软件核心设置
@@ -75,16 +73,13 @@ export const init_config = async () => {
 */
 export const init_i18n = async () => {
     let temp_path = await  PathUtils.buildResourcePath(i18nPath.value, `${i18nConfig.value["current-lang"]}.json`)
-    console.log(temp_path)
     lang.value = await invoke("read_json_file", { filePath: temp_path})
-    console.log(lang.value)
 }
 
 /**
  * 初始化调色板
 */
 export const init_color_palette = async () => {
-    console.log(themeConfig.value)
     // 主题颜色
     document.documentElement.style.setProperty("--ready", `${themeConfig.value["-base"]["ready"]}`)
     document.documentElement.style.setProperty("--normal", `${themeConfig.value["-base"]["normal"]}`)

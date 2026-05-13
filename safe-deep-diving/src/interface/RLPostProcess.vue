@@ -73,7 +73,7 @@
 import { ref } from "vue";
 import BaseIcon from "../icons/BaseIcon.vue";
 import ToolIcon from "../icons/ToolIcon.vue";
-import { lang, tools_state, interface_state } from "../core/cache";
+import { lang, interface_state } from "../core/cache";
 import { close_inter } from "../core/publicMethod";
 
 const floatingWindowElement = ref<HTMLElement | null>(null);

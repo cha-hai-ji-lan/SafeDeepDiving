@@ -1,14 +1,28 @@
 {
     "app": {
         "version": "0.0.15",
-        "core":{
-            "input-path":"C:\\",
-            "output-path":"C:\\"
-        },
-        "i18n":{
-            "current-lang": "ZH"
-        }
+        "repository":"https://github.com/cha-hai-ji-lan/SafeDeepDiving",
 
+        "core": {
+            "input-path": "C:\\",
+            "output-path": "C:\\",
+            "support-import-format":["obj", "step"],
+            "support-export-format":[]
+
+        },
+        "i18n": {
+            "current-lang": "ZH",
+            "lang-list": {
+                "中文": {
+                    "type": "ZH",
+                    "completion-rate": 100.0
+                },
+                "English":{
+                    "type": "EN",
+                    "completion-rate": 100.0
+                }
+            }
+        }
     },
     "theme": {
         "current": "light",
@@ -33,8 +47,8 @@
             "button-bgc": "7, 18, 38"
         },
         "-base": {
-            "ready": "0, 162, 103",
-            "noraml": "0, 145, 198",
+            "ready": "36, 162, 64",
+            "normal": "27, 129, 168",
             "warn": "204, 120, 50",
             "err": "232, 17, 35"
         }

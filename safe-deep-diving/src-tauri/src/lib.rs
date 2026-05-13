@@ -8,10 +8,10 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
-            get_app_path,       // 获取应用路径
-            open_url,           // 默认浏览器打开链接
-            read_json_file,     // 读取 json 文件
-            write_json_file,    // 写入 json 文件
+            get_app_path,           // 获取应用路径
+            open_url,               // 默认浏览器打开链接
+            read_json_file,         // 读取 json 文件
+            write_json_file,        // 写入 json 文件
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

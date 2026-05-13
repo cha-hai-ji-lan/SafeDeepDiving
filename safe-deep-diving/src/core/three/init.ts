@@ -5,7 +5,7 @@
 import { Ref, ref } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-// import { init_opencascade} from "../opencascade/init"
+import { init_opencascade } from "../opencascade/init"
 
 export let renderer: THREE.WebGLRenderer;  // 渲染器
 export let scene: THREE.Scene;  // 场景
@@ -42,8 +42,8 @@ let miniContainer: HTMLDivElement;
  * 
  * 用于加载非 基础Three.js内容
  */
-const add_in = async () =>{
-    // await init_opencascade()
+const add_in = () => {
+    init_opencascade()
 }
 export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => {
     if (!threeContainer.value) return;
@@ -53,6 +53,7 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
 
     // 1. 创建场景
     scene = new THREE.Scene();
+
     // 【关键】设置背景为 null,使其透明
     scene.background = null;
 
@@ -106,7 +107,7 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
     renderer.setClearColor(0x000000, 0);
 
     threeContainer.value.appendChild(renderer.domElement);  // 将渲染器的 canvas 添加到 DOM 中
-    
+
     // 创建边线材质
     edgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1 });
 
@@ -127,7 +128,7 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
 
     // const edgesGeometry = new THREE.EdgesGeometry(geometry);
     // // 创建黑色线材质
-    
+
     // // 创建线段对象
     // edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
     // entity_edges.value.push(edges)
@@ -159,7 +160,7 @@ export const init_three = async (threeContainer: Ref<HTMLDivElement | null>) => 
             // 更新相机投影矩阵
             camera.updateProjectionMatrix();
         }
-        
+
         // 更新小坐标系尺寸
         updateMiniCoordinateSystemSize();
     })
@@ -191,7 +192,7 @@ export const edge_visible = (visible: boolean) => {
     }
 }
 export const object_visible = (visible: boolean) => {
-    if(entitys.value){
+    if (entitys.value) {
         entitys.value.forEach(material => {
             material.transparent = true; // 确保启用透明
             material.opacity = visible ? 1 : 0; // 1为不透明，0为完全透明
@@ -255,12 +256,12 @@ const updateMiniCoordinateSystem = () => {
     // 同步主相机的旋转
     const quaternion = new THREE.Quaternion();
     camera.getWorldQuaternion(quaternion);
-    
+
     // 设置小相机位置,保持固定距离但跟随旋转
     const distance = 30;
     const direction = new THREE.Vector3(0, 0, 30).normalize();
     direction.applyQuaternion(quaternion);
-    
+
     miniCamera.position.copy(direction.multiplyScalar(distance));
     miniCamera.lookAt(0, 0, 0);
 
@@ -273,7 +274,7 @@ const updateMiniCoordinateSystem = () => {
  */
 const updateMiniCoordinateSystemSize = () => {
     if (!miniRenderer) return;
-    
+
     const size = 100;
     miniRenderer.setSize(size, size);
     miniCamera.left = -size;

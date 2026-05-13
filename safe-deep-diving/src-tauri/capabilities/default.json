@@ -3,16 +3,20 @@
   "identifier": "default",
   "description": "Capability for the main window",
   "windows": [
-    "main"
+    "main",
+    "splahScreen"
   ],
   "permissions": [
     "core:default",
     "opener:default",
+    "core:webview:allow-create-webview",
+    "core:webview:allow-create-webview-window",
     "core:window:allow-start-dragging",
     "core:window:allow-minimize",
     "core:window:allow-toggle-maximize",
     "core:window:allow-close",
     "core:window:allow-set-always-on-top",
+    "core:window:allow-show",
     "fs:allow-read-text-file",
     {
       "identifier": "fs:allow-read-file",
@@ -22,6 +26,6 @@
         }
       ]
     },
-    "dialog:allow-open"
+    "dialog:allow-open" 
   ]
 }

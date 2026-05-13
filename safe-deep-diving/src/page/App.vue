@@ -51,27 +51,27 @@
 import { onMounted, onUnmounted } from "vue";
 import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
-import BaseIcon from "./icons/BaseIcon.vue"                         // 引入基础图标组件
-import MainThree from "./interface/MainThree.vue";                  // 引入主界面模块
+import BaseIcon from "../icons/BaseIcon.vue"                         // 引入基础图标组件
+import MainThree from "../interface/MainThree.vue";                  // 引入主界面模块
 
-import Welcome from "./interface/Welcome.vue";                      // 引入欢迎界面
-import Setting from "./interface/Setting.vue";                      // 引入欢迎界面
-import MainLogo from "./components/MainLogo.vue";                   // 引入主logo
+import Welcome from "../interface/Welcome.vue";                      // 引入欢迎界面
+import Setting from "../interface/Setting.vue";                      // 引入欢迎界面
+import MainLogo from "../components/MainLogo.vue";                   // 引入主logo
 // 模块
-import Tools from "./components/Tools.vue";                         // 引入工具组模块
-import ViewTools from "./components/ViewTools.vue";                 // 引入视图工具模块
-import ReadWriteTool from "./components/ReadWriteTool.vue";         // 引入读写工具模块
-import SketchTool from "./components/SketchTool.vue";               // 引入草绘工具模块
-import FeatureTool from "./components/FeatureTool.vue";             // 引入特征工具模块
-import RibLayout from "./components/RibLayout.vue";                 // 引入特征工具模块
-import CurvedSurface from "./components/CurvedSurface.vue";                 // 引入特征工具模块
+import Tools from "../components/Tools.vue";                         // 引入工具组模块
+import ViewTools from "../components/ViewTools.vue";                 // 引入视图工具模块
+import ReadWriteTool from "../components/ReadWriteTool.vue";         // 引入读写工具模块
+import SketchTool from "../components/SketchTool.vue";               // 引入草绘工具模块
+import FeatureTool from "../components/FeatureTool.vue";             // 引入特征工具模块
+import RibLayout from "../components/RibLayout.vue";                 // 引入特征工具模块
+import CurvedSurface from "../components/CurvedSurface.vue";                 // 引入特征工具模块
 // 内联页面
-import RLPreProcess from "./interface/RLPreProcess.vue";            // 引入预处理界面
-import RLPostProcess from "./interface/RLPostProcess.vue";          // 引入后处理界面
+import RLPreProcess from "../interface/RLPreProcess.vue";            // 引入预处理界面
+import RLPostProcess from "../interface/RLPostProcess.vue";          // 引入后处理界面
 // 初始化关联脚本
-import { init_app } from "./core/init.ts";                          // 初始化应用脚本
-import { base_icon_ctr, ele_state , interface_state} from "./core/cache.ts";         // 引入缓存数据动态脚本
-import { close_inter} from './core/publicMethod.ts';
+import { init_app } from "../core/init.ts";                          // 初始化应用脚本
+import { base_icon_ctr, ele_state , interface_state} from "../core/cache.ts";         // 引入缓存数据动态脚本
+import { close_inter} from '../core/publicMethod.ts';
 const appWindow = Window.getCurrent()
 
 // const base_icon_ctr = ref({ "maximize": "maximize-0", "pin": "pin-0" })  // 控制窗口最大化和钉住屏幕图标
@@ -114,7 +114,6 @@ const title_bar_click = (mode: string) => {
       }
       break;
     case "setting":
-      console.log("点击设置")
       if (interface_state['setting']['show']){
         close_inter('setting');
       } else {
@@ -134,7 +133,6 @@ onMounted(async () => {
   resize_unlisten = await listen('tauri://resize', async () => {
     const currentWindow = getCurrentWindow();
     const isMaximized = await currentWindow.isMaximized();
-    console.log('窗口是否最大化:', isMaximized);
 
     if (isMaximized) {
       base_icon_ctr["maximize"] = "maximize-1"
@@ -249,9 +247,9 @@ onUnmounted(() => {
 }
 </style>
 <style>
-@import "./style/animation.css";
-@import "./style/font.css";
-@import "./style/setting.css";
+@import "../style/animation.css";
+@import "../style/font.css";
+@import "../style/setting.css";
 
 html,
 body,

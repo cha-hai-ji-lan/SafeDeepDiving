@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "safe-deep-diving",
-  "version": "0.1.0",
+  "version": "0.0.25",
   "identifier": "com.chaHaiJiLan.safe-deep-diving",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -17,7 +17,7 @@
         "height": 720,
         "minWidth": 512,
         "minHeight": 288,
-        "decorations": false, 
+        "decorations": false,
         "transparent": true
       }
     ],
@@ -35,9 +35,8 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "resources":[
+    "resources": [
       "bin/**/*"
     ]
-
   }
 }

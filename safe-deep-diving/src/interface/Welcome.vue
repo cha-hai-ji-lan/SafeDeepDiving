@@ -10,13 +10,13 @@
                 </div>
                 <div class=" wel-info">{{ lang?.["welcome"]?.["wel-msg"] ?? "__WELCOME_MSG__" }}</div>
                 <div class="methoad-bar">
-                    <div class="method-but" @click="()=>{module_loader()}">
+                    <div class="method-but" @click="() => { module_loader() }">
                         <ToolIcon Type="import" :State="1"></ToolIcon>
                     </div>
-                    <div class="method-but">
+                    <div class="method-but" @click="creat">
                         <ToolIcon Type="new-part" :State="1"></ToolIcon>
                     </div>
-                    <div class="method-but">
+                    <div class="method-but" @click="">
                         <ToolIcon Type="new-asm" :State="1"></ToolIcon>
                     </div>
                     <div class="method-but" @click="open_url(appConfig?.['repository'])">
@@ -27,7 +27,7 @@
                             <BaseIcon Type="bug-mail" :State="1"></BaseIcon>
                         </div>
                     </a>
-                    <div class="method-but" @click="()=>{close_inter('welcome')}">
+                    <div class="method-but" @click="() => { close_inter('welcome') }">
                         <BaseIcon Type="close" :State="1"></BaseIcon>
                     </div>
                 </div>
@@ -48,9 +48,37 @@ import { close_inter, module_loader } from '../core/publicMethod.ts';
 
 import ToolIcon from '../icons/ToolIcon.vue';
 import { invoke } from '@tauri-apps/api/core';
+import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 const open_url = (url: string) => {
     invoke("open_url", { url: url })
+}
+
+const creat = async () => {
+    console.log("打开界面")
+    const webview = await new WebviewWindow('splashScreen', {
+        url: "/splashScreen.html",
+        title: "splashScreen",
+        width: 800,
+        height: 600,
+        resizable: true,
+        decorations: true,
+    })
+    console.log(webview)
+    // since the webview window is created asynchronously,
+    // Tauri emits the `tauri://created` and `tauri://error` to notify you of the creation response
+    webview.once('tauri://window-created', function () {
+        webview.show()
+        // webview window successfully created
+    })
+    webview.once('tauri://window-created', function () {
+        webview.show()
+        // webview window successfully created
+    })
+    webview.once('tauri://error', function (e) {
+        console.log(e)
+        // an error occurred during webview window creation
+    })
 }
 
 
@@ -149,7 +177,8 @@ const open_url = (url: string) => {
             align-items: center;
             justify-content: center;
             flex-direction: row;
-            flex-wrap: wrap; /* 允许换行 */
+            flex-wrap: wrap;
+            /* 允许换行 */
             height: fit-content;
             width: fit-content;
             border: 0.25vmin solid rgba(var(--menu), var(--b-transparent));

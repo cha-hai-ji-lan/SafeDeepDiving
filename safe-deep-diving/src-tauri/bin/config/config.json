@@ -4,7 +4,7 @@
         "repository":"https://github.com/cha-hai-ji-lan/SafeDeepDiving",
 
         "core": {
-            "input-path": "C:\\",
+            "input-path": "D:\\Object_\\APP\\Tauri\\work\\SafeDeepDiving\\SDDassets",
             "output-path": "C:\\",
             "support-import-format":["obj", "step"],
             "support-export-format":[]
