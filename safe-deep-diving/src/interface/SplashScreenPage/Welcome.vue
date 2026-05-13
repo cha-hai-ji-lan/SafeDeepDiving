@@ -7,6 +7,7 @@
                         <div class="row-item">Safe</div>
                         <div class="row-item1">Deep</div>
                         <div class="row-item2">Diving</div>
+                        <div class="row-item3">{{"v"+ appConfig?.["version"] }}</div>
                     </div>
                 </div>
             </div>
@@ -15,7 +16,7 @@
     </div>
 </template>
 <script setup lang="ts">
-
+import { appConfig } from "../../core/cache";
 </script>
 <style scoped>
 .welcome {
@@ -99,14 +100,14 @@
                         align-items: start;
                         height: 20vmin;
                         width: 18vmin;
-                        background: linear-gradient(135deg,rgb(var(--but-0)));
+                        background: linear-gradient(135deg, rgb(var(--but-0)));
 
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         background-clip: text;
                         color: transparent;
                         -webkit-text-stroke: 0.25vmin rgb(var(--but-2));
-                        
+
                         /* text-shadow:
                             -2px -2px 0.5vmin rgba(var(--but-0), 0.45),
                             2px 2px 0.75vmin rgba(var(--font), 0.45); */
@@ -145,17 +146,24 @@
                         justify-items: start;
                         height: 25vmin;
                         width: 51vmin;
-                        color:rgb(--but-2);
+                        color: rgb(--but-2);
                         background: linear-gradient(135deg, rgb(var(--but-2)));
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                         background-clip: text;
                         color: transparent;
                         -webkit-text-stroke: 0.25vmin rgb(var(--but-2));
-                        
+
                         /* text-shadow:
                             -2px -2px 0.5vmin rgba(var(--but-2), 0.75),
                             2px 2px 0.75vmin rgba(var(--font), 0.75); */
+                    }
+
+                    & .row-item3 {
+                        font: 4.5vmin "楷体", Arial, Helvetica, Arial, sans-serif;
+
+                        padding-top: 46.5vmin;
+                        margin-left: 43vw;
                     }
                 }
 
