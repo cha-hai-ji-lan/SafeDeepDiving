@@ -13,6 +13,8 @@ export const listen_oc_init_start = async () => {
         return // 避免重复注册
     }
     unlisten_oc_init_start = await listen('oc-init-start', (event: any) => {
+        invoke("emit_to_window", {targetLabel:"splashScreen", eventName:"share-msg", payload: event.payload})
+
         console.log('收到 Rust 消息:', event.payload.data)
         // set_content(`${event.payload.data}`, 1)
         if (unlisten_oc_init_start) {  // 确保监听器存在 时响应了监听就卸载监听
@@ -29,6 +31,7 @@ export const listen_oc_init_ready = async () => {
         return // 避免重复注册
     }
     unlisten_oc_init_ready = await listen('oc-init-ready', (event: any) => {
+        invoke("emit_to_window", {targetLabel:"splashScreen", eventName:"share-msg", payload: event.payload})
         console.log('收到 Rust 消息:', event.payload.data)
         invoke("show_main_window")  // 显示主窗口
         if (unlisten_oc_init_ready) {
@@ -45,6 +48,7 @@ export const listen_oc_init_fail = async () => {
         return // 避免重复注册
     }
     unlisten_oc_init_fail = await listen('oc-init-fail', (event: any) => {
+        invoke("emit_to_window", {targetLabel:"splashScreen", eventName:"share-msg", payload: event.payload})
         console.log('收到 Rust 消息:', event.payload.data)
         if (unlisten_oc_init_fail) {
             unlisten_oc_init_fail()

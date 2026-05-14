@@ -14,16 +14,30 @@
                 </div>
             </div>
         </div>
+        <div class="message"><span class="msg">{{ message }}</span></div>
 
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
+import { listen, UnlistenFn } from '@tauri-apps/api/event'
 import { appConfig, splash_state } from "../../core/cache";
 import { invoke } from "@tauri-apps/api/core";
+let unlisten_share_msg: UnlistenFn | null = null    // 开始监听opencascade.js初始化
 
+
+const message = ref<string>("")
 onMounted(async () => {
     await invoke('set_click_through', { ignore: splash_state['click-penetrate-ignore'] });
+    unlisten_share_msg = await listen('share-msg', (event: any) => {
+        message.value = event.payload.data
+    })
+})
+onUnmounted(async () => {
+    if (unlisten_share_msg) {
+        unlisten_share_msg()
+        unlisten_share_msg = null
+    }
 })
 </script>
 <style scoped>
@@ -32,14 +46,17 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+
     & .contain0 {
         width: 480px;
         height: 270px;
 
         border-radius: 5vmin;
         background-color: rgb(var(--but-0));
+        border: 1px solid rgba(var(--border), 0.2);
         background-image:
             linear-gradient(to right, rgba(var(--but-1), 0.6) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(var(--but-1), 0.6) 1px, transparent 1px);
@@ -186,6 +203,34 @@ onMounted(async () => {
                 }
 
             }
+        }
+    }
+
+    & .message {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 0px;
+        font: 12px "LXGW", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin-top: 4px;
+        width: 480px;
+        height: 30px;
+        /* border-radius: 12px; */
+        /* background-color: rgba(var(--border), 0.45); */
+        /* border: 8px solid rgba(var(--border), 0.2); */
+
+        background-image: linear-gradient(165deg,
+                transparent 17.5%,
+                rgba(var(--but-0), 0.35) 25%,
+                rgba(var(--border), 1),
+                rgba(var(--but-2), 0.35) 75%,
+                transparent 82.5%);
+
+
+        filter: drop-shadow(0px 4px 10px rgba(var(--border), 0.75));
+
+        & .msg {
+            margin-left: 8px;
         }
     }
 
