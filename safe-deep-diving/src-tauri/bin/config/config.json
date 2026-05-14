@@ -1,6 +1,6 @@
 {
     "app": {
-        "version": "0.0.30",
+        "version": "0.0.32",
         "repository":"https://github.com/cha-hai-ji-lan/SafeDeepDiving",
 
         "core": {

@@ -20,13 +20,15 @@
         "decorations": false,
         "shadow": false,
         "center": true,
-        "transparent": true
+        "transparent": true,
+        "visible": false,
+        "label": "main"
       },
       {
         "width": 640,
         "height": 400,
         "title": "SafeDeepDiving-SplashScreen",
-        "decorations": true,
+        "decorations": false,
         "transparent": true,
         "alwaysOnTop": true,
         "center": true,

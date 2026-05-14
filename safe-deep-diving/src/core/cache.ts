@@ -5,6 +5,8 @@
 import { ref, reactive } from "vue";
 
 /**
+ * [all page public]
+ * 
  * 软件内联文件路径
 */
 export const appPath = ref<string>("__APP_PATH__")                              // 软件所在路径
@@ -17,6 +19,8 @@ export const defaultConfigPathF = ref<string>("__DEFAULT_CONFIG_FILE_PATH__")   
 export const lang = ref<any>("__CURRENT_LANGUAGE__")                            // 当前语言
 
 /**
+ * [all page public]
+ * 
  * config相关对象
 */
 export const cfg = ref<any>()                   // 配置文件
@@ -28,6 +32,8 @@ export const themeConfig = ref<any>()           // 主题配置
 export const interfaceConfig = ref<any>()       // 界面配置
 
 /**
+ * [main page]
+ * 
  * 状态参数
  * 
  * 用于保存 一些状态标志 
@@ -101,6 +107,8 @@ export const tools_state = reactive({
 })  // 控制 tools 的状态 用于[Tools.vue]
 
 /**
+ * [main page]
+ * 
  * 工具栏位置参数
  * 
  * 为保证能跟随屏幕变化 都以 vmin 做单位 有特殊单位则在后续标注
@@ -112,4 +120,14 @@ export const tool_bar_state = reactive({
         "y": [20]
     },
     "rw-file": { "ref-obj": "__REF_OBJ__", "x-vmin": 0, "y-vmin": 0 }
+})
+
+/**
+ * [aplashScreen page]
+ * 
+ * 用于管理 启动页面各类状态
+*/
+
+export const splash_state = reactive({
+    "click-penetrate-ignore": false,  // 点击穿透事件
 })

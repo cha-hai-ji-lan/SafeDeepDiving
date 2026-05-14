@@ -19,11 +19,11 @@
 </template>
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { appConfig } from "../../core/cache";
+import { appConfig, splash_state } from "../../core/cache";
 import { invoke } from "@tauri-apps/api/core";
 
 onMounted(async () => {
-    // await invoke('set_click_through', { ignore: true });
+    await invoke('set_click_through', { ignore: splash_state['click-penetrate-ignore'] });
 })
 </script>
 <style scoped>
@@ -34,7 +34,6 @@ onMounted(async () => {
     justify-content: center;
     width: 100%;
     height: 100%;
-
     & .contain0 {
         width: 480px;
         height: 270px;

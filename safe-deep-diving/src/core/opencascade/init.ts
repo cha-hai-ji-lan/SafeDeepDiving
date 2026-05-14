@@ -1,33 +1,27 @@
+import { invoke } from '@tauri-apps/api/core';
+import initOpenCascade from "opencascade.js";
 import { readFile } from '@tauri-apps/plugin-fs';
-import { occtWorker } from "../worker/cache";
 import { oc } from "./cache";
+import { init_listening_group, clean_init_listening_group } from "../event";
 
 export const init_opencascade = async () => {
-    if (!occtWorker.value) {
-        occtWorker.value = new Worker(new URL("../worker/opencascade.worker.ts", import.meta.url), {
-            type: "module"
-        });
-        occtWorker.value.onmessage = (e) => {
-            const { type, data, error } = e.data;
-            if (type === 'INIT_SUCCESS') {
-                console.log("OCCT 在后台线程初始化完成！");
-                if(!oc.value){
-                    console.log(oc.value, "oc没有初始化")
-                } else {
-                    console.log(oc.value)
-                }
-                // 此时可以通知 Vue 组件更新 UI，显示“就绪”状态
-            } else if (type === 'INIT_ERROR') {
-                console.log("OCCT 初始化失败", error);
-                // 此时可以通知 Vue 组件更新 UI，显示“就绪”状态
-            } else {
-                console.log("未知线程内容回显回显", type, data);
-            }
-        };
+    init_listening_group()
+    try {
+        await invoke("set_event_broadcast", { eventName: "oc-init-start" })
+        oc.value = await initOpenCascade();
+        if (oc.value) {
+            await invoke("set_event_broadcast", { eventName: "oc-init-ready" })
+        } else {
+            await invoke("set_event_broadcast", { eventName: "oc-init-fail" })
+        }
+    } catch (error) {
+        console.error("OpenCascade 初始化失败:", error);
+        await invoke("set_event_broadcast", {eventName:"oc-init-fail"})
+    } finally {
+        clean_init_listening_group()
 
-        // 发送初始化指令
-        occtWorker.value.postMessage({ type: 'INIT' });
     }
+
 }
 
 export const load_step = async (stepFilePath: string): Promise<any> => {
