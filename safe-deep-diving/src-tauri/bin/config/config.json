@@ -6,7 +6,7 @@
         "core": {
             "input-path": "D:\\Object_\\APP\\Tauri\\work\\SafeDeepDiving\\SDDassets",
             "output-path": "C:\\",
-            "support-import-format":["obj", "step"],
+            "support-import-format":["obj", "step", "stp"],
             "support-export-format":[]
 
         },

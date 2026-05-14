@@ -19,8 +19,10 @@ export const module_loader = async (load_mode: number = 0) => {
     switch (load_mode) {
         case 0:  // 读取单个模型文件
             await open_file_dialog()
+            console.log("文件已选好")
             if (file_path.value) {
                 let ext = await PathUtils.getFileExt(file_path.value)
+                console.log("文件扩展名",ext)
                 if (!coreConfig.value['support-import-format'].includes(ext.toLowerCase())) {
                     console.error("不支持的导入格式")
                     return
@@ -29,10 +31,16 @@ export const module_loader = async (load_mode: number = 0) => {
                     case "obj":
                         load_obj(file_path.value)
                         break;
-                    case "__storage__.stp":  // 暂存 stp读取方法
+                    case "stp":  // 暂存 stp读取方法
+                        console.log("进入读取STEP通道")
+                        load_step(file_path.value)
+                        break;
+                    case "step":  // 暂存 stp读取方法
+                        console.log("进入读取STEP通道")
                         load_step(file_path.value)
                         break;
                     default:
+                        console.log("无效扩展名", ext)
                         break;
                 }
             }
