@@ -23,6 +23,12 @@
         <div class="rw-tool-icon" @click="">
             <ToolIcon Type="part-transparency" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="feature-draft" :State="tools_state['feature']['icon-size']"></ToolIcon>
+        </div>
+        <div class="rw-tool-icon" @click="">
+            <ToolIcon Type="feature-muscles" :State="tools_state['feature']['icon-size']"></ToolIcon>
+        </div>
         <div v-if="tools_state['feature']['moved']" class="rw-tool-icon" @click="() => { close_bar('feature') }">
             <ToolIcon Type="omit" :State="tools_state['feature']['icon-size']"></ToolIcon>
         </div>
@@ -114,7 +120,7 @@ const stopDrag = () => {
     flex-direction: row;
     position: fixed;
     bottom: 5.75vmin;
-    left: calc(50% - (7 * 2.5vmin));
+    left: calc(50% - (9 * 2.75vmin));
     z-index: 11;
     /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */

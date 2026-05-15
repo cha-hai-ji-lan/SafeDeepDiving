@@ -238,6 +238,7 @@ defineProps(
     height: 2.5vmin;
     max-width: 25px;
     max-height: 25px;
+    transition: width 500ms, height 500ms;
 
     &.base-icon1 {
         width: 5vmin;
@@ -269,6 +270,7 @@ defineProps(
     height: 4vmin;
     max-width: 35px;
     max-height: 35px;
+    transition: width 500ms, height 500ms;
 
     &.logo-icon3 {
         width: 35vmin;
