@@ -5,6 +5,13 @@
 .opacity-hide {
     animation: interface-hide 250ms ease;
 }
+.show-sca {
+    animation: interface-show 250ms ease;
+}
+
+.hide-sca {
+    animation: interface-hide 250ms ease;
+}
 
 @keyframes act-icon {
     0% {
@@ -17,6 +24,23 @@
 
     100% {
         transform: scale(1);
+    }
+}
+@keyframes sca-show {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+@keyframes sca-hide {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
     }
 }
 

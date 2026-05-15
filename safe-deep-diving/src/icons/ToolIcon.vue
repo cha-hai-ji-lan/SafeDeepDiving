@@ -6,8 +6,8 @@
         <path class="l-fill" d="M512 496l-480-256L512 0l480 240z" stroke-linejoin="round" stroke-linecap="round" />
         <path class="d-fill" d="M496 512l-480-256v512l480 256z" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
-    <svg v-if="Type === 'sideline-coloring'" class="tool-icon d-stroke" xmlns="http://www.w3.org/2000/svg" width="1024"
-        height="1024" viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'sideline-coloring'" class="tool-icon d-stroke" preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <path class="m-fill" d="M512 496l480-256v512l-480 256z" stroke-linejoin="round" stroke-linecap="round"
             stroke-width="64" />
         <path class="l-fill" d="M512 496l-480-256L512 16 992 240z" stroke-linejoin="round" stroke-linecap="round"
@@ -415,9 +415,9 @@
             <stop class="l-stop-color" offset="0.45" />
             <stop class="m-stop-color" offset="0.75" />
         </linearGradient>
-        <path class=" d-stroke" d="M128 896q384-256 768-128Q1024 448 896.03 128 512 0 128.03 250q128 320 0 640z" fill="url(#reflective1)"
-            stroke-width="32"  stroke-linecap="round" stroke-linejoin="round" />
-        <path class=" d-stroke " d="M512 736q128-320 0-640M190 512q384-256 768-128" fill="none" stroke-width="32" 
+        <path class=" d-stroke" d="M128 896q384-256 768-128Q1024 448 896.03 128 512 0 128.03 250q128 320 0 640z"
+            fill="url(#reflective1)" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+        <path class=" d-stroke " d="M512 736q128-320 0-640M190 512q384-256 768-128" fill="none" stroke-width="32"
             stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" />
     </svg>
     <svg v-if="Type === 'curved-thicken'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
@@ -428,12 +428,12 @@
             <stop class="m-stop-color" offset="0.65" />
             <stop class="l-stop-color" offset="0.975" />
         </linearGradient>
-        <path class=" d-stroke " d="M32 864c256-384 640 64 832-320l64-512c-256 384-640-64-896 320z" stroke-width="32" 
+        <path class=" d-stroke " d="M32 864c256-384 640 64 832-320l64-512c-256 384-640-64-896 320z" stroke-width="32"
             stroke-linecap="round" stroke-linejoin="round" fill="url(#reflective)" />
-        <path class=" d-stroke m-fill" d="M94 990C288 624 672 1072 928 688L864 544C672 928 288 480 32 864Z" stroke-width="32" 
-            stroke-linecap="round" stroke-linejoin="round"  />
-        <path class=" d-stroke m-fill" d="M928 688l-64-144 64-512 64 144z" stroke-width="32"  
-            stroke-linecap="round" stroke-linejoin="round" />
+        <path class=" d-stroke m-fill" d="M94 990C288 624 672 1072 928 688L864 544C672 928 288 480 32 864Z"
+            stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+        <path class=" d-stroke m-fill" d="M928 688l-64-144 64-512 64 144z" stroke-width="32" stroke-linecap="round"
+            stroke-linejoin="round" />
     </svg>
     <svg v-if="Type === 'curved-extend'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
@@ -443,26 +443,27 @@
             <stop class="m-stop-color" offset="0.65" />
             <stop class="l-stop-color" offset="0.975" />
         </linearGradient>
-        <path class=" d-stroke " d="M96 64c192 384-192 512 0 896h416c-192-384 192-513 0-896z" stroke-width="32" 
+        <path class=" d-stroke " d="M96 64c192 384-192 512 0 896h416c-192-384 192-513 0-896z" stroke-width="32"
             fill="url(#reflective)" stroke-linejoin="round" stroke-linecap="round" />
-        <path class=" d-stroke m-fill" d="M512 64c192 384-192 512 0 896h416c-192-384 192-513 0-896z" stroke-width="32" 
-             stroke-linejoin="round" stroke-linecap="round" fill-opacity="0.75" stroke-dasharray="40" />
-        <path class=" d-stroke " d="M512 960C320 576 704 447 512 64" fill="none" stroke-width="64"  stroke-linecap="round"
-            stroke-linejoin="round" />
-        <circle class=" d-stroke l-fill" r="64" cx="512" cy="944" stroke-width="32"   />
-        <circle class=" d-stroke l-fill" r="64" cx="512" cy="80" stroke-width="32"   />
+        <path class=" d-stroke m-fill" d="M512 64c192 384-192 512 0 896h416c-192-384 192-513 0-896z" stroke-width="32"
+            stroke-linejoin="round" stroke-linecap="round" fill-opacity="0.75" stroke-dasharray="40" />
+        <path class=" d-stroke " d="M512 960C320 576 704 447 512 64" fill="none" stroke-width="64"
+            stroke-linecap="round" stroke-linejoin="round" />
+        <circle class=" d-stroke l-fill" r="64" cx="512" cy="944" stroke-width="32" />
+        <circle class=" d-stroke l-fill" r="64" cx="512" cy="80" stroke-width="32" />
     </svg>
-    <svg v-if="Type === 'curved-offset'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+    <svg v-if="Type === 'curved-offset'" class="tool-icon" :class="{ 'tool-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <linearGradient id="reflective">
             <stop class="m-stop-color" offset="0.1" />
             <stop class="l-stop-color" offset="0.3" />
             <stop class="m-stop-color" offset="0.65" />
             <stop class="l-stop-color" offset="0.975" />
         </linearGradient>
-        <path class=" d-stroke  m-fill" d="M64 960C320 576 704 1024 960 640V64C704 448 320 0 64 384Z" stroke-width="32" 
-            stroke-linecap="round" stroke-linejoin="round"  stroke-dasharray="40" fill-opacity="0.75" />
-        <path class=" d-stroke " d="M72 835.4C320 576 637.4 978 974.6 691.4V155.4C656 402 312 23.4 73.4 326Z" stroke-width="64"
-             stroke-linecap="round" stroke-linejoin="round" fill="url(#reflective)"
+        <path class=" d-stroke  m-fill" d="M64 960C320 576 704 1024 960 640V64C704 448 320 0 64 384Z" stroke-width="32"
+            stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" fill-opacity="0.75" />
+        <path class=" d-stroke " d="M72 835.4C320 576 637.4 978 974.6 691.4V155.4C656 402 312 23.4 73.4 326Z"
+            stroke-width="64" stroke-linecap="round" stroke-linejoin="round" fill="url(#reflective)"
             transform="scale(0.5 0.5) translate(512 512)" />
     </svg>
     <!-- 筋布局模块 -->
@@ -582,6 +583,7 @@
         <path class="d-stroke l-fill" d="M128 128 554 900 635 641 889 866 928.698 840.805" stroke-width="32"
             stroke-linecap="round" stroke-linejoin="round" />
     </svg>
+ 
 </template>
 <script setup lang="ts">
 defineProps(

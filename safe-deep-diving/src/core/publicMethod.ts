@@ -130,3 +130,16 @@ export const handleDoubleClick = (callback: () => void) => {
     callback()  // 回调传递的方法
     // 执行双击逻辑
 };
+
+/**
+ * 把SVG 转换成 Data URI
+*/
+export const svgToDataUri = (svgString: string): string => {
+    // 移除换行和多余空格
+    const minified = svgString.replace(/\s+/g, ' ').trim();
+    // URL 编码
+    const encoded = encodeURIComponent(minified)
+      .replace(/'/g, '%27')
+      .replace(/"/g, '%22');
+    return `data:image/svg+xml,${encoded}`;
+  };

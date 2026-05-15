@@ -33,7 +33,7 @@
                 stroke-linejoin="round" />
         </g>
     </svg>
-    <svg v-if="Type === 'setting'" class="base-icon d-stroke" xmlns="http://www.w3.org/2000/svg" width="1024"
+    <svg v-if="Type === 'setting'" class="base-icon d-stroke" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024"
         height="1024" viewBox="0 0 1024 1024">
         <g>
             <path class="m-fill" d="M383 288.5h258l129 223.5-129 223.5h-258l-129-223.5z" />
@@ -131,19 +131,38 @@
     <svg v-if="Type === 'option-bar-ide'" class="base-icon d-fill" :class="{ 'base-icon1': State === 1 }"
         xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
         <path class=" d-stroke m-fill" :class="{ 'l-fill': StateSty === 'change' }" d="M512 64 128 448h768Z"
-            stroke-linecap="round" stroke-linejoin="round"  stroke-width="32"  />
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
         <path class=" d-stroke l-fill" :class="{ 'm-fill': StateSty === 'change' }" d="M512 64 128 448h768Z"
-            stroke-linecap="round" stroke-linejoin="round"  stroke-width="32" 
-            transform="rotate(180 512 512)" />
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="32" transform="rotate(180 512 512)" />
     </svg>
-    <svg v-if="Type === 'tool-reform'" class="base-icon d-fill" :class="{ 'base-icon1': State === 1 }" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-        <circle class="d-stroke" r="384" cx="512" cy="512" stroke-width="64" fill="none"  />
-        <path class="m-stroke" d="M288 288l192 192M736 288l-192 192M736 736l-192-192M288 736l192-192"  stroke-width="24"
+    <svg v-if="Type === 'tool-reform'" class="base-icon d-fill" :class="{ 'base-icon1': State === 1 }"
+        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+        <circle class="d-stroke" r="384" cx="512" cy="512" stroke-width="64" fill="none" />
+        <path class="m-stroke" d="M288 288l192 192M736 288l-192 192M736 736l-192-192M288 736l192-192" stroke-width="24"
             stroke-linejoin="round" stroke-linecap="round" transform="rotate(45 512 512)" />
-        <rect class="d-stroke l-fill" width="128" height="128" x="448" y="448" rx="32" ry="32" transform="rotate(45 512 512)" 
-             stroke-width="8" />
-        <path class="d-stroke" d="M512 32v320M512 992v-320M32 512h320M992 512h-320" stroke-width="48" 
+        <rect class="d-stroke l-fill" width="128" height="128" x="448" y="448" rx="32" ry="32"
+            transform="rotate(45 512 512)" stroke-width="8" />
+        <path class="d-stroke" d="M512 32v320M512 992v-320M32 512h320M992 512h-320" stroke-width="48"
             stroke-linecap="round" transform="rotate(45 512 512)" />
+    </svg>
+    <svg v-if="Type === 'three-d-ball'" class="base-icon" :class="{ 'base-icon1': State === 1, 'base-icon2': State === 2, 'base-icon3': State ===3 }"  xmlns="http://www.w3.org/2000/svg" width="1024" height="1024"
+        viewBox="0 0 1024 1024">
+        <g>
+            <radialGradient id="ball-shadow" cx="50%" cy="55%">
+                <stop class="d-stop-color"  offset="0.25" />
+                <stop class="d-stop-color"  offset="0.5" stop-opacity="0.75" />
+                <stop class="d-stop-color"  offset="0.75" stop-opacity="0.25" />
+                <stop class="d-stop-color"  offset="0.9" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="ball1-shadow" cx="10%" cy="10%">
+                <stop class="l-stop-color"  offset="0.45" />
+                <stop class="m-stop-color"  offset="0.9" stop-opacity="0.35" />
+            </radialGradient>
+            <ellipse rx="426" ry="229" cx="475" cy="800" fill="url(#ball-shadow)" />
+            <circle class="d-fill" r="320" cx="335" cy="554"  />
+            <circle class="l-fill" r="320" cx="335" cy="554"  fill-opacity="0.19" />
+            <circle class="d-stroke" r="320" cx="335" cy="554" fill="url(#ball1-shadow)" stroke-width="2" />
+        </g>
     </svg>
     <!-- 提示性图标 -->
     <svg v-if="Type === 'question'" class="base-icon" :class="{ 'base-icon1': State === 1 }" viewBox="0 0 1024 1024"
@@ -226,6 +245,19 @@ defineProps(
         max-width: 60px;
         max-height: 60px;
     }
+    &.base-icon2 {
+        width: 15vmin;
+        height: 15vmin;
+        max-width: 200px;
+        max-height: 200px;
+    }
+    &.base-icon3 {
+        width: 25vmin;
+        height: 25vmin;
+        max-width: 300px;
+        max-height: 300px;
+    }
+
 
     &:active {
         animation: act-icon 200ms ease;
@@ -244,6 +276,7 @@ defineProps(
         max-width: 400px;
         max-height: 400px;
     }
+   
 
     &:active {
         animation: act-icon 200ms ease;
