@@ -1,13 +1,16 @@
 {
     "app": {
-        "version": "0.0.36",
+        "version": "0.0.40",
         "repository":"https://github.com/cha-hai-ji-lan/SafeDeepDiving",
 
         "core": {
             "input-path": "D:\\Object_\\APP\\Tauri\\work\\SafeDeepDiving\\SDDassets",
             "output-path": "C:\\",
             "support-import-format":["obj", "step", "stp"],
-            "support-export-format":[]
+            "support-export-format":[],
+            "scenes":{
+                "ambient-light-intensity": 0.5
+            }
 
         },
         "i18n": {

@@ -1,27 +1,33 @@
 <template>
-  <div ref="threeContainer" class="three-container"></div>
+  <div ref="threeCtr" class="three-container">
+    <div ref="miniCtr" class="mini-container"></div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref} from 'vue';
 
-import { init_three, clean_three } from '../../core/three/init.ts'
+import { init_three, clean_three } from '../../core/three/init'
+import { threeContainer, miniContainer } from '../../core/three/cache'
 
-const threeContainer = ref<HTMLDivElement | null>(null);
+const threeCtr = ref<HTMLDivElement | null>(null);
+const miniCtr = ref<HTMLDivElement | null>(null);
 
 onMounted(() => {
-  init_three(threeContainer);
-  // loadExampleSTEP();
+  threeContainer.value = threeCtr.value;
+  miniContainer.value = miniCtr.value;
+  init_three();
 });
 
 onUnmounted(() => {
-  clean_three(threeContainer)
+  clean_three()
 });
 
 </script>
 
 <style scoped>
 .three-container {
+  position: relative;
   display: flex;
   justify-self: center;
   align-self: center;
@@ -32,5 +38,13 @@ onUnmounted(() => {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  & .mini-container{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 100px;
+    height: 100px;
+    z-index: 17;
+  }
 }
 </style>

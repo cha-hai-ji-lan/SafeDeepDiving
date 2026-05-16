@@ -36,7 +36,6 @@
         "skipTaskbar": true,
         "url": "/page/splashScreen.html",
         "label": "splashScreen"
-
       }
     ],
     "security": {

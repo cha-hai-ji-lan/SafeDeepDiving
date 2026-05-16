@@ -5,14 +5,24 @@
 import { readTextFile } from '@tauri-apps/plugin-fs';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
-import { scene, edgesMaterial, entity_edges, entitys } from "./init"
-import { close_inter } from '../publicMethod';
+import { scene, edgesMaterial } from "./init"
+import { entity_edges, entitys } from "./cache"
+// import { close_inter } from '../publicMethod';
 
-export const load_obj = async (obj_path: string) => {
+export const load_obj = async (obj_path: string): Promise<boolean> => {
     try {
+        let startTime = performance.now();
         const fileContent = await readTextFile(obj_path)
+        let endTime = performance.now();
+        let duration = endTime - startTime;
+        console.log(`读取文件: ${duration.toFixed(2)} ms`);
+        startTime = endTime
         const loader = new OBJLoader();
         const mesh_data = loader.parse(fileContent);
+        endTime = performance.now();
+        duration = endTime - startTime;
+        console.log(`载入文件: ${duration.toFixed(2)} ms`);
+        startTime = endTime
         mesh_data.traverse((child: any) => {
             if (child.isMesh) {
                 // 如果 OBJ 没有附带 MTL 文件，可能需要手动指定材质
@@ -44,9 +54,12 @@ export const load_obj = async (obj_path: string) => {
         // 4. 添加到场景
         entitys.value.push(mesh_data)  // 添加到实体组
         scene.add(mesh_data);  // 将整个 OBJ 对象添加到场景中
-        close_inter('welcome')
-
+        endTime = performance.now();
+        duration = endTime - startTime;
+        console.log(`添加场景: ${duration.toFixed(2)} ms`);
+        return true
     } catch (error) {
         console.error('未能从文件系统加载OBJ：', error);
+        return false
     }
 }

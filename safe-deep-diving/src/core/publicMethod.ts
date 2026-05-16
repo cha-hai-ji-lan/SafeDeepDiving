@@ -22,14 +22,17 @@ export const module_loader = async (load_mode: number = 0) => {
             console.log("文件已选好")
             if (file_path.value) {
                 let ext = await PathUtils.getFileExt(file_path.value)
-                console.log("文件扩展名",ext)
+                console.log("文件扩展名", ext)
                 if (!coreConfig.value['support-import-format'].includes(ext.toLowerCase())) {
                     console.error("不支持的导入格式")
                     return
                 }
                 switch (ext) {
                     case "obj":
-                        load_obj(file_path.value)
+                        let return_state = await load_obj(file_path.value)
+                        if (return_state) {
+                            close_inter("welcome")
+                        }
                         break;
                     case "stp":  // 暂存 stp读取方法
                         console.log("进入读取STEP通道")
@@ -139,7 +142,7 @@ export const svgToDataUri = (svgString: string): string => {
     const minified = svgString.replace(/\s+/g, ' ').trim();
     // URL 编码
     const encoded = encodeURIComponent(minified)
-      .replace(/'/g, '%27')
-      .replace(/"/g, '%22');
+        .replace(/'/g, '%27')
+        .replace(/"/g, '%22');
     return `data:image/svg+xml,${encoded}`;
-  };
+};

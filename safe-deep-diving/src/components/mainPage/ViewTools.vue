@@ -7,13 +7,14 @@
             @click="normal_coloring">
             <ToolIcon Type='normal-coloring'></ToolIcon>
         </div>
-        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.SidelineColoring }" @click="sideline_coloring">
+        <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.SidelineColoring }"
+            @click="sideline_coloring">
             <ToolIcon Type='sideline-coloring'></ToolIcon>
         </div>
         <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.Wireframe }" @click="wireframe">
             <ToolIcon Type="wireframe"></ToolIcon>
         </div>
-        <div class="view-tool-icon" :class="{ 'active-icon': false }" @click="">
+        <div class="view-tool-icon" :class="{ 'active-icon': camera_mode === cameraMode.Perspective }" @click="orthographic">
             <ToolIcon Type="perspective-camera"></ToolIcon>
         </div>
     </div>
@@ -22,7 +23,7 @@
 import { ref, onUnmounted } from 'vue';
 import ToolIcon from '../../icons/ToolIcon.vue';
 import BaseIcon from '../../icons/BaseIcon.vue';
-import {edge_visible, object_visible} from '../../core/three/init.ts'
+import { edge_visible, object_visible, switch_camera } from '../../core/three/init.ts'
 
 
 const floatingWindowElement = ref<HTMLElement | null>(null);
@@ -34,8 +35,13 @@ const enum viewMode {
     SidelineColoring,
     Wireframe
 }
+const enum cameraMode {
+    Perspective,
+    Orthographic
+}
 
 const view_mode = ref<viewMode>(viewMode.SidelineColoring)
+const camera_mode = ref<cameraMode>(cameraMode.Orthographic)
 onUnmounted(() => {
     stopDrag()
 })
@@ -55,6 +61,17 @@ const wireframe = () => {
     edge_visible(true)
     object_visible(false)
     view_mode.value = viewMode.Wireframe
+}
+
+const orthographic = () => {
+    if (camera_mode.value === cameraMode.Orthographic) {
+        switch_camera("perspective")
+        camera_mode.value = cameraMode.Perspective
+
+    } else {
+        switch_camera("ortho")
+        camera_mode.value = cameraMode.Orthographic
+    }
 }
 // 开始拖拽
 const startDrag = (event: MouseEvent) => {
@@ -77,7 +94,7 @@ const startDrag = (event: MouseEvent) => {
 // 拖拽过程
 const drag = (event: MouseEvent) => {
     if (!isDragging.value || !floatingWindowElement.value) return;
-    
+
     // 1. 计算新的位置 (像素)
     const newX_px = event.clientX - dragOffset.value.x;
     const newY_px = event.clientY - dragOffset.value.y;
@@ -112,7 +129,8 @@ const stopDrag = () => {
     position: fixed;
     top: 5.75vmin;
     left: calc(50% - (5 * 2vmin));
-    z-index: 11;  /* 工具放在第11层 */
+    z-index: 11;
+    /* 工具放在第11层 */
     /* 修改点 2: 向左平移自身宽度的 50%，实现完美居中 */
     height: fit-content;
     width: fit-content;
@@ -127,7 +145,8 @@ const stopDrag = () => {
         align-items: center;
         justify-content: center;
         margin: 0.5vmin;
-        &.active-icon{
+
+        &.active-icon {
             filter: brightness(1.25);
             border-radius: 0.5vmin;
             outline: 0.25vmin solid rgba(var(--border), var(--b-transparent));

@@ -306,6 +306,7 @@ const creat = async () => {
                     justify-content: center;
                     align-items: center;
                     z-index: 1;
+                    pointer-events: none;  /* 事件穿透 */
                 }
             }
 
