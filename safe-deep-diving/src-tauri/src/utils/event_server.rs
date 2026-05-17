@@ -1,7 +1,9 @@
 use tauri::Manager;
 use tauri::Emitter;
 use crate::utils::event;
-use event::{get_app_handle, send_oc_init_fail, send_oc_init_ready, send_oc_init_start};
+use event::{get_app_handle, send_oc_init_fail, send_oc_init_ready, send_oc_init_start,
+            send_cfg_init_start, send_cfg_init_ready, send_cfg_init_fail,
+            send_three_init_start, send_three_init_ready, send_three_init_fail};
 
 ///
 /// 设置事件触发广播
@@ -10,10 +12,18 @@ use event::{get_app_handle, send_oc_init_fail, send_oc_init_ready, send_oc_init_
 pub fn set_event_broadcast(event_name: &str) {
     let app_handle = get_app_handle().unwrap();
     match event_name {
+        "cfg-init-start" => send_cfg_init_start(app_handle), //  配置项初始化开始
+        "cfg-init-ready" => send_cfg_init_ready(app_handle), //  配置项初始化完成
+        "cfg-init-fail" => send_cfg_init_fail(app_handle),   //  配置项初始化失败
+        "three-init-start" => send_three_init_start(app_handle), //  three.js初始化开始
+        "three-init-ready" => send_three_init_ready(app_handle), //  three.js初始化完成
+        "three-init-fail" => send_three_init_fail(app_handle),   //  three.js初始化失败
         "oc-init-start" => send_oc_init_start(app_handle), //  开始初始化OC
         "oc-init-ready" => send_oc_init_ready(app_handle), //  OC初始化完成
         "oc-init-fail" => send_oc_init_fail(app_handle),   //  OC初始化失败
-        _ => {}
+        _ => {
+            println!("未定义的事件: {}", event_name);
+        }
     }
 }
 

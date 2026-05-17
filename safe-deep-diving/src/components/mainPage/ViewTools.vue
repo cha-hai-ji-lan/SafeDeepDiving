@@ -14,7 +14,8 @@
         <div class="view-tool-icon" :class="{ 'active-icon': view_mode === viewMode.Wireframe }" @click="wireframe">
             <ToolIcon Type="wireframe"></ToolIcon>
         </div>
-        <div class="view-tool-icon" :class="{ 'active-icon': camera_mode === cameraMode.Perspective }" @click="orthographic">
+        <div class="view-tool-icon" :class="{ 'active-icon': camera_mode === cameraMode.Perspective }"
+            @click="orthographic">
             <ToolIcon Type="perspective-camera"></ToolIcon>
         </div>
     </div>
@@ -23,7 +24,8 @@
 import { ref, onUnmounted } from 'vue';
 import ToolIcon from '../../icons/ToolIcon.vue';
 import BaseIcon from '../../icons/BaseIcon.vue';
-import { edge_visible, object_visible, switch_camera } from '../../core/three/init.ts'
+import { switch_camera } from '../../core/three/init'
+import { edge_visible, object_visible } from '../../core/three/io'
 
 
 const floatingWindowElement = ref<HTMLElement | null>(null);

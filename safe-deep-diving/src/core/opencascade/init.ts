@@ -2,10 +2,9 @@ import { invoke } from '@tauri-apps/api/core';
 import initOpenCascade from "opencascade.js";
 import { readFile } from '@tauri-apps/plugin-fs';
 import { oc } from "./cache";
-import { init_listening_group, clean_init_listening_group } from "../event";
+import {clean_oc_init_group } from "../event";
 
 export const init_opencascade = async () => {
-    init_listening_group()
     try {
         await invoke("set_event_broadcast", { eventName: "oc-init-start" })
         oc.value = await initOpenCascade();
@@ -18,8 +17,7 @@ export const init_opencascade = async () => {
         console.error("OpenCascade 初始化失败:", error);
         await invoke("set_event_broadcast", {eventName:"oc-init-fail"})
     } finally {
-        clean_init_listening_group()
-
+        clean_oc_init_group()
     }
 
 }

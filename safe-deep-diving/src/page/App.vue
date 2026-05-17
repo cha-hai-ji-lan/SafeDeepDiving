@@ -53,6 +53,7 @@
 </template>
 <script setup lang="ts">
 import { onMounted, onUnmounted } from "vue";
+import { invoke } from "@tauri-apps/api/core";
 import { Window, getCurrentWindow } from "@tauri-apps/api/window";
 import { listen, UnlistenFn } from '@tauri-apps/api/event';
 import BaseIcon from "../icons/BaseIcon.vue"                                          // 引入基础图标组件
@@ -75,8 +76,11 @@ import CurvedSurface from "../components/mainPage/CurvedSurface.vue";           
 
 // 初始化关联脚本
 import { init_app } from "../core/init.ts";                                           // 初始化应用脚本
+import { init_three, clean_three } from '../core/three/init'
 import { base_icon_ctr, ele_state, interface_state } from "../core/cache.ts";         // 引入缓存数据动态脚本
 import { close_inter } from '../core/publicMethod.ts';
+import { init_listening_group, clean_cfg_init_group, clean_three_init_group, clean_init_listening_group } from "../core/event.ts";
+import { init_opencascade } from "../core/opencascade/init.ts";
 const appWindow = Window.getCurrent()
 
 
@@ -131,7 +135,8 @@ const title_bar_click = (mode: string) => {
 }
 
 onMounted(async () => {
-  init_app()
+  init_listening_group()
+  add_in()
   // 监听窗口调整大小事件，并在回调中检查状态
   resize_unlisten = await listen('tauri://resize', async () => {
     const currentWindow = getCurrentWindow();
@@ -149,7 +154,34 @@ onUnmounted(() => {
   if (resize_unlisten) {
     resize_unlisten()
   }
+  clean_three()
+  clean_init_listening_group()
 })
+
+/**
+ * 插件加载项
+ */
+const add_in = async () => {
+  await invoke("set_event_broadcast", { eventName: "cfg-init-start" })
+  if (await init_app()) {
+    await invoke("set_event_broadcast", { eventName: "cfg-init-ready" })
+    clean_cfg_init_group()
+    await invoke("set_event_broadcast", { eventName: "three-init-start" })
+    // 随着配置的增多配置项的加载事件也越长应该可以把init_three自动排到合适的时间片 ----不增大开销但是可能不稳定
+    // 加载到init_three时 两个DOM对象元素应该已经获得了
+    if (await init_three()) {
+      await invoke("set_event_broadcast", { eventName: "three-init-ready" })
+      clean_three_init_group()
+      init_opencascade()  // three 加载完成后再加载 OC
+    } else {
+      await invoke("set_event_broadcast", { eventName: "three-init-fail" })
+    }
+  } else {
+    await invoke("set_event_broadcast", { eventName: "cfg-init-fail" })
+    clean_cfg_init_group()
+  }
+  
+}
 </script>
 
 <style scoped>

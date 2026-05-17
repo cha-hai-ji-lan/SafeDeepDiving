@@ -7,7 +7,6 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { scene, edgesMaterial } from "./init"
 import { entity_edges, entitys } from "./cache"
-// import { close_inter } from '../publicMethod';
 
 export const load_obj = async (obj_path: string): Promise<boolean> => {
     try {
@@ -61,5 +60,23 @@ export const load_obj = async (obj_path: string): Promise<boolean> => {
     } catch (error) {
         console.error('未能从文件系统加载OBJ：', error);
         return false
+    }
+}
+
+export const edge_visible = (visible: boolean) => {
+    if (entity_edges.value) {
+        entity_edges.value.forEach(edges => {
+            edges.visible = visible;
+        });
+    }
+}
+export const object_visible = (visible: boolean) => {
+    if (entitys.value) {
+        entitys.value.forEach(material => {
+            material.transparent = true; // 确保启用透明
+            material.opacity = visible ? 1 : 0; // 1为不透明，0为完全透明
+            material.needsUpdate = true; // 通知 Three.js 更新材质
+            material.visible = visible
+        });
     }
 }

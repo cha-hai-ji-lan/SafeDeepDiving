@@ -33,11 +33,18 @@ export const replace_config = async () => {
  * 
  * 每个页面都需要 调用一次
 */
-export const init_app = async () => {
-    await init_app_path()
-    await init_config()
-    await init_i18n()
-    init_color_palette()
+export const init_app = async (): Promise<boolean> => {
+    try{
+        await init_app_path()
+        await init_config()
+        await init_i18n()
+        init_color_palette()
+        return true
+    } catch (error) {
+        console.error("初始化程序失败:", error);
+        return false
+    }
+
 }
 /**
  * 初始化程序路径

@@ -1,3 +1,9 @@
+//! # 事件模块
+//!
+//! 分为 初始化事件  运行时事件 清理时事件
+//!
+//! 初始化事件有:  软件配置项加载事件 three.js初始化事件 opencascade相关事件
+//!
 use once_cell::sync::OnceCell;
 use std::sync::Arc;
 use tauri::AppHandle;
@@ -28,11 +34,83 @@ pub struct SomePayload {
 }
 
 ///
-/// ### 服务端启动事件
+/// ### 配置项初始化事件
 ///
-/// cli-connect
+pub fn send_cfg_init_start(app: &AppHandle) {
+    app.emit(
+        "cfg-init-start",
+        SomePayload {
+            data: "配置项开始载入...".to_string(),
+        },
+    )
+        .unwrap();
+}
 ///
-/// 用于在前端提示开始连接CAD实例
+/// ### 配置项初始化完成事件
+///
+pub fn send_cfg_init_ready(app: &AppHandle) {
+    app.emit(
+        "cfg-init-ready",
+        SomePayload {
+            data: "配置项载入完成".to_string(),
+        },
+    )
+        .unwrap();
+}
+///
+/// ### 配置项初始化失败事件
+///
+pub fn send_cfg_init_fail(app: &AppHandle) {
+    app.emit(
+        "cfg-init-fail",
+        SomePayload {
+            data: "配置项载入失败".to_string(),
+        },
+    )
+        .unwrap();
+}
+
+///
+/// ### three.js初始化事件
+///
+pub fn send_three_init_start(app: &AppHandle) {
+    app.emit(
+        "three-init-start",
+        SomePayload {
+            data: "three.js开始初始化...".to_string(),
+        },
+    )
+        .unwrap();
+}
+
+///
+/// ### three.js初始化完成事件
+///
+pub fn send_three_init_ready(app: &AppHandle) {
+    app.emit(
+        "three-init-ready",
+        SomePayload {
+            data: "three.js初始化完成".to_string(),
+        },
+    )
+        .unwrap();
+}
+///
+/// ### three.js初始化失败事件
+///
+pub fn send_three_init_fail(app: &AppHandle) {
+    app.emit(
+        "three-init-fail",
+        SomePayload {
+            data: "three.js初始化失败".to_string(),
+        },
+    )
+        .unwrap();
+}
+
+///
+/// ### opencascade 初始化事件
+///
 pub fn send_oc_init_start(app: &AppHandle) {
     app.emit(
         "oc-init-start",

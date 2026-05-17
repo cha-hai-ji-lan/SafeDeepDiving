@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref} from 'vue';
 
-import { init_three, clean_three } from '../../core/three/init'
+// import { init_three, clean_three } from '../../core/three/init'
 import { threeContainer, miniContainer } from '../../core/three/cache'
 
 const threeCtr = ref<HTMLDivElement | null>(null);
@@ -16,11 +16,9 @@ const miniCtr = ref<HTMLDivElement | null>(null);
 onMounted(() => {
   threeContainer.value = threeCtr.value;
   miniContainer.value = miniCtr.value;
-  init_three();
 });
 
 onUnmounted(() => {
-  clean_three()
 });
 
 </script>
