@@ -130,6 +130,20 @@ export const tool_bar_state = reactive({
 })
 
 /**
+ * [main page]
+ * 
+ * 选择栏 内容对象
+*/
+export const select_obj = reactive({
+    "theme": [
+        { "key": "defaut", "value": "默认" },
+        { "key": "seaside-breeze", "value": "海滨微风" },
+        { "key": "Ink-deep-sea", "value": "海滨微风" },
+    ]
+
+})
+
+/**
  * [aplashScreen page]
  * 
  * 用于管理 启动页面各类状态
