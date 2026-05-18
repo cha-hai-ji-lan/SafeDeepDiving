@@ -7,20 +7,28 @@
                 <BaseIcon Type="setting"></BaseIcon>
             </div>
             
-            <div>设置切页栏</div>
+            <div class="switch-but ban-select">基础设置</div>
+            <div class="switch-but ban-select">主题设置</div>
             <div class="title-close-icon" @click="()=>{close_inter('setting')}">
                 <BaseIcon Type="close"></BaseIcon>
             </div>
         </div>
-        <div class="main">这是设置界面的主体</div>
+        <div class="main">
+            <basePage v-if="setting_ctr['current-page'] === 'base-page'"></basePage>
+        </div>
+        <div class="foot">
+            这是设置页脚
+        </div>
 
     </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+
 import BaseIcon from "../../icons/BaseIcon.vue";
 import { close_inter} from '../../core/publicMethod';
-import { interface_state } from "../../core/cache";
+import { interface_state, setting_ctr } from "../../core/cache";
+import basePage from "./setting/basePage.vue";
 const floatingWindowElement = ref<HTMLElement | null>(null);
 const isDragging = ref(false);  // 鼠标是否正在拖拽
 const dragOffset = ref({ x: 0, y: 0 });  // 鼠标拖拽的偏移量
@@ -90,6 +98,7 @@ const stopDrag = () => {
     border: 0.2vmin solid rgba(var(--border), var(--w-transparent));
     border-radius: 3vmin;
     background-color: rgba(var(--but-0), var(--b-transparent));
+    overflow: hidden;
 
     & .title {
         display: flex;
@@ -98,7 +107,7 @@ const stopDrag = () => {
         flex-direction: row;
 
         width: 100%;
-        height: 5vmin;
+        height: 7.5%;
         border-top-left-radius: 2.5vmin;
         border-top-right-radius: 2.5vmin;
         background-color: rgba(var(--menu), var(--b-transparent));
@@ -114,14 +123,33 @@ const stopDrag = () => {
             width: 2.5vmin;
             height: 2.5vmin;
         }
+
+        & .switch-but{
+            margin: 1vmin;
+        }
     }
 
     & .main {
+        width: 100%;
         flex: 1;
         display: flex;
-        justify-items: start;
+        justify-items: center;
         align-items: center;
         flex-direction: column;
+        
+    }
+    & .foot {
+        width: 100%;
+        height: 12.5%;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgba(var(--background), var(--w-transparent));
+        border: 0.2vmin solid rgba(var(--border), var(--w-transparent));
+        box-sizing: border-box;
+        border-bottom-left-radius: 2.75vmin;
+        border-bottom-right-radius: 2.75vmin;
     }
 }
 </style>

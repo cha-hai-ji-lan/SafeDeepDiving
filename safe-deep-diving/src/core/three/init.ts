@@ -5,8 +5,8 @@
 // import { Ref } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
-import { init_opencascade } from "../opencascade/init"
-import { threeContainer, miniContainer, sceneSize, frustumSize, animationId, entity_edges, entitys } from "./cache"
+// import { init_opencascade } from "../opencascade/init"
+import { threeContainer, miniContainer, sceneSize, frustumSize, animationId } from "./cache"
 import { coreConfig } from '../cache';
 
 
@@ -19,22 +19,20 @@ export let edgesMaterial: THREE.LineBasicMaterial;  // 边线材质
 export let axesHelper: THREE.AxesHelper;  // 坐标轴
 export let track_controller: OrbitControls;  // 轨道控制器
 
-
-
 // 添加小坐标系场景内容
 export let miniScene: THREE.Scene;  // 小坐标系场景
 export let miniCamera: THREE.OrthographicCamera;  // 小坐标系相机
 export let miniRenderer: THREE.WebGLRenderer;  // 小坐标系渲染器
 export let miniAxesHelper: THREE.AxesHelper;  // 小坐标系坐标轴
 
-/**
- * 插件加载项
- * 
- * 用于加载非 基础Three.js内容
- */
-const add_in = () => {
-    init_opencascade()
-}
+// /**
+//  * 插件加载项
+//  * 
+//  * 用于加载非 基础Three.js内容
+//  */
+// const add_in = () => {
+//     init_opencascade()
+// }
 /**
  * 初始化 Three.js 基础场景
 */
@@ -199,7 +197,7 @@ export const init_three = async (): Promise<boolean> => {
         // 初始化小坐标系
         if (!init_mini_coordinate_system()) return false
 
-        add_in()  // 加载插件
+        // add_in()  // 加载插件
 
 
         // 5. 动画循环

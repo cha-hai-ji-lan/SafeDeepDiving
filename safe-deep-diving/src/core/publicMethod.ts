@@ -7,7 +7,7 @@ import { file_path, open_file_dialog } from './io';
 import { PathUtils } from "./path";
 // 存在环
 import { load_obj } from './three/io'
-import { load_step } from './opencascade/init'
+import { load_step } from './opencascade/io'
 
 let clickTimer: number | null = null;  // 单双击切换计时器
 /**
